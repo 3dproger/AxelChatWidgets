@@ -1,6 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { ViewersCountView } from './ViewersCountView'
+import { MessageView } from './MessageView';
+
+const MessagesListView = ({messages}) => (
+    <div>
+        {messages.map(message => (
+            <div><MessageView message={message} /></div>
+        ))}
+    </div>
+);
 
 export const WebSocketWrapper = () => {
     const [socketUrl, setSocketUrl] = useState('ws://127.0.0.1:12345');
@@ -20,25 +29,7 @@ export const WebSocketWrapper = () => {
                 setServices(data.services)
             }
             else if (protocolMessageType === "chat_messages") {
-                for (const message of data.messages) {
-                    var text = "";
-                    for (const content  of message.contents) {
-                        if (content.type === "text") {
-                            text += content.data.text;
-                        }
-                        else if (content.type === "hyperlink") {
-                            text += content.data.text;
-                        }
-                        else if (content.type === "image") {
-                            text += content.data.url;
-                        }
-                        else {
-                            console.error("Unknown content type '" + content.type + "', protocol message = '" + protocolMessage + "'");
-                        }
-                    }
-
-                    setMessageHistory((prev) => prev.concat(text));
-                }
+                setMessageHistory((prev) => prev.concat(...data.messages));
             }
             else {
                 console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
@@ -56,19 +47,17 @@ export const WebSocketWrapper = () => {
 
     return (
         <div>
-            <div>
+            <span>WebSocket is {connectionStatus}</span><br/>
+
+            <MessagesListView messages={messageHistory} />
+
+            <div class="viewers-count-list-view">
                 {services.map((service, idx) => (
                     <ViewersCountView service={service} />
                 ))}
             </div>
-
-            <span>WebSocket is {connectionStatus}</span>
-
-            {messageHistory.map((message, idx) => (
-                <span key={idx}>{message ? message : null}<br/></span>
-            ))}
         </div>
-    );
+    )
 };
 
 export default WebSocketWrapper;

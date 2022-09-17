@@ -20,9 +20,9 @@ export class ViewersCountView extends React.Component {
         }
 
         return (
-            <div>
+            <span>
                 <img src={service.icon} height="20" align="top" /> {service.viewersCount !== -1 ? service.viewersCount : "?"}
-            </div>
+            </span>
         )
     }
 }
