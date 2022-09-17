@@ -10,16 +10,17 @@ body {
     padding: 4px;
     vertical-align: middle;
     border-radius: 2px;
-    background-color: rgba(0, 0, 0, 0);
-    -webkit-text-stroke: 0.5px black;
+    -webkit-text-stroke: 0.75px black;
     font-size: medium;
     color: white;
     font-weight: 600;
 }
 
 .authorName {
-    padding-right: 6px;
-    padding-left: 6px;
+    padding-right: 4px;
+    padding-left: 4px;
+    margin-left: 4px;
+    margin-right: 4px;
     vertical-align: middle;
     font-weight: 900;
     color: #03A9F4;
