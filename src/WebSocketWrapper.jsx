@@ -43,6 +43,9 @@ class MessagesListView extends React.Component {
 export const WebSocketWrapper = () => {
     const [messageHistory, setMessageHistory] = useState([]);
     const [services, setServices] = useState([]);
+    const [info, setInfo] = useState({
+        viewersCountTotal: -1,
+    });
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://127.0.0.1:12345', {
         onOpen: () => {
             console.log('Opened socket')
@@ -63,7 +66,8 @@ export const WebSocketWrapper = () => {
         console.log(protocolMessage);
 
         if (protocolMessageType === "info") {
-            setServices(data.services)
+            setServices(data.services);
+            setInfo(data);
         }
         else if (protocolMessageType === "chat_messages") {
             setMessageHistory((prev) => prev.concat(...data.messages));
@@ -92,6 +96,9 @@ export const WebSocketWrapper = () => {
                 {services.map((service, idx) => (
                     <ViewersCountView key={idx} service={service} />
                 ))}
+
+                <img alt="" class="badge" src="./images/viewer.svg"/>
+                <span class="text">{info.viewersCountTotal !== -1 ? info.viewersCountTotal : "?"}</span>
             </div>
         </div>
     )

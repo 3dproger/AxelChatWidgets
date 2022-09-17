@@ -19,6 +19,12 @@ export class ViewersCountView extends React.Component {
             )
         }
 
+        if (service.connectionStateType !== "connected") {
+            return (
+                <span></span>
+            )
+        }
+
         return (
             <span>
                 <img class="badge" alt="" src={service.icon} height="20"/>
