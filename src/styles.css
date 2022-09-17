@@ -8,11 +8,8 @@ body {
 }
 
 .message {
-    margin-left: 5px;
-    margin-right: 5px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    padding: 4px;
+    margin: 2px;
+    padding: 2px;
     vertical-align: middle;
     border-radius: 2px;
     -webkit-text-stroke: 1px black;
