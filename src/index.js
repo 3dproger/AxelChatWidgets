@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import { AxelChat } from './components/AxelChat';
+import './styles.css';
+import { WebSocketWrapper } from './WebSocketWrapper';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AxelChat />
+    <WebSocketWrapper />
   </React.StrictMode>
 );

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './MessageView.css'
 
 class ContentView extends React.Component {
     static propTypes = {
