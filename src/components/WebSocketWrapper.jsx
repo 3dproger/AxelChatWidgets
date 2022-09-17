@@ -15,7 +15,10 @@ export const WebSocketWrapper = () => {
     const [messageHistory, setMessageHistory] = useState([]);
     const [services, setServices] = useState([]);
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://127.0.0.1:12345', {
-        onOpen: () => console.log('Opened socket'),
+        onOpen: () => {
+            console.log('Opened socket')
+            setMessageHistory([]);
+        },
         shouldReconnect: (closeEvent) => true,
     });
 
