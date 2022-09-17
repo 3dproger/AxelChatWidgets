@@ -13,12 +13,28 @@ class MessagesListView extends React.Component {
         messages: [],
     }
 
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
     render() {
         return (
             <div>
                 {this.props.messages.map(message => (
                     <div key={message.id}><MessageView message={message} /></div>
                 ))}
+
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+                </div>
             </div>
         )
     }
