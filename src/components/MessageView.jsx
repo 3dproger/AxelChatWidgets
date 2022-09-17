@@ -47,6 +47,43 @@ class ContentView extends React.Component {
     }
 }
 
+class AuthorName extends React.Component {
+    static propTypes = {
+        author: PropTypes.object.isRequired,
+    }
+
+    static defaultProps = {
+        author: null,
+    }
+
+    render() {
+        const author = this.props.author;
+        if (!author) {
+            return (
+                <span>Author is null</span>
+            )
+        }
+
+        const name = author.name;
+        const color = author.color;
+        const backgroundColor = author.backgroundColor;
+
+        var style = {};
+
+        if (color !== "") {
+            style.color = color;
+        }
+
+        if (backgroundColor !== "") {
+            style.backgroundColor = backgroundColor;
+        }
+
+        return (
+            <span className="authorName" style={style}>{name}</span>
+        )
+    }
+}
+
 export class MessageView extends React.Component {
     static propTypes = {
         message: PropTypes.object.isRequired,
@@ -81,7 +118,7 @@ export class MessageView extends React.Component {
                     <img className="badge" src={badgeUrl}></img>
                 ))}
 
-                <span className="authorName">{author.name}&nbsp;</span>
+                <AuthorName author={author} />
 
                 {author.rightBadges.map(badgeUrl => (
                     <img className="badge" src={badgeUrl}></img>
