@@ -56,7 +56,7 @@ export const WebSocketWrapper = () => {
 
             <MessagesListView messages={messageHistory} />
 
-            <div class="viewers-count-list-view">
+            <div>
                 {services.map((service, idx) => (
                     <ViewersCountView service={service} />
                 ))}

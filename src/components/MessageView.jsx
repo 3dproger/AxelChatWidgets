@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './MessageView.css'
 
 class ContentView extends React.Component {
     static propTypes = {
@@ -24,19 +25,19 @@ class ContentView extends React.Component {
         if (type === "text") {
             const text = data.text;
             return (
-                <span>{text}</span>
+                <span className="textContent">{text}</span>
             )
         }
         
         if (type === "image") {
             return (
-                <img height="20" src={data.url}></img>
+                <img className="imageContent" src={data.url}></img>
             )
         }
 
         if (type === "hyperlink") {
             return (
-                <a href={data.url}>{data.text}</a>
+                <a className="hyperlinkContent" href={data.url}>{data.text}</a>
             )
         }
 
@@ -71,25 +72,19 @@ export class MessageView extends React.Component {
         }
 
         return (
-            <div class="message">
-                <span>
-                    <img src={"./images/" + author.serviceId + "-icon.svg"} height="20"></img>
-                </span>
+            <div className='message'>
+                <img className="avatar" src={author.avatar}></img>
 
-                <span>
-                    <img src={author.avatar} height="40"></img>
-                </span>
+                <img className="badge" src={"./images/" + author.serviceId + "-icon.svg"}></img>
 
                 {author.leftBadges.map(badgeUrl => (
-                    <img src={badgeUrl} height="25"></img>
+                    <img className="badge" src={badgeUrl}></img>
                 ))}
 
-                <span>
-                    {author.name}:&nbsp;
-                </span>
+                <span className="authorName">{author.name}&nbsp;</span>
 
                 {author.rightBadges.map(badgeUrl => (
-                    <img src={badgeUrl} height="25"></img>
+                    <img className="badge" src={badgeUrl}></img>
                 ))}
 
                 {message.contents.map(content => (
