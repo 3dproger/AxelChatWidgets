@@ -12,10 +12,9 @@ const MessagesListView = ({messages}) => (
 );
 
 export const WebSocketWrapper = () => {
-    const [socketUrl, setSocketUrl] = useState('ws://127.0.0.1:12345');
     const [messageHistory, setMessageHistory] = useState([]);
     const [services, setServices] = useState([]);
-    const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+    const { sendMessage, lastMessage, readyState } = useWebSocket('ws://127.0.0.1:12345');
 
     useEffect(() => {
         if (lastMessage !== null) {
