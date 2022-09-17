@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { ViewersCountView } from './ViewersCountView'
 import { MessageView } from './MessageView';
 
-const MessagesListView = ({messages}) => (
-    <div>
-        {messages.map(message => (
-            <div key={message.id}><MessageView message={message} /></div>
-        ))}
-    </div>
-);
+class MessagesListView extends React.Component {
+    static propTypes = {
+        messages: PropTypes.array.isRequired,
+    }
+
+    static defaultProps = {
+        messages: [],
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.messages.map(message => (
+                    <div key={message.id}><MessageView message={message} /></div>
+                ))}
+            </div>
+        )
+    }
+}
 
 export const WebSocketWrapper = () => {
     const [messageHistory, setMessageHistory] = useState([]);
