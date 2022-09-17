@@ -47,7 +47,7 @@ export const WebSocketWrapper = () => {
 
     return (
         <div>
-            <span>WebSocket is {connectionStatus}</span><br/>
+            <span>AxelChat is {connectionStatus}</span><br/>
 
             <MessagesListView messages={messageHistory} />
 

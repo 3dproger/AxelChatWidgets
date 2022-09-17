@@ -80,9 +80,17 @@ export class MessageView extends React.Component {
                     <img src={author.avatar} height="40"></img>
                 </span>
 
+                {author.leftBadges.map(badgeUrl => (
+                    <img src={badgeUrl} height="25"></img>
+                ))}
+
                 <span>
-                    {author.name}:&#32;
+                    {author.name}:&nbsp;
                 </span>
+
+                {author.rightBadges.map(badgeUrl => (
+                    <img src={badgeUrl} height="25"></img>
+                ))}
 
                 {message.contents.map(content => (
                     <ContentView content={content} />
