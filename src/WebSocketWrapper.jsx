@@ -52,23 +52,26 @@ export const WebSocketWrapper = () => {
     });
 
     useEffect(() => {
-        if (lastMessage !== null) {
-            const protocolMessage = JSON.parse(lastMessage.data);
-            const protocolMessageType = protocolMessage.type;
-            const data = protocolMessage.data;
-
-            console.log(protocolMessage);
-
-            if (protocolMessageType === "info") {
-                setServices(data.services)
-            }
-            else if (protocolMessageType === "chat_messages") {
-                setMessageHistory((prev) => prev.concat(...data.messages));
-            }
-            else {
-                console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
-            }
+        if (!lastMessage) {
+            return;
         }
+
+        const protocolMessage = JSON.parse(lastMessage.data);
+        const protocolMessageType = protocolMessage.type;
+        const data = protocolMessage.data;
+
+        console.log(protocolMessage);
+
+        if (protocolMessageType === "info") {
+            setServices(data.services)
+        }
+        else if (protocolMessageType === "chat_messages") {
+            setMessageHistory((prev) => prev.concat(...data.messages));
+        }
+        else {
+            console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
+        }
+
     }, [lastMessage, setMessageHistory]);
     
     const connectionStatus = {
