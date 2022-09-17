@@ -109,18 +109,20 @@ export class MessageView extends React.Component {
 
         return (
             <div className='message'>
-                <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
-                
-                <img className="avatar" alt="" src={author.avatar}></img>
+                <a className='messageAuthorLink' href="#">
+                    <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
+                    
+                    <img className="avatar" alt="" src={author.avatar}></img>
 
-                {author.leftBadges.map(badgeUrl => (
-                    <img className="badge" alt="" src={badgeUrl}></img>
-                ))}
+                    {author.leftBadges.map((badgeUrl, idx) => (
+                        <img key={idx} className="badge" alt="" src={badgeUrl}></img>
+                    ))}
 
-                <AuthorName author={author} />
+                    <AuthorName author={author} />
+                </a>
 
-                {author.rightBadges.map(badgeUrl => (
-                    <img className="badge" alt="" src={badgeUrl}></img>
+                {author.rightBadges.map((badgeUrl, idx) => (
+                    <img key={idx} className="badge" alt="" src={badgeUrl}></img>
                 ))}
 
                 {message.contents.map((content, idx) => (

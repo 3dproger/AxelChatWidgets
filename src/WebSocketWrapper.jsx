@@ -97,8 +97,8 @@ export const WebSocketWrapper = () => {
                     <ViewersCountView key={idx} service={service} />
                 ))}
 
-                <img alt="" class="badge" src="./images/viewer.svg"/>
-                <span class="text">{info.viewersCountTotal !== -1 ? info.viewersCountTotal : "?"}</span>
+                <img alt="" className="badge" src="./images/viewer.svg"/>
+                <span className="text">{info.viewersCountTotal > -1 ? info.viewersCountTotal : "?"}</span>
             </div>
         </div>
     )

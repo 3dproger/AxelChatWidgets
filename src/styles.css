@@ -27,6 +27,10 @@ body {
     border-radius: 3px;
 }
 
+.messageAuthorLink {
+    text-decoration: none;
+}
+
 .textContent, .hyperlinkContent {
     vertical-align: middle;
 }
