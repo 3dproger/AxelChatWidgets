@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { ViewersCountView } from './ViewersCountView'
 import { MessageView } from './MessageView';
@@ -6,7 +6,7 @@ import { MessageView } from './MessageView';
 const MessagesListView = ({messages}) => (
     <div>
         {messages.map(message => (
-            <div><MessageView message={message} /></div>
+            <div key={message.id}><MessageView message={message} /></div>
         ))}
     </div>
 );
@@ -58,7 +58,7 @@ export const WebSocketWrapper = () => {
 
             <div>
                 {services.map((service, idx) => (
-                    <ViewersCountView service={service} />
+                    <ViewersCountView key={idx} service={service} />
                 ))}
             </div>
         </div>

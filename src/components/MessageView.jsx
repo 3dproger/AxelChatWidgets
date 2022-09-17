@@ -31,7 +31,7 @@ class ContentView extends React.Component {
         
         if (type === "image") {
             return (
-                <img className="imageContent" src={data.url}></img>
+                <img className="imageContent" alt="" src={data.url}></img>
             )
         }
 
@@ -110,22 +110,22 @@ export class MessageView extends React.Component {
 
         return (
             <div className='message'>
-                <img className="avatar" src={author.avatar}></img>
+                <img className="avatar" alt="" src={author.avatar}></img>
 
-                <img className="badge" src={"./images/" + author.serviceId + "-icon.svg"}></img>
+                <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
 
                 {author.leftBadges.map(badgeUrl => (
-                    <img className="badge" src={badgeUrl}></img>
+                    <img className="badge" alt="" src={badgeUrl}></img>
                 ))}
 
                 <AuthorName author={author} />
 
                 {author.rightBadges.map(badgeUrl => (
-                    <img className="badge" src={badgeUrl}></img>
+                    <img className="badge" alt="" src={badgeUrl}></img>
                 ))}
 
-                {message.contents.map(content => (
-                    <ContentView content={content} />
+                {message.contents.map((content, idx) => (
+                    <ContentView key={idx} content={content} />
                 ))}
             </div>
         )
