@@ -22,10 +22,8 @@ body {
 }
 
 .authorName {
-    padding-right: 4px;
-    padding-left: 4px;
-    margin-left: 4px;
     margin-right: 4px;
+    margin-left: 4px;
     vertical-align: middle;
     font-weight: 900;
     color: #03A9F4;
@@ -44,8 +42,7 @@ body {
 }
 
 .avatar {
-    padding-left: 5px;
-    padding-right: 5px;
+    margin-left: 2px;
     height: 30px;
     vertical-align: middle;
     border-radius: 50%;
