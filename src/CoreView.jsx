@@ -35,7 +35,17 @@ export const CoreView = () => {
             setState(data);
         }
         else if (protocolMessageType === "messages") {
-            setMessageHistory((prev) => prev.concat(...data.messages));
+            setMessageHistory((prev) => {
+                prev = prev.concat(...data.messages);
+
+                const MaxMessagesCount = 50;
+
+                if (prev.length > MaxMessagesCount) {
+                    prev = prev.slice(prev.length - MaxMessagesCount, prev.length);
+                }
+
+                return prev;
+            });
         }
         else if (protocolMessageType === "hello") {
             // ignore
