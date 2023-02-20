@@ -19,7 +19,7 @@ export class ViewersCountView extends React.Component {
             )
         }
 
-        if (service.connectionStateType !== "connected") {
+        if (!service.enabled) {
             return (
                 <span></span>
             )
@@ -27,8 +27,8 @@ export class ViewersCountView extends React.Component {
 
         return (
             <span>
-                <img class="badge" alt="" src={service.icon} height="20"/>
-                <span class="text">{service.viewersCount !== -1 ? service.viewersCount : "?"}</span>
+                <img class="badge" alt="" src={"./images/" + service.type_id + "-icon.svg"} height="20"/>
+                <span class="text">{service.viewers !== -1 ? service.viewers : ""}</span>
             </span>
         )
     }
