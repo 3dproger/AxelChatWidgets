@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
+import { useSearchParams } from 'react-router-dom';
 import { MessagesListView } from './MessagesListView';
 import { ServicesListView } from './ServicesListView'
 
 export const CoreView = () => {
+    const [searchParams] = useSearchParams();
     const [messageHistory, setMessageHistory] = useState([]);
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
@@ -53,12 +55,17 @@ export const CoreView = () => {
     }[readyState];
 
     if (readyState == ReadyState.OPEN) {
-        return (
-            <div>
-                <MessagesListView messages={messageHistory} />
-                <ServicesListView services={services} appState={appState} />
-            </div>
-        )
+        const widgetType = searchParams.get("widget");
+
+        if (widgetType === "messages") {
+            return (<MessagesListView messages={messageHistory} />);
+        }
+        else if (widgetType === "viewers_counter") {
+            return (<ServicesListView services={services} appState={appState} />);
+        }
+        else {
+            return (<span className="status">Unknown widget</span>);
+        }
     }
     else {
         return (
