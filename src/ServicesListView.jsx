@@ -27,8 +27,8 @@ export class ServiceView extends React.Component {
 
         return (
             <span>
-                <img class="badge" alt="" src={"./images/" + service.type_id + "-icon.svg"} height="20"/>
-                <span class="text">{service.viewers !== -1 ? service.viewers : ""}</span>
+                <img className="badge" alt="" src={"./images/" + service.type_id + "-icon.svg"} height="20"/>
+                <span className="text">{service.viewers !== -1 ? service.viewers : ""}</span>
             </span>
         )
     }

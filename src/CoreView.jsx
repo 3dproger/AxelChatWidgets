@@ -35,6 +35,9 @@ export const CoreView = () => {
         else if (protocolMessageType === "messages") {
             setMessageHistory((prev) => prev.concat(...data.messages));
         }
+        else if (protocolMessageType === "hello") {
+            // ignore
+        }
         else {
             console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
         }
