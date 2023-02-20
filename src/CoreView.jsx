@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { ViewersCountView } from './ViewersCountView'
 import { MessagesListView } from './MessagesListView';
+import { ServicesListView } from './ServicesListView'
 
 export const CoreView = () => {
     const [messageHistory, setMessageHistory] = useState([]);
     const [services, setServices] = useState([]);
-    const [info, setState] = useState({
+    const [appState, setState] = useState({
         viewers: -1,
     });
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://127.0.0.1:8355', {
@@ -53,15 +53,7 @@ export const CoreView = () => {
         return (
             <div>
                 <MessagesListView messages={messageHistory} />
-
-                <div align="middle">
-                    {services.map((service, idx) => (
-                        <ViewersCountView key={idx} service={service} />
-                    ))}
-
-                    <img alt="" className="badge" src="./images/viewer.svg"/>
-                    <span className="text">{info.viewers > -1 ? info.viewers : "?"}</span>
-                </div>
+                <ServicesListView services={services} appState={appState} />
             </div>
         )
     }
