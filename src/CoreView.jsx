@@ -49,22 +49,27 @@ export const CoreView = () => {
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
-    return (
-        <div>
-            <span>AxelChat is {connectionStatus}</span><br/>
+    if (readyState == ReadyState.OPEN) {
+        return (
+            <div>
+                <MessagesListView messages={messageHistory} />
 
-            <MessagesListView messages={messageHistory} />
+                <div align="middle">
+                    {services.map((service, idx) => (
+                        <ViewersCountView key={idx} service={service} />
+                    ))}
 
-            <div align="middle">
-                {services.map((service, idx) => (
-                    <ViewersCountView key={idx} service={service} />
-                ))}
-
-                <img alt="" className="badge" src="./images/viewer.svg"/>
-                <span className="text">{info.viewers > -1 ? info.viewers : "?"}</span>
+                    <img alt="" className="badge" src="./images/viewer.svg"/>
+                    <span className="text">{info.viewers > -1 ? info.viewers : "?"}</span>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
+    else {
+        return (
+            <div><span className="status">AxelChat is {connectionStatus}</span></div>
+        )
+    }
 };
 
 export default CoreView;

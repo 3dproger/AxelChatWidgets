@@ -65,3 +65,13 @@ body {
     color: white;
     font-weight: 900;
 }
+
+.status {
+    padding: 4px;
+    vertical-align: middle;
+    border-radius: 2px;
+    -webkit-text-stroke: 1px black;
+    font-size: medium;
+    color: white;
+    font-weight: 900;
+}
