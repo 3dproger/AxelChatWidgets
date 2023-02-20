@@ -40,7 +40,7 @@ class MessagesListView extends React.Component {
     }
 }
 
-export const WebSocketWrapper = () => {
+export const CoreView = () => {
     const [messageHistory, setMessageHistory] = useState([]);
     const [services, setServices] = useState([]);
     const [info, setState] = useState({
@@ -63,7 +63,7 @@ export const WebSocketWrapper = () => {
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
-        console.log(protocolMessage);
+        //console.log(protocolMessage);
 
         if (protocolMessageType === "state") {
             setServices(data.services);
@@ -104,4 +104,4 @@ export const WebSocketWrapper = () => {
     )
 };
 
-export default WebSocketWrapper;
+export default CoreView;
