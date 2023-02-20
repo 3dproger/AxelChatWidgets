@@ -132,3 +132,39 @@ export class MessageView extends React.Component {
         )
     }
 }
+
+export class MessagesListView extends React.Component {
+    static propTypes = {
+        messages: PropTypes.array.isRequired,
+    }
+
+    static defaultProps = {
+        messages: [],
+    }
+
+    scrollToBottom = () => {
+        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+    }
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
+
+    render() {
+        return (
+            <div>
+                {this.props.messages.map(message => (
+                    <div key={message.id}><MessageView message={message} /></div>
+                ))}
+
+                <div style={{ float:"left", clear: "both" }}
+                    ref={(el) => { this.messagesEnd = el; }}>
+                </div>
+            </div>
+        )
+    }
+}
