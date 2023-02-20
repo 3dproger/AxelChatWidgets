@@ -12,9 +12,9 @@ body {
     padding: 2px;
     vertical-align: middle;
     border-radius: 2px;
-    -webkit-text-stroke: 1px black;
+    -webkit-text-stroke: 1x white;
     font-size: medium;
-    color: white;
+    color: black;
     font-weight: 600;
 }
 
@@ -44,13 +44,13 @@ body {
 
 .avatar {
     margin-left: 2px;
-    height: 30px;
+    height: 40px;
     vertical-align: middle;
     border-radius: 50%;
 }
 
 .badge {
-    height: 20px;
+    height: 30px;
     padding-left: 2px;
     padding-right: 2px;
     vertical-align: middle;
@@ -61,7 +61,7 @@ body {
     vertical-align: middle;
     border-radius: 2px;
     -webkit-text-stroke: 1px black;
-    font-size: medium;
+    font-size: x-large;
     color: white;
     font-weight: 900;
 }
