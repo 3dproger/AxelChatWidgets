@@ -39,7 +39,7 @@ body {
     vertical-align: middle;
     padding-left: 3px;
     padding-right: 3px;
-    height: 20px;
+    height: 30px;
 }
 
 .avatar {
@@ -50,7 +50,7 @@ body {
 }
 
 .badge {
-    height: 30px;
+    height: 24px;
     padding-left: 2px;
     padding-right: 2px;
     vertical-align: middle;

@@ -6,7 +6,8 @@ import { ServicesListView } from './ServicesListView'
 
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
-    const [messageHistory, setMessageHistory] = useState([]);
+    const [authors, setAuthors] = useState(new Map());
+    const [messages, setMessages] = useState([]);
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
         viewers: -1,
@@ -14,7 +15,7 @@ export const CoreView = () => {
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://127.0.0.1:8355', {
         onOpen: () => {
             console.log('Opened socket')
-            setMessageHistory([]);
+            setMessages([]);
         },
         shouldReconnect: (closeEvent) => true,
     });
@@ -35,8 +36,13 @@ export const CoreView = () => {
             setState(data);
         }
         else if (protocolMessageType === "messages") {
-            setMessageHistory((prev) => {
+            setMessages((prev) => {
                 prev = prev.concat(...data.messages);
+
+                for (const message of data.messages) {
+                    const author = message.author;
+                    authors.set(author.id, author);
+                }
 
                 const MaxMessagesCount = 50;
 
@@ -47,6 +53,16 @@ export const CoreView = () => {
                 return prev;
             });
         }
+        else if (protocolMessageType === "author_values") {
+            const authorId = data.author_id;
+
+            if (authors.has(authorId)) {
+                var author = authors.get(authorId);
+                for (var key in data.values) {
+                    author[key] = data.values[key];
+                }
+            }
+        }
         else if (protocolMessageType === "hello") {
             // ignore
         }
@@ -54,7 +70,7 @@ export const CoreView = () => {
             console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
         }
 
-    }, [lastMessage, setMessageHistory]);
+    }, [lastMessage, setMessages]);
     
     const connectionStatus = {
         [ReadyState.CONNECTING]: 'Connecting',
@@ -68,7 +84,7 @@ export const CoreView = () => {
         const widgetType = searchParams.get("widget");
 
         if (widgetType === "messages") {
-            return (<MessagesListView messages={messageHistory} />);
+            return (<MessagesListView messages={messages} />);
         }
         else if (widgetType === "viewers_counter") {
             return (<ServicesListView services={services} appState={appState} />);
