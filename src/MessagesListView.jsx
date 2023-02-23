@@ -141,7 +141,9 @@ export class MessagesListView extends React.Component {
     }
 
     scrollToBottom = () => {
-        this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        if (this.messagesEnd !== undefined) {
+            this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+        }
     }
 
     componentDidMount() {
@@ -153,16 +155,23 @@ export class MessagesListView extends React.Component {
     }
 
     render() {
-        return (
-            <div>
-                {this.props.messages.map(message => (
-                    <div key={message.id}><MessageView message={message} /></div>
-                ))}
-
-                <div style={{ float:"left", clear: "both" }}
-                    ref={(el) => { this.messagesEnd = el; }}>
+        if (this.props.messages.length === 0) {
+            return (
+                <img className="dummyAnimation" alt="" src="./images/cool_200_transparent.gif"></img>
+            )
+        }
+        else {
+            return (
+                <div>
+                    {this.props.messages.map(message => (
+                        <div key={message.id}><MessageView message={message} /></div>
+                    ))}
+    
+                    <div style={{ float:"left", clear: "both" }}
+                        ref={(el) => { this.messagesEnd = el; }}>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        }
     }
 }
