@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { AnimatedDummyTextView } from './AnimatedDummyTextView'
 
 class ContentView extends React.Component {
     static propTypes = {
@@ -141,7 +142,7 @@ export class MessagesListView extends React.Component {
     }
 
     scrollToBottom = () => {
-        if (this.messagesEnd !== undefined) {
+        if (this.messagesEnd !== undefined && this.messagesEnd !== null) {
             this.messagesEnd.scrollIntoView({ behavior: "smooth" });
         }
     }
@@ -157,7 +158,7 @@ export class MessagesListView extends React.Component {
     render() {
         if (this.props.messages.length === 0) {
             return (
-                <img className="dummyAnimation" alt="" src="./images/cool_200_transparent.gif"></img>
+                <AnimatedDummyTextView text="Connected! But no one has written anything yet" imageSrc="./images/cool_200_transparent.gif"/>
             )
         }
         else {

@@ -3,6 +3,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useSearchParams } from 'react-router-dom';
 import { MessagesListView } from './MessagesListView';
 import { ServicesListView } from './ServicesListView'
+import { AnimatedDummyTextView } from './AnimatedDummyTextView'
 
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
@@ -95,7 +96,7 @@ export const CoreView = () => {
     }
     else {
         return (
-            <div><span className="statusText">AxelChat is {connectionStatus}</span></div>
+            <AnimatedDummyTextView text={connectionStatus} imageSrc="./images/sleeping_200_transparent.gif"/>
         )
     }
 };
