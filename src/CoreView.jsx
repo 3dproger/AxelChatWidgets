@@ -73,10 +73,10 @@ export const CoreView = () => {
     }, [lastMessage, setMessages]);
     
     const connectionStatus = {
-        [ReadyState.CONNECTING]: 'Connecting',
+        [ReadyState.CONNECTING]: 'Connecting...',
         [ReadyState.OPEN]: 'Open',
         [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed',
+        [ReadyState.CLOSED]: 'Closed...',
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
@@ -86,16 +86,16 @@ export const CoreView = () => {
         if (widgetType === "messages") {
             return (<MessagesListView messages={messages} />);
         }
-        else if (widgetType === "viewers_counter") {
+        else if (widgetType === "states") {
             return (<ServicesListView services={services} appState={appState} />);
         }
         else {
-            return (<span className="status">Unknown widget</span>);
+            return (<span className="errorText">Error: unknown widget</span>);
         }
     }
     else {
         return (
-            <div><span className="status">AxelChat is {connectionStatus}</span></div>
+            <div><span className="statusText">AxelChat is {connectionStatus}</span></div>
         )
     }
 };

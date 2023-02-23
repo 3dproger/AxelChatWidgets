@@ -66,12 +66,22 @@ body {
     font-weight: 900;
 }
 
-.status {
+.statusText {
     padding: 4px;
     vertical-align: middle;
     border-radius: 2px;
     -webkit-text-stroke: 1px black;
-    font-size: medium;
+    font-size: xx-large;
     color: white;
+    font-weight: 900;
+}
+
+.errorText {
+    padding: 4px;
+    vertical-align: middle;
+    border-radius: 2px;
+    -webkit-text-stroke: 1px black;
+    font-size: xx-large;
+    color: red;
     font-weight: 900;
 }
