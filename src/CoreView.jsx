@@ -77,7 +77,7 @@ export const CoreView = () => {
         [ReadyState.CONNECTING]: 'Connecting...',
         [ReadyState.OPEN]: 'Open',
         [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed...',
+        [ReadyState.CLOSED]: 'Closed',
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
@@ -96,7 +96,7 @@ export const CoreView = () => {
     }
     else {
         return (
-            <AnimatedDummyTextView text={connectionStatus} imageSrc="./images/sleeping_200_transparent.gif"/>
+            <AnimatedDummyTextView text={connectionStatus} imageSrc="./images/error-alt-svgrepo-com.svg"/>
         )
     }
 };

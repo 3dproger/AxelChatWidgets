@@ -158,7 +158,7 @@ export class MessagesListView extends React.Component {
     render() {
         if (this.props.messages.length === 0) {
             return (
-                <AnimatedDummyTextView text="Connected! But no one has written anything yet" imageSrc="./images/cool_200_transparent.gif"/>
+                <AnimatedDummyTextView text="Connected! But no one has written anything yet" imageSrc="./images/tick.svg"/>
             )
         }
         else {

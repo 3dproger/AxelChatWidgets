@@ -66,14 +66,21 @@ body {
     font-weight: 900;
 }
 
+.dummyAnimation {
+    padding: 3%;
+}
+
 .dummyAnimationText {
-    padding: 4px;
     text-align: center;
-    border-radius: 2px;
     -webkit-text-stroke: 1px black;
     font-size: xx-large;
     color: #03A9F4;
     font-weight: 900;
+}
+
+.dummyAnimationImage {
+    filter: drop-shadow(0px 0px 2px black);
+    padding: 10%;
 }
 
 .errorText {

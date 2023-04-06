@@ -9,15 +9,23 @@ export class AnimatedDummyTextView extends React.Component {
 
     static defaultProps = {
         text: "TEXT",
-        imageSrc: "./images/cool_200_transparent.gif",
+        imageSrc: "./images/tick.svg",
     }
 
     render() {
         return (
-            <div className="dummyAnimation">
-                <img alt="" src={this.props.imageSrc}></img>
+            <div
+                className="dummyAnimation"
+                style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '100vh',
+                }}>
+
+                <img className="dummyAnimationImage" alt="" width="60" height="60" src={this.props.imageSrc}></img>
                 <br/>
-                <span className="dummyAnimationText">{this.props.text}</span>
+                <div className="dummyAnimationText">{this.props.text}</div>
             </div>
         )
     }
