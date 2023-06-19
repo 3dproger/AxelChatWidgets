@@ -18,9 +18,9 @@ class ContentView extends React.Component {
                 color: "#ffffff",
                 family: "Roboto",
                 size: 24,
-                weight: "400",
+                weight: "800",
                 italic: false,
-                outlineWidth: 1,
+                outlineWidth: 1.1,
                 outlineColor: "#000000",
             },
         },
@@ -77,9 +77,9 @@ class AuthorName extends React.Component {
                 color: "#03A9F4",
                 family: "Roboto",
                 size: 24,
-                weight: "700",
+                weight: "950",
                 italic: false,
-                outlineWidth: 1,
+                outlineWidth: 1.5,
                 outlineColor: "#000000",
             }
         }

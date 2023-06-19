@@ -108,7 +108,7 @@ class TextViewEditor extends React.Component {
                         },
                         {
                             label: "Extra Bold (800)",
-                            value: "700"
+                            value: "800"
                         },
                         {
                             label: "Black (900)",
