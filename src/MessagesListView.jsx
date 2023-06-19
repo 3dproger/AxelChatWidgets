@@ -22,7 +22,7 @@ class ContentView extends React.Component {
                 italic: false,
                 outlineWidth: 1,
                 outlineColor: "#000000",
-            }
+            },
         },
     }
 
@@ -72,8 +72,16 @@ class AuthorName extends React.Component {
         author: null,
         settings: {
             visible: true,
-            defaultColor: "#03A9F4",
             useOnlyDefaultColor: false,
+            text: {
+                color: "#03A9F4",
+                family: "Roboto",
+                size: 24,
+                weight: "700",
+                italic: false,
+                outlineWidth: 1,
+                outlineColor: "#000000",
+            }
         }
     }
 
@@ -102,7 +110,7 @@ class AuthorName extends React.Component {
 
         return (
             <span>
-            {this.props.settings.visible ? <TextView text={name}/>: null}
+            {this.props.settings.visible ? <TextView text={name} settings={this.props.settings.text}/>: null}
             </span>
         )
     }

@@ -233,13 +233,12 @@ class EditorPanel extends React.Component {
 
                     <br/>
                     
-                    Default color:
-                    <ColorPicker
-                        defaultValue={this.props.settings.item.authorName.defaultColor}
-                        onChange={(value) => {
-                            this.props.settings.item.authorName.defaultColor = value.toHexString()
-                            this.updateSettings()
-                        }} />
+                    <TextViewEditor
+                        settings={this.props.settings.item.authorName.text}
+                        onChange={(settings)=>{
+                            this.props.settings.item.authorName.text=settings
+                        }}
+                        />
                 </Card>
                 
                 <Card title="Message content" size="small" extra={
