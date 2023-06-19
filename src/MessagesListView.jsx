@@ -28,7 +28,7 @@ class ContentView extends React.Component {
 
     render() {
         if (!this.props.settings.visible) {
-            return(<div></div>)
+            return(<span/>)
         }
 
         const content = this.props.content;
@@ -94,19 +94,6 @@ class AuthorName extends React.Component {
         }
 
         const name = author.name
-        const color = this.props.settings.useOnlyDefaultColor ? this.props.settings.defaultColor : author.color
-        const backgroundColor = author.backgroundColor
-
-        var style = {};
-
-        if (color !== "") {
-            style.color = color
-            console.log(color)
-        }
-
-        if (backgroundColor !== "") {
-            style.backgroundColor = backgroundColor
-        }
 
         return (
             <span>
@@ -131,6 +118,10 @@ export class MessageView extends React.Component {
                 shape: "circle",
                 size: 40,
             },
+            platformIcon: {
+                visible: true,
+                size: 20,
+            },
             authorName: AuthorName.defaultProps.settings,
             content: ContentView.defaultProps.settings,
         }
@@ -154,8 +145,8 @@ export class MessageView extends React.Component {
         return (
             <div className='message'>
                 <a className='messageAuthorLink' href="#">
-                    <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
-                    
+                    {this.props.settings.platformIcon.visible ? <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}/> : null}
+
                     {this.props.settings.avatar.visible ? <Avatar
                         size={this.props.settings.avatar.size > 0 ? this.props.settings.avatar.size : 1}
                         shape={this.props.settings.avatar.shape}

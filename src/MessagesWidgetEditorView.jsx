@@ -223,16 +223,7 @@ class EditorPanel extends React.Component {
                         }}
                         />
                 }>
-                    <Checkbox
-                        defaultChecked={this.props.settings.item.authorName.useOnlyDefaultColor}
-                        onChange={(e) =>{
-                            this.props.settings.item.authorName.useOnlyDefaultColor = e.target.checked
-                        }}>
-                        Use only default color
-                    </Checkbox>
 
-                    <br/>
-                    
                     <TextViewEditor
                         settings={this.props.settings.item.authorName.text}
                         onChange={(settings)=>{
@@ -255,6 +246,25 @@ class EditorPanel extends React.Component {
                             this.props.settings.item.content.text=settings
                         }}
                         />
+                </Card>
+
+                <Card title="Platform icon" size="small" extra={
+                    <Switch
+                        defaultChecked={this.props.settings.item.platformIcon.visible}
+                        onChange={(checked)=>{
+                            this.props.settings.item.platformIcon.visible=checked
+                        }}
+                        />
+                }>
+                    Size:
+                    <InputNumber
+                        min={1}
+                        max={500}
+                        defaultValue={this.props.settings.item.platformIcon.size}
+                        onChange={(value) => {
+                            this.props.settings.item.platformIcon.size=value
+                            this.updateSettings()
+                        }} />
                 </Card>
             </Space>
         )
