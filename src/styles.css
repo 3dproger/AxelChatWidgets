@@ -42,13 +42,6 @@ body {
     height: 30px;
 }
 
-.avatar {
-    margin-left: 2px;
-    height: 40px;
-    vertical-align: middle;
-    border-radius: 50%;
-}
-
 .badge {
     height: 24px;
     padding-left: 2px;

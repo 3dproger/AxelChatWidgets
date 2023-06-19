@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useSearchParams } from 'react-router-dom';
 import { MessagesListView } from './MessagesListView';
+import { MessagesWidgetEditorView } from './MessagesWidgetEditorView'
 import { ServicesListView } from './ServicesListView'
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
 
@@ -86,6 +87,9 @@ export const CoreView = () => {
 
         if (widgetType === "messages") {
             return (<MessagesListView messages={messages} />);
+        }
+        else if (widgetType === "messages-widget-editor") {
+            return (<MessagesWidgetEditorView messages={messages} />);
         }
         else if (widgetType === "states") {
             return (<ServicesListView services={services} appState={appState} />);

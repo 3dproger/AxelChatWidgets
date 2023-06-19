@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
+import { Avatar, Space } from 'antd';
 
 class ContentView extends React.Component {
     static propTypes = {
@@ -85,10 +86,16 @@ class AuthorName extends React.Component {
 export class MessageView extends React.Component {
     static propTypes = {
         message: PropTypes.object.isRequired,
+        settings: PropTypes.object,
     }
 
     static defaultProps = {
         message: null,
+        settings: {
+            avatar: {
+                shape: "circle"
+            }
+        }
     }
     
     render() {
@@ -106,12 +113,18 @@ export class MessageView extends React.Component {
             )
         }
 
+        // <img className="avatar" alt="" src={author.avatar}></img>
+
         return (
             <div className='message'>
                 <a className='messageAuthorLink' href="#">
                     <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
                     
-                    <img className="avatar" alt="" src={author.avatar}></img>
+                    <Avatar
+                        size={40}
+                        shape={this.props.settings.avatar.shape}
+                        src={author.avatar}
+                        />
 
                     {author.leftBadges.map((badgeUrl, idx) => (
                         <img key={idx} className="badge" alt="" src={badgeUrl}></img>
@@ -139,6 +152,13 @@ export class MessagesListView extends React.Component {
 
     static defaultProps = {
         messages: [],
+        settings: {
+            container: {
+                type: "list"
+            },
+
+            item: MessageView.defaultProps.settings
+        }
     }
 
     scrollToBottom = () => {
@@ -165,7 +185,7 @@ export class MessagesListView extends React.Component {
             return (
                 <div>
                     {this.props.messages.map(message => (
-                        <div key={message.id}><MessageView message={message} /></div>
+                        <div key={message.id}><MessageView message={message} settings={this.props.settings.item} /></div>
                     ))}
     
                     <div style={{ float:"left", clear: "both" }}
