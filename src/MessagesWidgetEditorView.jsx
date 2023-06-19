@@ -3,6 +3,144 @@ import PropTypes from 'prop-types';
 import { MessagesListView } from './MessagesListView';
 import { InputNumber, Select, Space, Card, ColorPicker, Checkbox, Switch } from 'antd';
 
+class TextStyleEditor extends React.Component {
+    static defaultProps = {
+        settings: {
+            font: {
+                color: "#ffffff",
+                family: "",
+                size: 9,
+                bold: false,
+                italic: false,
+                underline: false,
+                strikeout: false,
+                outline: true,
+                outlineColor: "#000000",
+            }
+        },
+
+        onChange: (settings) => {
+            console.log("settings changed but callback not setted")
+        },
+    }
+
+    updateSettings() {
+        this.props.onChange(this.props.settings)
+    }
+
+    render(){
+        return(
+            <div>
+                Text color:
+                <ColorPicker
+                    defaultValue={this.props.settings.font.color}
+                    onChange={(value) => {
+                        this.props.settings.font.color = value.toHexString()
+                        this.updateSettings()
+                    }} />
+
+                <br/>
+
+                Font family:
+                <Select
+                    showSearch
+                    defaultValue={this.props.settings.font.family}
+                    onChange={(value) => {
+                        this.props.settings.font.family=value
+                        this.updateSettings()
+                    }}
+                    options={[
+                        {
+                            label: "Square",
+                            value: "square"
+                        },
+                        {
+                            label: "Circle",
+                            value: "circle"
+                        },
+                    ]}
+                />
+
+                <br/>
+
+                Font size:
+                <InputNumber
+                    min={1}
+                    max={300}
+                    defaultValue={this.props.settings.font.size}
+                    onChange={(value) => {
+                        this.props.settings.font.size=value
+                        this.updateSettings()
+                    }} />
+                
+                <br/>
+
+                <Checkbox
+                    defaultChecked={this.props.settings.font.bold}
+                    onChange={(e) =>{
+                        this.props.settings.font.bold = e.target.checked
+                        this.updateSettings()
+                    }}>
+                    Bold
+                </Checkbox>
+
+                <br/>
+
+                <Checkbox
+                    defaultChecked={this.props.settings.font.italic}
+                    onChange={(e) =>{
+                        this.props.settings.font.italic = e.target.checked
+                        this.updateSettings()
+                    }}>
+                    Italic
+                </Checkbox>
+
+                <br/>
+
+                <Checkbox
+                    defaultChecked={this.props.settings.font.underline}
+                    onChange={(e) =>{
+                        this.props.settings.font.underline = e.target.checked
+                        this.updateSettings()
+                    }}>
+                    Underline
+                </Checkbox>
+
+                <br/>
+
+                <Checkbox
+                    defaultChecked={this.props.settings.font.strikeout}
+                    onChange={(e) =>{
+                        this.props.settings.font.strikeout = e.target.checked
+                        this.updateSettings()
+                    }}>
+                    Strikeout
+                </Checkbox>
+
+                <br/>
+
+                <Checkbox
+                    defaultChecked={this.props.settings.font.outline}
+                    onChange={(e) =>{
+                        this.props.settings.font.outline = e.target.checked
+                        this.updateSettings()
+                    }}>
+                    Outline
+                </Checkbox>
+
+                <br/>
+
+                Outline color:
+                <ColorPicker
+                    defaultValue={this.props.settings.font.outlineColor}
+                    onChange={(value) => {
+                        this.props.settings.font.outlineColor = value.toHexString()
+                        this.updateSettings()
+                    }} />
+            </div>)
+    }
+}
+
 class EditorPanel extends React.Component {
     static defaultProps = {
         settings: MessagesListView.defaultProps.settings,
@@ -95,6 +233,7 @@ class EditorPanel extends React.Component {
                         }}
                         />
                 }>
+                    <TextStyleEditor/>
                 </Card>
             </Space>
         )
