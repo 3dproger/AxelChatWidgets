@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
+import { TextView } from './TextView'
 import { Avatar, Typography } from 'antd';
 const { Text, Link } = Typography;
 
@@ -36,7 +37,7 @@ class ContentView extends React.Component {
         
         if (type === "text") {
             const text = data.text;
-            return (<span className="textContent">{text}</span>)
+            return (<TextView text={text}/>)
         }
         else if (type === "image") {
             return (

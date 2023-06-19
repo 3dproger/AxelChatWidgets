@@ -1,27 +1,32 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MessagesListView } from './MessagesListView';
+import { TextView } from './TextView';
 import { InputNumber, Select, Space, Card, ColorPicker, Checkbox, Switch } from 'antd';
 
-class TextStyleEditor extends React.Component {
+class TextViewEditor extends React.Component {
     static defaultProps = {
-        settings: {
-            font: {
-                color: "#ffffff",
-                family: "",
-                size: 9,
-                bold: false,
-                italic: false,
-                underline: false,
-                strikeout: false,
-                outline: true,
-                outlineColor: "#000000",
-            }
-        },
+        settings: TextView.defaultProps.settings,
+        
 
         onChange: (settings) => {
             console.log("settings changed but callback not setted")
         },
+    }
+
+    static getAvailableFontsFamiliesOptions() {
+        var result = []
+
+        const families = TextView.getAvailableFontsFamilies()
+        for (const family of families)
+        {
+            result.push({
+                label: family,
+                value: family
+            })
+        }
+
+        return result
     }
 
     updateSettings() {
@@ -49,16 +54,7 @@ class TextStyleEditor extends React.Component {
                         this.props.settings.font.family=value
                         this.updateSettings()
                     }}
-                    options={[
-                        {
-                            label: "Square",
-                            value: "square"
-                        },
-                        {
-                            label: "Circle",
-                            value: "circle"
-                        },
-                    ]}
+                    options={TextViewEditor.getAvailableFontsFamiliesOptions()}
                 />
 
                 <br/>
@@ -233,7 +229,7 @@ class EditorPanel extends React.Component {
                         }}
                         />
                 }>
-                    <TextStyleEditor/>
+                    <TextViewEditor/>
                 </Card>
             </Space>
         )
