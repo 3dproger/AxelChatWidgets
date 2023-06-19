@@ -15,7 +15,13 @@ class ContentView extends React.Component {
         settings: {
             visible: true,
             text: {
-                style: {},
+                color: "#ffffff",
+                family: "Roboto",
+                size: 24,
+                weight: "400",
+                italic: false,
+                outlineWidth: 1,
+                outlineColor: "#000000",
             }
         },
     }
@@ -37,7 +43,7 @@ class ContentView extends React.Component {
         
         if (type === "text") {
             const text = data.text;
-            return (<TextView text={text}/>)
+            return (<TextView text={text} settings={this.props.settings.text}/>)
         }
         else if (type === "image") {
             return (
@@ -96,9 +102,7 @@ class AuthorName extends React.Component {
 
         return (
             <span>
-            {this.props.settings.visible ? <Text className="authorName" style={style}>
-                {name}
-            </Text> : null}
+            {this.props.settings.visible ? <TextView text={name}/>: null}
             </span>
         )
     }

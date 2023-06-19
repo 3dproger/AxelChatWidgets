@@ -7,7 +7,6 @@ import { InputNumber, Select, Space, Card, ColorPicker, Checkbox, Switch } from 
 class TextViewEditor extends React.Component {
     static defaultProps = {
         settings: TextView.defaultProps.settings,
-        
 
         onChange: (settings) => {
             console.log("settings changed but callback not setted")
@@ -38,9 +37,9 @@ class TextViewEditor extends React.Component {
             <div>
                 Text color:
                 <ColorPicker
-                    defaultValue={this.props.settings.font.color}
+                    defaultValue={this.props.settings.color}
                     onChange={(value) => {
-                        this.props.settings.font.color = value.toHexString()
+                        this.props.settings.color = value.toHexString()
                         this.updateSettings()
                     }} />
 
@@ -49,9 +48,9 @@ class TextViewEditor extends React.Component {
                 Font family:
                 <Select
                     showSearch
-                    defaultValue={this.props.settings.font.family}
+                    defaultValue={this.props.settings.family}
                     onChange={(value) => {
-                        this.props.settings.font.family=value
+                        this.props.settings.family=value
                         this.updateSettings()
                     }}
                     options={TextViewEditor.getAvailableFontsFamiliesOptions()}
@@ -63,9 +62,9 @@ class TextViewEditor extends React.Component {
                 <InputNumber
                     min={1}
                     max={300}
-                    defaultValue={this.props.settings.font.size}
+                    defaultValue={this.props.settings.size}
                     onChange={(value) => {
-                        this.props.settings.font.size=value
+                        this.props.settings.size=value
                         this.updateSettings()
                     }} />
                 
@@ -73,9 +72,9 @@ class TextViewEditor extends React.Component {
 
                 Weight:
                 <Select
-                    defaultValue={this.props.settings.font.weight}
+                    defaultValue={this.props.settings.weight}
                     onChange={(value) => {
-                        this.props.settings.font.weight=value
+                        this.props.settings.weight=value
                         this.updateSettings()
                     }}
                     options={[
@@ -125,9 +124,9 @@ class TextViewEditor extends React.Component {
                 <br/>
 
                 <Checkbox
-                    defaultChecked={this.props.settings.font.italic}
+                    defaultChecked={this.props.settings.italic}
                     onChange={(e) =>{
-                        this.props.settings.font.italic = e.target.checked
+                        this.props.settings.italic = e.target.checked
                         this.updateSettings()
                     }}>
                     Italic
@@ -140,9 +139,9 @@ class TextViewEditor extends React.Component {
                     min={0}
                     max={100}
                     step={0.1}
-                    defaultValue={this.props.settings.font.outlineWidth}
+                    defaultValue={this.props.settings.outlineWidth}
                     onChange={(value) => {
-                        this.props.settings.font.outlineWidth=value
+                        this.props.settings.outlineWidth=value
                         this.updateSettings()
                     }} />
 
@@ -150,9 +149,9 @@ class TextViewEditor extends React.Component {
 
                 Outline color:
                 <ColorPicker
-                    defaultValue={this.props.settings.font.outlineColor}
+                    defaultValue={this.props.settings.outlineColor}
                     onChange={(value) => {
-                        this.props.settings.font.outlineColor = value.toHexString()
+                        this.props.settings.outlineColor = value.toHexString()
                         this.updateSettings()
                     }} />
             </div>)
@@ -251,7 +250,12 @@ class EditorPanel extends React.Component {
                         }}
                         />
                 }>
-                    <TextViewEditor/>
+                    <TextViewEditor
+                        settings={this.props.settings.item.content.text}
+                        onChange={(settings)=>{
+                            this.props.settings.item.content.text=settings
+                        }}
+                        />
                 </Card>
             </Space>
         )

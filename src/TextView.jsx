@@ -11,17 +11,14 @@ export class TextView extends React.Component {
     static defaultProps = {
         text: "",
         settings: {
-            visible: true,
-            font: {
-                color: "#00ffff",
-                family: "Roboto",
-                size: 20,
-                weight: "400",
-                italic: false,
-                // text-decoration
-                outlineWidth: 1,
-                outlineColor: "#000000",
-            },
+            color: "#00ffff",
+            family: "Roboto",
+            size: 20,
+            weight: "400",
+            italic: false,
+            // text-decoration
+            outlineWidth: 1,
+            outlineColor: "#000000",
         }
     }
 
@@ -30,24 +27,22 @@ export class TextView extends React.Component {
     }
 
     render() {
-        const font = this.props.settings.font
+        const settings = this.props.settings
 
         const style = {
-            color: font.color,
-            fontSize: font.size,
-            fontWeight: font.weight,
-            fontStyle: font.italic ? "italic" : "normal",
+            color: settings.color,
+            fontSize: settings.size,
+            fontWeight: settings.weight,
+            fontStyle: settings.italic ? "italic" : "normal",
 
-            WebkitTextStrokeWidth: font.outlineWidth,
-            WebkitTextStrokeColor: font.outlineColor,
+            WebkitTextStrokeWidth: settings.outlineWidth,
+            WebkitTextStrokeColor: settings.outlineColor,
         }
 
         return (
-            <span>
-            {this.props.settings.visible ? <Text style={style}>
+            <Text style={style}>
                 {this.props.text}
-            </Text> : null}
-            </span>
+            </Text>
         )
     }
 }
