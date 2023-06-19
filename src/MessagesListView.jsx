@@ -56,6 +56,7 @@ class AuthorName extends React.Component {
     static defaultProps = {
         author: null,
         settings: {
+            visible: true,
             defaultColor: "#03A9F4",
             useOnlyDefaultColor: false,
         }
@@ -85,9 +86,11 @@ class AuthorName extends React.Component {
         }
 
         return (
-            <Text className="authorName" style={style}>
+            <span>
+            {this.props.settings.visible ? <Text className="authorName" style={style}>
                 {name}
-            </Text>
+            </Text> : null}
+            </span>
         )
     }
 }

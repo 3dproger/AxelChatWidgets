@@ -34,9 +34,6 @@ class EditorPanel extends React.Component {
                             this.props.settings.item.avatar.shape=value
                             this.updateSettings()
                         }}
-                        style={{
-                            width: 100,
-                        }}
                         options={[
                             {
                                 label: "Square",
@@ -63,7 +60,14 @@ class EditorPanel extends React.Component {
                 
                 </Card>
                 
-                <Card title="Author name" size="small">
+                <Card title="Author name" size="small" extra={
+                    <Switch
+                        defaultChecked={this.props.settings.item.authorName.visible}
+                        onChange={(checked)=>{
+                            this.props.settings.item.authorName.visible=checked
+                        }}
+                        />
+                }>
                     <Checkbox
                         defaultChecked={this.props.settings.item.authorName.useOnlyDefaultColor}
                         onChange={(e) =>{
@@ -123,9 +127,6 @@ export class MessagesWidgetEditorView extends React.Component {
                 <Card
                     title="Settings"
                     bordered={false}
-                    style={{
-                        width: 300,
-                    }}
                     >
                     <EditorPanel
                         onChange={(settings)=>{
