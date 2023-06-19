@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MessagesListView } from './MessagesListView';
-import { Radio, Select, Space } from 'antd';
+import { InputNumber, Select, Space } from 'antd';
 
 class EditorPanel extends React.Component {
     static defaultProps = {
@@ -40,6 +40,16 @@ class EditorPanel extends React.Component {
                         },
                     ]}
                     />
+
+                Size:
+                <InputNumber
+                    min={1}
+                    max={500}
+                    defaultValue={this.props.settings.item.avatar.size}
+                    onChange={(value) => {
+                        this.props.settings.item.avatar.size=value
+                        this.updateSettings()
+                    }} />
             </Space>
         )
     }

@@ -93,7 +93,8 @@ export class MessageView extends React.Component {
         message: null,
         settings: {
             avatar: {
-                shape: "circle"
+                shape: "circle",
+                size: 40,
             }
         }
     }
@@ -113,15 +114,13 @@ export class MessageView extends React.Component {
             )
         }
 
-        // <img className="avatar" alt="" src={author.avatar}></img>
-
         return (
             <div className='message'>
                 <a className='messageAuthorLink' href="#">
                     <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
                     
                     <Avatar
-                        size={40}
+                        size={this.props.settings.avatar.size > 0 ? this.props.settings.avatar.size : 1}
                         shape={this.props.settings.avatar.shape}
                         src={author.avatar}
                         />
