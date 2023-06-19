@@ -11,9 +11,19 @@ class ContentView extends React.Component {
 
     static defaultProps = {
         content: null,
+        settings: {
+            visible: true,
+            text: {
+                style: {},
+            }
+        },
     }
 
     render() {
+        if (!this.props.settings.visible) {
+            return(<div></div>)
+        }
+
         const content = this.props.content;
         if (!content) {
             return (
@@ -26,9 +36,7 @@ class ContentView extends React.Component {
         
         if (type === "text") {
             const text = data.text;
-            return (
-                <span className="textContent">{text}</span>
-            )
+            return (<span className="textContent">{text}</span>)
         }
         else if (type === "image") {
             return (
@@ -111,6 +119,7 @@ export class MessageView extends React.Component {
                 size: 40,
             },
             authorName: AuthorName.defaultProps.settings,
+            content: ContentView.defaultProps.settings,
         }
     }
     

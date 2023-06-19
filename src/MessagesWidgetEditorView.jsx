@@ -86,6 +86,16 @@ class EditorPanel extends React.Component {
                             this.updateSettings()
                         }} />
                 </Card>
+                
+                <Card title="Message content" size="small" extra={
+                    <Switch
+                        defaultChecked={this.props.settings.item.content.visible}
+                        onChange={(checked)=>{
+                            this.props.settings.item.content.visible=checked
+                        }}
+                        />
+                }>
+                </Card>
             </Space>
         )
     }
