@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MessagesListView } from './MessagesListView';
-import { InputNumber, Select, Space } from 'antd';
+import { InputNumber, Select, Space, ColorPicker, Checkbox } from 'antd';
 
 class EditorPanel extends React.Component {
     static defaultProps = {
@@ -50,6 +50,22 @@ class EditorPanel extends React.Component {
                         this.props.settings.item.avatar.size=value
                         this.updateSettings()
                     }} />
+                
+                <Checkbox
+                    defaultChecked={this.props.settings.item.authorName.useOnlyDefaultColor}
+                    onChange={(e) =>{
+                        this.props.settings.item.authorName.useOnlyDefaultColor = e.target.checked
+                    }}>
+                    Use only default color
+                </Checkbox>
+                
+                Default color:
+                <ColorPicker
+                    defaultValue={this.props.settings.item.authorName.defaultColor}
+                    onChange={(value) => {
+                        this.props.settings.item.authorName.defaultColor = value.toHexString()
+                        this.updateSettings()
+                    }} />
             </Space>
         )
     }
@@ -62,21 +78,10 @@ export class MessagesWidgetEditorView extends React.Component {
 
     static defaultProps = {
         messages: [],
-        settings: MessagesListView.defaultProps,
     }
 
     state = {
-        settings: {
-            container: {
-                type: "list"
-            },
-
-            item: {
-                avatar: {
-                    shape: "round"
-                }
-            }
-        }
+        settings: MessagesListView.defaultProps,
     }
 
     render() {

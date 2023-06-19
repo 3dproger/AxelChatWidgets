@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
-import { Avatar, Space } from 'antd';
+import { Avatar, Typography } from 'antd';
+const { Text, Link } = Typography;
 
 class ContentView extends React.Component {
     static propTypes = {
@@ -49,10 +50,15 @@ class ContentView extends React.Component {
 class AuthorName extends React.Component {
     static propTypes = {
         author: PropTypes.object.isRequired,
+        settings: PropTypes.object,
     }
 
     static defaultProps = {
         author: null,
+        settings: {
+            defaultColor: "#03A9F4",
+            useOnlyDefaultColor: false,
+        }
     }
 
     render() {
@@ -63,22 +69,25 @@ class AuthorName extends React.Component {
             )
         }
 
-        const name = author.name;
-        const color = author.color;
-        const backgroundColor = author.backgroundColor;
+        const name = author.name
+        const color = this.props.settings.useOnlyDefaultColor ? this.props.settings.defaultColor : author.color
+        const backgroundColor = author.backgroundColor
 
         var style = {};
 
         if (color !== "") {
-            style.color = color;
+            style.color = color
+            console.log(color)
         }
 
         if (backgroundColor !== "") {
-            style.backgroundColor = backgroundColor;
+            style.backgroundColor = backgroundColor
         }
 
         return (
-            <span className="authorName" style={style}>{name}</span>
+            <Text className="authorName" style={style}>
+                {name}
+            </Text>
         )
     }
 }
@@ -92,10 +101,12 @@ export class MessageView extends React.Component {
     static defaultProps = {
         message: null,
         settings: {
+            type: "basic",
             avatar: {
                 shape: "circle",
                 size: 40,
-            }
+            },
+            authorName: AuthorName.defaultProps.settings,
         }
     }
     
