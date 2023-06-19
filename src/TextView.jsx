@@ -16,7 +16,7 @@ export class TextView extends React.Component {
                 color: "#00ffff",
                 family: "Roboto",
                 size: 20,
-                weight: "normal",
+                weight: "400",
                 italic: false,
                 // text-decoration
                 outlineWidth: 1,

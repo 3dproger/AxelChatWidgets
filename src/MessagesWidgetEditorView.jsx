@@ -71,14 +71,56 @@ class TextViewEditor extends React.Component {
                 
                 <br/>
 
-                <Checkbox
-                    defaultChecked={this.props.settings.font.bold}
-                    onChange={(e) =>{
-                        this.props.settings.font.bold = e.target.checked
+                Weight:
+                <Select
+                    defaultValue={this.props.settings.font.weight}
+                    onChange={(value) => {
+                        this.props.settings.font.weight=value
                         this.updateSettings()
-                    }}>
-                    Bold
-                </Checkbox>
+                    }}
+                    options={[
+                        {
+                            label: "Thin (100)",
+                            value: "100"
+                        },
+                        {
+                            label: "Extra Light (200)",
+                            value: "200"
+                        },
+                        {
+                            label: "Light (300)",
+                            value: "300"
+                        },
+                        {
+                            label: "Normal (400)",
+                            value: "400"
+                        },
+                        {
+                            label: "Medium (500)",
+                            value: "500"
+                        },
+                        {
+                            label: "Semi Bold (600)",
+                            value: "600"
+                        },
+                        {
+                            label: "Bold (700)",
+                            value: "700"
+                        },
+                        {
+                            label: "Extra Bold (800)",
+                            value: "700"
+                        },
+                        {
+                            label: "Black (900)",
+                            value: "900"
+                        },
+                        {
+                            label: "Extra Black (950)",
+                            value: "950"
+                        },
+                    ]}
+                />
 
                 <br/>
 
@@ -93,36 +135,16 @@ class TextViewEditor extends React.Component {
 
                 <br/>
 
-                <Checkbox
-                    defaultChecked={this.props.settings.font.underline}
-                    onChange={(e) =>{
-                        this.props.settings.font.underline = e.target.checked
+                Outline width:
+                <InputNumber
+                    min={0}
+                    max={100}
+                    step={0.1}
+                    defaultValue={this.props.settings.font.outlineWidth}
+                    onChange={(value) => {
+                        this.props.settings.font.outlineWidth=value
                         this.updateSettings()
-                    }}>
-                    Underline
-                </Checkbox>
-
-                <br/>
-
-                <Checkbox
-                    defaultChecked={this.props.settings.font.strikeout}
-                    onChange={(e) =>{
-                        this.props.settings.font.strikeout = e.target.checked
-                        this.updateSettings()
-                    }}>
-                    Strikeout
-                </Checkbox>
-
-                <br/>
-
-                <Checkbox
-                    defaultChecked={this.props.settings.font.outline}
-                    onChange={(e) =>{
-                        this.props.settings.font.outline = e.target.checked
-                        this.updateSettings()
-                    }}>
-                    Outline
-                </Checkbox>
+                    }} />
 
                 <br/>
 
