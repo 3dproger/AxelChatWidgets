@@ -103,6 +103,7 @@ export class MessageView extends React.Component {
         settings: {
             type: "basic",
             avatar: {
+                visible: true,
                 shape: "circle",
                 size: 40,
             },
@@ -130,11 +131,11 @@ export class MessageView extends React.Component {
                 <a className='messageAuthorLink' href="#">
                     <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}></img>
                     
-                    <Avatar
+                    {this.props.settings.avatar.visible ? <Avatar
                         size={this.props.settings.avatar.size > 0 ? this.props.settings.avatar.size : 1}
                         shape={this.props.settings.avatar.shape}
                         src={author.avatar}
-                        />
+                        /> : null}
 
                     {author.leftBadges.map((badgeUrl, idx) => (
                         <img key={idx} className="badge" alt="" src={badgeUrl}></img>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { MessagesListView } from './MessagesListView';
-import { InputNumber, Select, Space, Card, ColorPicker, Checkbox } from 'antd';
+import { InputNumber, Select, Space, Card, ColorPicker, Checkbox, Switch } from 'antd';
 
 class EditorPanel extends React.Component {
     static defaultProps = {
@@ -19,7 +19,14 @@ class EditorPanel extends React.Component {
     render() {
         return (
             <Space wrap direction="vertical">
-                <Card title="Avatar" size="small">
+                <Card title="Avatar" size="small" extra={
+                    <Switch
+                        defaultChecked={this.props.settings.item.avatar.visible}
+                        onChange={(checked)=>{
+                            this.props.settings.item.avatar.visible=checked
+                        }}
+                        />
+                }>
                     Shape:
                     <Select
                         defaultValue={this.props.settings.item.avatar.shape}
