@@ -153,21 +153,19 @@ export class MessageView extends React.Component {
 
         return (
             <div className='message' style={messageStyle}>
-                <a className='messageAuthorLink' href="#">
-                    {this.props.settings.platformIcon.visible ? <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}/> : null}
+                {this.props.settings.platformIcon.visible ? <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}/> : null}
 
-                    {this.props.settings.avatar.visible ? <Avatar
-                        size={this.props.settings.avatar.size > 0 ? this.props.settings.avatar.size : 1}
-                        shape={this.props.settings.avatar.shape}
-                        src={author.avatar}
-                        /> : null}
+                {this.props.settings.avatar.visible ? <Avatar
+                    size={this.props.settings.avatar.size > 0 ? this.props.settings.avatar.size : 1}
+                    shape={this.props.settings.avatar.shape}
+                    src={author.avatar}
+                    /> : null}
 
-                    {author.leftBadges.map((badgeUrl, idx) => (
-                        <img key={idx} className="badge" alt="" src={badgeUrl}></img>
-                    ))}
+                {author.leftBadges.map((badgeUrl, idx) => (
+                    <img key={idx} className="badge" alt="" src={badgeUrl}></img>
+                ))}
 
-                    <AuthorName author={author} />
-                </a>
+                <AuthorName author={author} />
 
                 {author.rightBadges.map((badgeUrl, idx) => (
                     <img key={idx} className="badge" alt="" src={badgeUrl}></img>
