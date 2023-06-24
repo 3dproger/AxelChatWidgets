@@ -142,8 +142,17 @@ export class MessageView extends React.Component {
             )
         }
 
+        const forcedColors = message.forcedColors;
+
+        var messageStyle = {};
+
+        if (typeof forcedColors.bodyBackground === 'string')
+        {
+            messageStyle['backgroundColor'] = forcedColors.bodyBackground;
+        }
+
         return (
-            <div className='message'>
+            <div className='message' style={messageStyle}>
                 <a className='messageAuthorLink' href="#">
                     {this.props.settings.platformIcon.visible ? <img className="badge" alt="" src={"./images/" + author.serviceId + "-icon.svg"}/> : null}
 

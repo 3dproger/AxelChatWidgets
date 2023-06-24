@@ -28,10 +28,9 @@ export const CoreView = () => {
         }
 
         const protocolMessage = JSON.parse(lastMessage.data);
+        //console.log(protocolMessage);
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
-
-        //console.log(protocolMessage);
 
         if (protocolMessageType === "state") {
             setServices(data.services);
