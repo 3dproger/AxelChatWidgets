@@ -40,7 +40,7 @@ export class TextView extends React.Component {
         }
 
         return (
-            <Text style={style}>
+            <Text className='text' style={style}>
                 {this.props.text}
             </Text>
         )

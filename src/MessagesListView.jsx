@@ -96,7 +96,7 @@ class AuthorName extends React.Component {
         const name = author.name
 
         return (
-            <span>
+            <span className='authorName'>
             {this.props.settings.visible ? <TextView text={name} settings={this.props.settings.text}/>: null}
             </span>
         )
