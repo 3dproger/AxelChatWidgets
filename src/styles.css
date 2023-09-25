@@ -81,3 +81,9 @@ body {
     color: red;
     font-weight: 900;
 }
+
+.messagesListView {
+    margin: 0 auto;
+    display: grid;
+    gap: 20px;
+  }

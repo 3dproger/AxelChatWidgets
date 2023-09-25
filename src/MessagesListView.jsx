@@ -217,9 +217,9 @@ export class MessagesListView extends React.Component {
         }
         else {
             return (
-                <div>
+                <div className='messagesListView'>
                     {this.props.messages.map(message => (
-                        <div key={message.id}><MessageView message={message} settings={this.props.settings.item} /></div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between' }} key={message.id}><MessageView message={message} settings={this.props.settings.item} /></div>
                     ))}
     
                     <div style={{ float:"left", clear: "both" }}
