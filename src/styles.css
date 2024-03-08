@@ -138,11 +138,11 @@ body {
 	width: 5%;
 	height: 5%;
   }
-  
+}
+
 @media (min-width: 600px) {
   .logo { 
 	width: 2%;
 	height: 2%;
   }
-  
 }
