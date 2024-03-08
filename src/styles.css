@@ -95,3 +95,54 @@ body {
   display: grid;
   gap: 20px;
 }
+
+.topnav {
+  padding: 10px 16px;
+  background: #555;
+  color: #f1f1f1;
+  z-index:999;
+  overflow: hidden;
+}
+
+.topnav a, img {
+  color: #f2f2f2;
+  text-align: center;
+  padding: 7px 8px;
+  text-decoration: none;
+  font-size: .5em;
+  vertical-align: middle;
+}
+
+.topnav a:hover {
+  background-color: #2844ba;
+  color: #fff;
+}
+
+.topnav a.active {
+  background-color: #ddd;
+  color: #000;
+}
+.content {
+  padding: 16px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+@media (min-width: 200px) {
+  .logo { 
+	width: 5%;
+	height: 5%;
+  }
+  
+@media (min-width: 600px) {
+  .logo { 
+	width: 2%;
+	height: 2%;
+  }
+  
+}
