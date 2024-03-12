@@ -44,7 +44,7 @@ export const CoreView = () => {
         }
 
         const protocolMessage = JSON.parse(lastMessage.data);
-        //console.log(protocolMessage);
+        console.log(protocolMessage);
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
@@ -82,7 +82,6 @@ export const CoreView = () => {
         }
         else if (protocolMessageType === "HELLO") {
             // ignore
-            console.debug(protocolMessage);
         }
         else {
             console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
