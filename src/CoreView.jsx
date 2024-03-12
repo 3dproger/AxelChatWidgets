@@ -5,6 +5,7 @@ import { MessagesListView } from './MessagesListView';
 import { MessagesWidgetEditorView } from './MessagesWidgetEditorView'
 import { ServicesListView } from './ServicesListView'
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
+import packageJson from '../package.json';
 
 const WEBSOCKET_CLIENT_TYPE = "WEB_WIDGET";
 
@@ -23,8 +24,16 @@ export const CoreView = () => {
             sendMessage(JSON.stringify({
                 type: "HELLO",
                 data: {
-                    clientType: WEBSOCKET_CLIENT_TYPE,
-                    widgetType: searchParams.get("widget"),
+                    client: {
+                        type: WEBSOCKET_CLIENT_TYPE,
+                    },
+                    package: {
+                        version: packageJson.version,
+                        name: packageJson.name,
+                    },
+                    widget: {
+                        type: searchParams.get("widget"),
+                    },
                 },
             }));
         },
