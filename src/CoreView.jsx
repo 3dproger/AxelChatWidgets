@@ -6,6 +6,8 @@ import { MessagesWidgetEditorView } from './MessagesWidgetEditorView'
 import { ServicesListView } from './ServicesListView'
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
 
+const WEBSOCKET_CLIENT_TYPE = "WEB_WIDGET";
+
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
     const [authors, setAuthors] = useState(new Map());
@@ -18,6 +20,12 @@ export const CoreView = () => {
         onOpen: () => {
             console.log('Opened socket')
             setMessages([]);
+            sendMessage(JSON.stringify({
+                type: "HELLO",
+                data: {
+                    clientType: WEBSOCKET_CLIENT_TYPE
+                },
+            }));
         },
         shouldReconnect: (closeEvent) => true,
     });
@@ -64,7 +72,7 @@ export const CoreView = () => {
                 }
             }
         }
-        else if (protocolMessageType === "hello") {
+        else if (protocolMessageType === "HELLO") {
             // ignore
         }
         else {
