@@ -44,7 +44,7 @@ export const CoreView = () => {
         }
 
         const protocolMessage = JSON.parse(lastMessage.data);
-        console.log(protocolMessage);
+        //console.log(protocolMessage);
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
