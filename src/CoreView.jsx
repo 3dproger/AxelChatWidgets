@@ -20,7 +20,6 @@ export const CoreView = () => {
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8355', {
         onOpen: () => {
             console.log('Opened socket')
-            setMessages([]);
             sendMessage(JSON.stringify({
                 type: "HELLO",
                 data: {
