@@ -16,14 +16,15 @@ export const CoreView = () => {
     const [appState, setState] = useState({
         viewers: -1,
     });
-    const { sendMessage, lastMessage, readyState } = useWebSocket('ws://127.0.0.1:8355', {
+    const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8355', {
         onOpen: () => {
             console.log('Opened socket')
             setMessages([]);
             sendMessage(JSON.stringify({
                 type: "HELLO",
                 data: {
-                    clientType: WEBSOCKET_CLIENT_TYPE
+                    clientType: WEBSOCKET_CLIENT_TYPE,
+                    widgetType: searchParams.get("widget"),
                 },
             }));
         },
