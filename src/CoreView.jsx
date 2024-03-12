@@ -7,8 +7,6 @@ import { ServicesListView } from './ServicesListView'
 import { AnimatedDummyTextView } from './AnimatedDummyTextView'
 import packageJson from '../package.json';
 
-const WEBSOCKET_CLIENT_TYPE = "WEB_WIDGET";
-
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
     const [authors, setAuthors] = useState(new Map());
@@ -25,7 +23,7 @@ export const CoreView = () => {
                 type: "HELLO",
                 data: {
                     client: {
-                        type: WEBSOCKET_CLIENT_TYPE,
+                        type: "MAIN_WEBSOCKETCLIENT",
                     },
                     package: {
                         version: packageJson.version,
@@ -50,11 +48,11 @@ export const CoreView = () => {
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
-        if (protocolMessageType === "state") {
+        if (protocolMessageType === "STATES_CHANGED") {
             setServices(data.services);
             setState(data);
         }
-        else if (protocolMessageType === "messages") {
+        else if (protocolMessageType === "NEW_MESSAGES_RECEIVED") {
             setMessages((prev) => {
                 prev = prev.concat(...data.messages);
 
@@ -72,7 +70,7 @@ export const CoreView = () => {
                 return prev;
             });
         }
-        else if (protocolMessageType === "author_values") {
+        else if (protocolMessageType === "AUTHOR_VALUES_CHANGED") {
             const authorId = data.author_id;
 
             if (authors.has(authorId)) {
@@ -84,6 +82,7 @@ export const CoreView = () => {
         }
         else if (protocolMessageType === "HELLO") {
             // ignore
+            console.debug(protocolMessage);
         }
         else {
             console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
