@@ -24,10 +24,8 @@ export const CoreView = () => {
                 data: {
                     client: {
                         type: "MAIN_WEBSOCKETCLIENT",
-                    },
-                    package: {
-                        version: packageJson.version,
                         name: packageJson.name,
+						version: packageJson.version,
                     },
                     widget: {
                         type: searchParams.get("widget"),
