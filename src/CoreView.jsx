@@ -27,8 +27,9 @@ export const CoreView = () => {
                         name: packageJson.name,
 						version: packageJson.version,
                     },
-                    widget: {
-                        type: searchParams.get("widget"),
+                    info: {
+						type: "WIDGET",
+                        name: searchParams.get("widget"),
                     },
                 },
             }));
