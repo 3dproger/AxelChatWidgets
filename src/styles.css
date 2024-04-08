@@ -14,9 +14,9 @@ body {
   -webkit-text-stroke: 0.25px darkgray;
 }
 
-.badge-service-logo,
-.badge-from-service-left,
-.badge-from-service-right {
+.badgeServiceIcon,
+.badgeLeft,
+.badgeRight {
   vertical-align: middle;
   padding-right: 2px;
   height: 20px;

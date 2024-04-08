@@ -64,20 +64,20 @@ export class MessageView extends React.Component {
       <div>
         <span className="badges">
           <img
-              className="badge-service-logo"
+              className="badgeServiceIcon"
               alt=""
               src={"./images/" + author.serviceId + "-icon.svg"}
           />
 
           {author.leftBadges.map((badgeUrl, idx) => (
-            <img key={idx} className="badge-from-service-left" alt="" src={badgeUrl}></img>
+            <img key={idx} className="badgeLeft" alt="" src={badgeUrl}></img>
           ))}
         </span>
 
         <span className="authorName">{author.name}</span>
 
         {author.rightBadges.map((badgeUrl, idx) => (
-          <img key={idx} className="badge-from-service-right" alt="" src={badgeUrl}></img>
+          <img key={idx} className="badgeRight" alt="" src={badgeUrl}></img>
         ))}
 
         <span className="text">: </span>

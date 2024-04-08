@@ -28,7 +28,7 @@ export class ServiceView extends React.Component {
 
         return (
             <span className="serviceIndicator">
-                <img className="badge-service-logo" alt={service.type_id} src={"./images/" + service.type_id + "-icon.svg"}/>
+                <img className="badgeServiceIcon" alt={service.type_id} src={"./images/" + service.type_id + "-icon.svg"}/>
                 <span className="text">{service.viewers !== -1 ? service.viewers : ""}</span>
             </span>
         )
@@ -53,7 +53,7 @@ export class ServicesListView extends React.Component {
                     <ServiceView key={idx} service={service} />
                 ))}
                 <span className="serviceIndicator">
-                    <img className="badge-service-logo" alt="viewer" src={"./images/viewer.svg"}/>
+                    <img className="badgeServiceIcon" alt="viewer" src={"./images/viewer.svg"}/>
                     <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers : "?"}</span>
                 </span>
             </div>
