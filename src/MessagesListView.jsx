@@ -1,9 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { AnimatedDummyTextView } from "./AnimatedDummyTextView";
-import { TextView } from "./TextView";
 import { Avatar, Typography } from "antd";
-const { Text, Link } = Typography;
 
 class ContentView extends React.Component {
   static propTypes = {
@@ -12,25 +10,9 @@ class ContentView extends React.Component {
 
   static defaultProps = {
     content: null,
-    settings: {
-      visible: true,
-      text: {
-        color: "#ffffff",
-        family: "Roboto",
-        size: 24,
-        weight: "800",
-        italic: false,
-        outlineWidth: 1.1,
-        outlineColor: "#000000",
-      },
-    },
   };
 
   render() {
-    if (!this.props.settings.visible) {
-      return <span />;
-    }
-
     const content = this.props.content;
     if (!content) {
       return <div>null</div>;
@@ -41,13 +23,13 @@ class ContentView extends React.Component {
 
     if (type === "text") {
       const text = data.text;
-      return <TextView text={text} settings={this.props.settings.text} />;
+      return <span className="text">{text}</span>;
     } else if (type === "image") {
       return <img className="imageContent" alt="" src={data.url}></img>;
     } else if (type === "hyperlink") {
       return (
         <a className="hyperlinkContent" href={data.url}>
-          {data.text}
+          <span>{data.text}</span>
         </a>
       );
     }
@@ -56,69 +38,13 @@ class ContentView extends React.Component {
   }
 }
 
-class AuthorName extends React.Component {
-  static propTypes = {
-    author: PropTypes.object.isRequired,
-    settings: PropTypes.object,
-  };
-
-  static defaultProps = {
-    author: null,
-    settings: {
-      visible: true,
-      useOnlyDefaultColor: false,
-      text: {
-        color: "#03A9F4",
-        family: "Roboto",
-        size: 24,
-        weight: "950",
-        italic: false,
-        outlineWidth: 1.5,
-        outlineColor: "#000000",
-      },
-    },
-  };
-
-  render() {
-    const author = this.props.author;
-    if (!author) {
-      return <span>Author is null</span>;
-    }
-
-    const name = author.name;
-
-    return (
-      <span className="authorName">
-        {this.props.settings.visible ? (
-          <TextView text={name} settings={this.props.settings.text} />
-        ) : null}
-      </span>
-    );
-  }
-}
-
 export class MessageView extends React.Component {
   static propTypes = {
     message: PropTypes.object.isRequired,
-    settings: PropTypes.object,
   };
 
   static defaultProps = {
     message: null,
-    settings: {
-      type: "basic",
-      avatar: {
-        visible: true,
-        shape: "circle",
-        size: 40,
-      },
-      platformIcon: {
-        visible: true,
-        size: 20,
-      },
-      authorName: AuthorName.defaultProps.settings,
-      content: ContentView.defaultProps.settings,
-    },
   };
 
   render() {
@@ -134,31 +60,28 @@ export class MessageView extends React.Component {
 
     const forcedColors = message.forcedColors;
 
-    var messageStyle = {};
-
-    if (typeof forcedColors.bodyBackground === "string") {
-      messageStyle["backgroundColor"] = forcedColors.bodyBackground;
-    }
-
     return (
-      <div className="message" style={messageStyle}>
+      <div>
         <span className="badges">
-          {this.props.settings.platformIcon.visible ? (
-            <img
-              className="badge"
+          <img
+              className="badge-service-logo"
               alt=""
               src={"./images/" + author.serviceId + "-icon.svg"}
-            />
-          ) : null}
+          />
+
           {author.leftBadges.map((badgeUrl, idx) => (
-            <img key={idx} className="badge" alt="" src={badgeUrl}></img>
+            <img key={idx} className="badge-from-service-left" alt="" src={badgeUrl}></img>
           ))}
         </span>
-        <AuthorName author={author} />
-        <span className="text">: </span>
+
+        <span className="authorName">{author.name}</span>
+
         {author.rightBadges.map((badgeUrl, idx) => (
-          <img key={idx} className="badge" alt="" src={badgeUrl}></img>
+          <img key={idx} className="badge-from-service-right" alt="" src={badgeUrl}></img>
         ))}
+
+        <span className="text">: </span>
+
         {message.contents.map((content, idx) => (
           <ContentView key={idx} content={content} />
         ))}
@@ -174,13 +97,6 @@ export class MessagesListView extends React.Component {
 
   static defaultProps = {
     messages: [],
-    settings: {
-      container: {
-        type: "list",
-      },
-
-      item: MessageView.defaultProps.settings,
-    },
   };
 
   scrollToBottom = () => {
@@ -201,7 +117,7 @@ export class MessagesListView extends React.Component {
     if (this.props.messages.length === 0) {
       return (
         <AnimatedDummyTextView
-          text="Connected! But no one has written anything yet"
+          text="Connected!"
           imageSrc="./images/tick.svg"
         />
       );
@@ -215,7 +131,6 @@ export class MessagesListView extends React.Component {
             >
               <MessageView
                 message={message}
-                settings={this.props.settings.item}
               />
             </div>
           ))}
