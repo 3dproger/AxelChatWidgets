@@ -6,6 +6,12 @@ body {
   margin: 1px;
 }
 
+.message {
+  padding-left: 3px;
+  padding-right: 3px;
+  border-radius: 5px;
+}
+
 .authorName {
   vertical-align: middle;
   color: #03A9F4;

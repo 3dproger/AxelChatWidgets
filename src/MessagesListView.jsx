@@ -59,9 +59,10 @@ export class MessageView extends React.Component {
     }
 
     const forcedColors = message.forcedColors;
+    console.log(message)
 
     return (
-      <div>
+      <span className="message" style={{"backgroundColor": forcedColors.bodyBackground }}>
         <span className="badges">
           <img
               className="badgeServiceIcon"
@@ -91,7 +92,7 @@ export class MessageView extends React.Component {
         {message.contents.map((content, idx) => (
           <ContentView key={idx} content={content} />
         ))}
-      </div>
+      </span>
     );
   }
 }
