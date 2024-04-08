@@ -11,12 +11,9 @@ body {
   color: #03A9F4;
   font-weight: 800;
   border-radius: 3px;
+  margin-right: 1px;
 
-  text-shadow:
-    1px 1px 0 rgb(50, 50, 50),
-    -1px 1px 0 rgb(50, 50, 50),
-    -1px -1px 0 rgb(50, 50, 50),
-    1px -1px 0 rgb(50, 50, 50);
+  text-shadow: 1px 1px 0 rgb(0, 0, 0);
 }
 
 .badgeServiceIcon,
@@ -43,13 +40,9 @@ body {
 .hyperlinkContent {
   vertical-align: middle;
   font-weight: 600;
-  color: #3EA6FF;
+  color: #007bff;
 
-  text-shadow:
-  1px 1px 0 black,
-  -1px 1px 0 black,
-  -1px -1px 0 black,
-  1px -1px 0 black;
+  text-shadow: 1px 1px 0 rgb(0, 0, 0);
 }
 
 .imageContent {
