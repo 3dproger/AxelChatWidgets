@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Avatar from '@mui/material/Avatar';
-import StyledBadge from "@mui/material/Badge"
 
 export class ServiceView extends React.Component {
     static propTypes = {
@@ -29,14 +27,7 @@ export class ServiceView extends React.Component {
 
         return (
             <span>
-                <StyledBadge
-                    color={service.connection_state === "connected" ? "success" : "error"}
-                    overlap="circular"
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-                    variant="dot"
-                    >
-                    <Avatar alt="" variant="square" src={"./images/" + service.type_id + "-icon.svg"}/>
-                </StyledBadge>
+                <img className="badge-service-logo" alt={service.type_id} src={"./images/" + service.type_id + "-icon.svg"}/>
                 <span className="text">{service.viewers !== -1 ? service.viewers : ""}</span>
             </span>
         )
@@ -60,7 +51,7 @@ export class ServicesListView extends React.Component {
                 {this.props.services.map((service, idx) => (
                     <ServiceView key={idx} service={service} />
                 ))}
-                <Avatar alt="" variant="square" src="./images/viewer.svg"/>
+                <img className="badge-service-logo" alt="viewer" src={"./images/viewer.svg"}/>
                 <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers : "?"}</span>
             </div>
         )
