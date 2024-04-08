@@ -11,7 +11,12 @@ body {
   color: #03A9F4;
   font-weight: 800;
   border-radius: 3px;
-  -webkit-text-stroke: 0.25px darkgray;
+
+  text-shadow:
+    0.5px 0.5px 0 rgb(50, 50, 50),
+    -0.5px 0.5px 0 rgb(50, 50, 50),
+    -0.5px -0.5px 0 rgb(50, 50, 50),
+    0.5px -0.5px 0 rgb(50, 50, 50);
 }
 
 .badgeServiceIcon,
@@ -27,14 +32,24 @@ body {
   vertical-align: middle;
   font-weight: 600;
   color: white;
-  -webkit-text-stroke: 0.5px darkgray;
+
+  text-shadow:
+    0.5px 0.5px 0 rgb(50, 50, 50),
+    -0.5px 0.5px 0 rgb(50, 50, 50),
+    -0.5px -0.5px 0 rgb(50, 50, 50),
+    0.5px -0.5px 0 rgb(50, 50, 50);
 }
 
 .hyperlinkContent {
   vertical-align: middle;
   font-weight: 600;
   color: #3EA6FF;
-  -webkit-text-stroke: 0.5px darkgray;
+
+  text-shadow:
+    0.5px 0.5px 0 rgb(50, 50, 50),
+    -0.5px 0.5px 0 rgb(50, 50, 50),
+    -0.5px -0.5px 0 rgb(50, 50, 50),
+    0.5px -0.5px 0 rgb(50, 50, 50);
 }
 
 .imageContent {
