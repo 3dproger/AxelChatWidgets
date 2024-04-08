@@ -3,7 +3,7 @@ import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useSearchParams } from 'react-router-dom';
 import { MessagesListView } from './MessagesListView';
 import { ServicesListView } from './ServicesListView'
-import { AnimatedDummyTextView } from './AnimatedDummyTextView'
+import { AnimatedDummyTextView, IndicatorType } from './AnimatedDummyTextView'
 import packageJson from '../package.json';
 
 export const CoreView = () => {
@@ -110,7 +110,7 @@ export const CoreView = () => {
     }
     else {
         return (
-            <AnimatedDummyTextView text={connectionStatus} imageSrc="./images/error-alt-svgrepo-com.svg"/>
+            <AnimatedDummyTextView type={readyState == ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image} text={connectionStatus} imageSrc="./images/error-alt-svgrepo-com.svg"/>
         )
     }
 };

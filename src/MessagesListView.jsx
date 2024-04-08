@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AnimatedDummyTextView } from "./AnimatedDummyTextView";
+import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 import { Avatar, Typography } from "antd";
 
 class ContentView extends React.Component {
@@ -123,6 +123,7 @@ export class MessagesListView extends React.Component {
     if (this.props.messages.length === 0) {
       return (
         <AnimatedDummyTextView
+          type={IndicatorType.Image}
           text="Connected!"
           imageSrc="./images/tick.svg"
         />
