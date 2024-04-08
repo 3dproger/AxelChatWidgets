@@ -74,7 +74,7 @@ export class MessageView extends React.Component {
           ))}
         </span>
 
-        <span className="authorName">{author.name}</span>
+        <span className="authorName" style={{"color": author.color}}>{author.name}</span>
 
         {author.rightBadges.map((badgeUrl, idx) => (
           <img key={idx} className="badgeRight" alt="" src={badgeUrl}></img>
