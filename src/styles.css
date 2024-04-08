@@ -2,7 +2,7 @@ body {
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(224, 224, 224);
   margin: 1px;
 }
 
@@ -13,10 +13,10 @@ body {
   border-radius: 3px;
 
   text-shadow:
-    0.5px 0.5px 0 rgb(50, 50, 50),
-    -0.5px 0.5px 0 rgb(50, 50, 50),
-    -0.5px -0.5px 0 rgb(50, 50, 50),
-    0.5px -0.5px 0 rgb(50, 50, 50);
+    1px 1px 0 rgb(50, 50, 50),
+    -1px 1px 0 rgb(50, 50, 50),
+    -1px -1px 0 rgb(50, 50, 50),
+    1px -1px 0 rgb(50, 50, 50);
 }
 
 .badgeServiceIcon,
@@ -34,10 +34,10 @@ body {
   color: white;
 
   text-shadow:
-    0.5px 0.5px 0 rgb(50, 50, 50),
-    -0.5px 0.5px 0 rgb(50, 50, 50),
-    -0.5px -0.5px 0 rgb(50, 50, 50),
-    0.5px -0.5px 0 rgb(50, 50, 50);
+    1px 1px 0 rgb(50, 50, 50),
+    -1px 1px 0 rgb(50, 50, 50),
+    -1px -1px 0 rgb(50, 50, 50),
+    1px -1px 0 rgb(50, 50, 50);
 }
 
 .hyperlinkContent {
@@ -46,10 +46,10 @@ body {
   color: #3EA6FF;
 
   text-shadow:
-    0.5px 0.5px 0 rgb(50, 50, 50),
-    -0.5px 0.5px 0 rgb(50, 50, 50),
-    -0.5px -0.5px 0 rgb(50, 50, 50),
-    0.5px -0.5px 0 rgb(50, 50, 50);
+  1px 1px 0 black,
+  -1px 1px 0 black,
+  -1px -1px 0 black,
+  1px -1px 0 black;
 }
 
 .imageContent {
