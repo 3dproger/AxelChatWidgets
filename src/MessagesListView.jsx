@@ -28,9 +28,9 @@ class ContentView extends React.Component {
       return <img className="imageContent" alt="" src={data.url}></img>;
     } else if (type === "hyperlink") {
       return (
-        <a className="hyperlinkContent" href={data.url}>
+        <span> <a className="hyperlinkContent" href={data.url}>
           <span>{data.text}</span>
-        </a>
+        </a> </span>
       );
     }
 

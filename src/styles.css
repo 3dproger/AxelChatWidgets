@@ -33,6 +33,7 @@ body {
 .hyperlinkContent {
   vertical-align: middle;
   font-weight: 600;
+  color: #3EA6FF;
   -webkit-text-stroke: 0.5px darkgray;
 }
 
