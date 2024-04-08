@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './styles.css'
 
 export class ServiceView extends React.Component {
     static propTypes = {
@@ -26,7 +27,7 @@ export class ServiceView extends React.Component {
         }
 
         return (
-            <span>
+            <span className="serviceIndicator">
                 <img className="badge-service-logo" alt={service.type_id} src={"./images/" + service.type_id + "-icon.svg"}/>
                 <span className="text">{service.viewers !== -1 ? service.viewers : ""}</span>
             </span>
@@ -47,12 +48,14 @@ export class ServicesListView extends React.Component {
 
     render() {
         return (
-            <div align="middle">
+            <div>
                 {this.props.services.map((service, idx) => (
                     <ServiceView key={idx} service={service} />
                 ))}
-                <img className="badge-service-logo" alt="viewer" src={"./images/viewer.svg"}/>
-                <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers : "?"}</span>
+                <span className="serviceIndicator">
+                    <img className="badge-service-logo" alt="viewer" src={"./images/viewer.svg"}/>
+                    <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers : "?"}</span>
+                </span>
             </div>
         )
     }
