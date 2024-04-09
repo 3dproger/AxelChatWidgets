@@ -76,9 +76,10 @@ export class MessageView extends React.Component {
         </span>
 
         <span
-          className="authorName"
+          className={"authorName" + (author.customBackgroundColor.length  > 0 ? " authorNameCustomBackgroundColor" : "")}
           style={{
-            "color": author.color
+            "color": author.color,
+            "backgroundColor": author.customBackgroundColor,
           }}>
             {author.name}
         </span>
