@@ -91,7 +91,7 @@ export const CoreView = () => {
         [ReadyState.CONNECTING]: 'Connecting...',
         [ReadyState.OPEN]: 'Open',
         [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed',
+        [ReadyState.CLOSED]: 'Closed. Please launch the AxelChat...',
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
