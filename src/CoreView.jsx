@@ -10,6 +10,7 @@ export const CoreView = () => {
     const [searchParams] = useSearchParams();
     const [authors, setAuthors] = useState(new Map());
     const [messages, setMessages] = useState([]);
+    const [selectedMessages, setSelectedMessages] = useState([]);
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
         viewers: -1,
@@ -68,6 +69,16 @@ export const CoreView = () => {
                 return prev;
             });
         }
+        else if (protocolMessageType === "MESSAGES_SELECTED") {
+            setSelectedMessages((prev) => {
+                for (const message of data.messages) {
+                    const author = message.author;
+                    authors.set(author.id, author);
+                }
+
+                return data.messages;
+            });
+        }
         else if (protocolMessageType === "AUTHOR_VALUES_CHANGED") {
             const authorId = data.author_id;
 
@@ -100,6 +111,9 @@ export const CoreView = () => {
 
         if (widgetType === "messages") {
             return (<MessagesListView messages={messages} />);
+        }
+        else if (widgetType === "selected-messages") {
+            return (<MessagesListView messages={selectedMessages} />);
         }
         else if (widgetType === "states") {
             return (<ServicesListView services={services} appState={appState} />);
