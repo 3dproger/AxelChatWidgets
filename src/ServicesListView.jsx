@@ -29,7 +29,7 @@ export class ServiceView extends React.Component {
         return (
             <span className="serviceIndicator">
                 <img className="badgeServiceIcon" alt={service.type_id} src={"./images/" + service.type_id + "-icon.svg"}/>
-                <span className="text">{service.viewers !== -1 ? service.viewers : ""}</span>
+                <span className="text">{service.viewers !== -1 ? service.viewers.toLocaleString() : ""}</span>
             </span>
         )
     }
@@ -54,7 +54,7 @@ export class ServicesListView extends React.Component {
                 ))}
                 <span className="serviceIndicator">
                     <img className="badgeServiceIcon" alt="viewer" src={"./images/viewer.svg"}/>
-                    <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers : "?"}</span>
+                    <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers.toLocaleString() : "?"}</span>
                 </span>
             </div>
         )
