@@ -45,7 +45,8 @@ body {
   width: 20px;
 }
 
-.text {
+.text,
+.authorMessageContentSeparator {
   vertical-align: middle;
   font-weight: 600;
   color: white;
@@ -57,7 +58,7 @@ body {
     1px -1px 0 rgb(50, 50, 50);
 }
 
-.text::before {
+.authorMessageContentSeparator::before {
   content: ": ";
 }
 

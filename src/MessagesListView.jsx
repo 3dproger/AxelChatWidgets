@@ -88,9 +88,13 @@ export class MessageView extends React.Component {
           <img key={idx} className="badgeRight" alt="" src={badgeUrl}></img>
         ))}
 
-        {message.contents.map((content, idx) => (
-          <ContentView key={idx} content={content} />
-        ))}
+        <span className="authorMessageContentSeparator"></span>
+
+        <span className="messageContents">
+          {message.contents.map((content, idx) => (
+            <ContentView key={idx} content={content} />
+          ))}
+        </span>
       </span>
     );
   }
