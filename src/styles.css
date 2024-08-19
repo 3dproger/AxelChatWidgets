@@ -2,8 +2,9 @@ body {
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: rgb(224, 224, 224);
+  background-color: black;
   margin: 1px;
+  overflow-wrap: anywhere;
 }
 
 .message {
