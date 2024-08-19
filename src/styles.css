@@ -2,9 +2,15 @@ body {
   font-family: Roboto, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: black;
+  background-color: #1D1F26;
   margin: 1px;
   overflow-wrap: anywhere;
+  overflow: hidden;
+
+}
+
+body:hover {
+  overflow: auto;
 }
 
 .message {
