@@ -41,11 +41,31 @@ class ContentView extends React.Component {
 export class MessageView extends React.Component {
   static propTypes = {
     message: PropTypes.object.isRequired,
+    hideTimeout: PropTypes.number,
   };
 
   static defaultProps = {
     message: null,
+    hideTimeout: 0,
   };
+
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      needToHide: false,
+    };
+
+    if (props.hideTimeout > 0)
+    {
+      setTimeout(() => 
+        {
+          this.setState({
+            needToHide: true,
+          });
+        }, props.hideTimeout)
+    }
+  }
 
   render() {
     const message = this.props.message;
@@ -59,14 +79,14 @@ export class MessageView extends React.Component {
     }
 
     const forcedColors = message.forcedColors;
-    console.log(message)
+    //console.log(message)
 
     return (
-      <span className="message" style={{"backgroundColor": forcedColors.bodyBackground }}>
+      <span className={"message" + (this.state.needToHide ? " hidden" : "")} style={{"backgroundColor": forcedColors.bodyBackground, 'visibility': this.state.visibility}}>
         <span className="badges">
           <img
               className="badgeServiceIcon"
-              alt=""
+              alt="badge service icon"
               src={"./images/" + author.serviceId + "-icon.svg"}
           />
 
