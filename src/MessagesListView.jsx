@@ -82,7 +82,7 @@ export class MessageView extends React.Component {
     //console.log(message)
 
     return (
-      <span className={"message" + (this.state.needToHide ? " hidden" : "")} style={{"backgroundColor": forcedColors.bodyBackground, 'visibility': this.state.visibility}}>
+      <span className={"message" + (this.state.needToHide ? " hiddenFadeOut" : "")} style={{"backgroundColor": forcedColors.bodyBackground, 'visibility': this.state.visibility}}>
         <span className="badges">
           <img
               className="badgeServiceIcon"
