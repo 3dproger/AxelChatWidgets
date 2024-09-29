@@ -25,7 +25,7 @@ export class AnimatedDummyTextView extends React.Component {
         if (this.props.type === IndicatorType.Spin) {
             return (
                 <span>
-                    <Spin style={{"margin-right": "4px"}} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>
+                    <Spin style={{"marginRight": "4px"}} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>
                     <span className="authorName">{this.props.text}</span>
                 </span>
             )

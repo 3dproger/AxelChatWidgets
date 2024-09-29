@@ -123,10 +123,12 @@ export class MessageView extends React.Component {
 export class MessagesListView extends React.Component {
   static propTypes = {
     messages: PropTypes.array.isRequired,
+    hideTimeout: PropTypes.number,
   };
 
   static defaultProps = {
     messages: [],
+    hideTimeout: 0,
   };
 
   scrollToBottom = () => {
@@ -162,6 +164,7 @@ export class MessagesListView extends React.Component {
             >
               <MessageView
                 message={message}
+                hideTimeout={this.props.hideTimeout}
               />
             </div>
           ))}

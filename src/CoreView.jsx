@@ -8,7 +8,7 @@ import packageJson from '../package.json';
 
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
-    const [authors, setAuthors] = useState(new Map());
+    const [authors] = useState(new Map());
     const [messages, setMessages] = useState([]);
     const [selectedMessages, setSelectedMessages] = useState([]);
     const [services, setServices] = useState([]);
@@ -106,14 +106,14 @@ export const CoreView = () => {
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
-    if (readyState == ReadyState.OPEN) {
+    if (readyState === ReadyState.OPEN) {
         const widgetType = searchParams.get("widget");
 
         if (widgetType === "messages") {
-            return (<MessagesListView messages={messages} />);
+            return (<MessagesListView messages={messages} hideTimeout={0} />);
         }
         else if (widgetType === "selected-messages") {
-            return (<MessagesListView messages={selectedMessages} />);
+            return (<MessagesListView messages={selectedMessages} hideTimeout={0} />);
         }
         else if (widgetType === "states") {
             return (<ServicesListView services={services} appState={appState} />);
@@ -124,7 +124,7 @@ export const CoreView = () => {
     }
     else {
         return (
-            <AnimatedDummyTextView type={readyState == ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image} text={connectionStatus} imageSrc="./images/error-alt-svgrepo-com.svg"/>
+            <AnimatedDummyTextView type={readyState === ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image} text={connectionStatus} imageSrc="./images/error-alt-svgrepo-com.svg"/>
         )
     }
 };
