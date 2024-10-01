@@ -8,8 +8,9 @@ import packageJson from '../package.json';
 
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
-    const [authors] = useState(new Map());
+    const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState([]);
+    const [messagesMap] = useState(new Map());
     const [selectedMessages, setSelectedMessages] = useState([]);
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
@@ -17,7 +18,7 @@ export const CoreView = () => {
     });
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8355', {
         onOpen: () => {
-            console.log('Opened socket');
+            //console.log('Opened socket');
             setMessages([]);
             sendMessage(JSON.stringify({
                 type: "HELLO",
@@ -56,13 +57,19 @@ export const CoreView = () => {
                 prev = prev.concat(...data.messages);
 
                 for (const message of data.messages) {
+                    messagesMap.set(message.id, message)
                     const author = message.author;
-                    authors.set(author.id, author);
+                    authorsMap.set(author.id, author);
                 }
 
                 const MaxMessagesCount = 50;
 
                 if (prev.length > MaxMessagesCount) {
+                    for (let i = prev.length - MaxMessagesCount; i < prev.length; i++) {
+                        const message = prev[prev.length - 1];
+                        messagesMap.delete(message.id);
+                    }
+
                     prev = prev.slice(prev.length - MaxMessagesCount, prev.length);
                 }
 
@@ -73,7 +80,7 @@ export const CoreView = () => {
             setSelectedMessages((prev) => {
                 for (const message of data.messages) {
                     const author = message.author;
-                    authors.set(author.id, author);
+                    authorsMap.set(author.id, author);
                 }
 
                 return data.messages;
@@ -82,8 +89,8 @@ export const CoreView = () => {
         else if (protocolMessageType === "AUTHOR_VALUES_CHANGED") {
             const authorId = data.author_id;
 
-            if (authors.has(authorId)) {
-                var author = authors.get(authorId);
+            if (authorsMap.has(authorId)) {
+                var author = authorsMap.get(authorId);
                 for (var key in data.values) {
                     author[key] = data.values[key];
                 }
