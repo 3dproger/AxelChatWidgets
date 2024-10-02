@@ -62,15 +62,15 @@ export const CoreView = () => {
                     authorsMap.set(author.id, author);
                 }
 
-                const MaxMessagesCount = 50;
+                const MaxMessagesCount = 70;
 
                 if (prev.length > MaxMessagesCount) {
-                    for (let i = prev.length - MaxMessagesCount; i < prev.length; i++) {
-                        const message = prev[prev.length - 1];
+                    const needToDeleteCount = prev.length - MaxMessagesCount;
+
+                    for (let i = 0; i < needToDeleteCount; i++) {
+                        const message = prev.shift();
                         messagesMap.delete(message.id);
                     }
-
-                    prev = prev.slice(prev.length - MaxMessagesCount, prev.length);
                 }
 
                 return prev;
@@ -81,9 +81,11 @@ export const CoreView = () => {
             setState(data);
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
+            //console.log(protocolMessage);
             for (const message of data.messages) {
                 let prevMessage = messagesMap.get(message.id);
                 if (typeof(prevMessage) !== "undefined" && prevMessage !== null) {
+                    //console.log("changed ", prevMessage, " to ", message);
                     Object.assign(prevMessage, message);
                 }
             }
