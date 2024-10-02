@@ -10,12 +10,16 @@ export const CoreView = () => {
     const [searchParams] = useSearchParams();
     const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState([]);
-    const [messagesMap] = useState(new Map());
+    const [messagesMap, setMessagesMap] = useState(new Map());
     const [selectedMessages, setSelectedMessages] = useState([]);
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
         viewers: -1,
     });
+
+    const [, updateState] = React.useState();
+    const forceUpdate = React.useCallback(() => updateState({}), []);
+
     const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8355', {
         onOpen: () => {
             //console.log('Opened socket');
@@ -48,11 +52,7 @@ export const CoreView = () => {
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
-        if (protocolMessageType === "STATES_CHANGED") {
-            setServices(data.services);
-            setState(data);
-        }
-        else if (protocolMessageType === "NEW_MESSAGES_RECEIVED") {
+        if (protocolMessageType === "NEW_MESSAGES_RECEIVED") {
             setMessages((prev) => {
                 prev = prev.concat(...data.messages);
 
@@ -75,6 +75,19 @@ export const CoreView = () => {
 
                 return prev;
             });
+        }
+        else if (protocolMessageType === "STATES_CHANGED") {
+            setServices(data.services);
+            setState(data);
+        }
+        else if (protocolMessageType === "MESSAGES_CHANGED") {
+            for (const message of data.messages) {
+                let prevMessage = messagesMap.get(message.id);
+                if (typeof(prevMessage) !== "undefined" && prevMessage !== null) {
+                    Object.assign(prevMessage, message);
+                }
+            }
+            forceUpdate();
         }
         else if (protocolMessageType === "MESSAGES_SELECTED") {
             setSelectedMessages((prev) => {
