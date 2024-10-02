@@ -109,6 +109,12 @@ export const CoreView = () => {
                 }
             }
         }
+        else if (protocolMessageType === "CLEAR_MESSAGES") {
+            setMessages((prev) => {
+                messagesMap.clear();
+                return [];
+            });
+        }
         else if (protocolMessageType === "HELLO") {
             // ignore
         }
