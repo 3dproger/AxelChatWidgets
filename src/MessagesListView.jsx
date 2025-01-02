@@ -86,8 +86,8 @@ export class MessageView extends React.Component {
         <span className="badges">
           <img
               className="badgeServiceIcon"
-              alt="badge service icon"
-              src={"./images/" + author.serviceId + "-icon.svg"}
+              alt={author.serviceId + "-badge"}
+              src={author.serviceBadge}
           />
 
           {author.leftBadges.map((badgeUrl, idx) => (
