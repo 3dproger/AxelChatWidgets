@@ -6,6 +6,19 @@ import { ServicesListView } from './ServicesListView'
 import { AnimatedDummyTextView, IndicatorType } from './AnimatedDummyTextView'
 import packageJson from '../package.json';
 
+const DefaultWebSocketUrl = 'ws://localhost:8355';
+
+function extractWebSocketUrl(searchParams)
+{
+    const param = searchParams.get("ws-url");
+    if (typeof param === "string")
+    {
+        return param;
+    }
+
+    return DefaultWebSocketUrl;
+}
+
 export const CoreView = () => {
     const [searchParams] = useSearchParams();
     const [authorsMap] = useState(new Map());
@@ -20,7 +33,7 @@ export const CoreView = () => {
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
 
-    const { sendMessage, lastMessage, readyState } = useWebSocket('ws://localhost:8355', {
+    const { sendMessage, lastMessage, readyState } = useWebSocket(extractWebSocketUrl(searchParams), {
         onOpen: () => {
             //console.log('Opened socket');
             setMessages([]);
