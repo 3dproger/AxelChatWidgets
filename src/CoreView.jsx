@@ -4,10 +4,28 @@ import { useSearchParams } from 'react-router-dom';
 import { MessagesListView } from './MessagesListView';
 import { ServicesListView } from './ServicesListView'
 import { AnimatedDummyTextView, IndicatorType } from './AnimatedDummyTextView'
+import {
+    osName,
+    osVersion,
+    browserName,
+    isBrowser,
+    fullBrowserVersion,
+    isDesktop,
+    isMobileOnly,
+    isTablet,
+    isSmartTV,
+    isMobile,
+    isConsole,
+    isWearable,
+    isEmbedded,
+    mobileVendor,
+    mobileModel,
+}
+    from 'react-device-detect'
+
 import packageJson from '../package.json';
 
-function getWebSocketUrl(searchParams)
-{
+function getWebSocketUrl(searchParams) {
     const param = searchParams.get("ws-url");
     if (typeof param === "string")
     {
@@ -15,6 +33,25 @@ function getWebSocketUrl(searchParams)
     }
 
     return "ws://" + window.location.hostname + ":" + window.location.port + "/";
+}
+
+function getDeviceType() {
+    if (isDesktop) { return "DESKTOP" }
+    if (isMobileOnly) {return "MOBILE" }
+    if (isTablet) { return "TABLET" }
+    if (isSmartTV) { return "SMART_TV" }
+    if (isConsole) { return "CONSOLE" }
+    if (isWearable) { return "WEARABLE" }
+    if (isEmbedded) { return "EMBEDDED" }
+    return "UNKNOWN"
+}
+
+function getDeviceName() {
+    if (isMobile) {
+        return mobileVendor + ", " + mobileModel
+    }
+
+    return ""
 }
 
 export const CoreView = () => {
@@ -42,6 +79,18 @@ export const CoreView = () => {
                         type: "MAIN_WEBSOCKETCLIENT",
                         name: packageJson.name,
 						version: packageJson.version,
+                        device: {
+                            type: getDeviceType(),
+                            name: getDeviceName(),
+                            os: {
+                                name: osName,
+                                version: osVersion,
+                            },
+                            browser: {
+                                name: browserName,
+                                version: fullBrowserVersion,
+                            },
+                        }
                     },
                     info: {
 						type: "WIDGET",
