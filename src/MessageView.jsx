@@ -36,12 +36,21 @@ export class MessageView extends React.Component {
         const message = this.props.message;
         const forcedColors = message.forcedColors;
 
-        return {
-            "backgroundColor": forcedColors.bodyBackground,
-            //"borderColor": forcedColors.bodyBorder,
-            //"border": "4em solid red",
+        let r = {
             'visibility': this.state.visibility,
+        };
+
+        if (forcedColors.bodyBackground !== undefined) {
+            r["backgroundColor"] = forcedColors.bodyBackground
         }
+
+        if (forcedColors.bodyBorder !== undefined) {
+            r["borderWidth"] = "2px"
+            r["borderStyle"] = "solid"
+            r["borderColor"] = forcedColors.bodyBorder
+        }
+
+        return r
     }
 
     render() {
@@ -50,7 +59,7 @@ export class MessageView extends React.Component {
             return <span className="null_message">NULL_MESSAGE</span>;
         }
 
-        console.log(message)
+        //console.log(message)
 
         return (
         <span
