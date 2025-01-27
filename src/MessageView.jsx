@@ -32,24 +32,30 @@ export class MessageView extends React.Component {
         }
     }
 
+    getMessageStyle() {
+        const message = this.props.message;
+        const forcedColors = message.forcedColors;
+
+        return {
+            "backgroundColor": forcedColors.bodyBackground,
+            //"borderColor": forcedColors.bodyBorder,
+            //"border": "4em solid red",
+            'visibility': this.state.visibility,
+        }
+    }
+
     render() {
         const message = this.props.message;
         if (!message) {
             return <span className="null_message">NULL_MESSAGE</span>;
         }
 
-        const forcedColors = message.forcedColors;
         console.log(message)
 
         return (
         <span
             className={"message" + (this.state.needToHide ? " hiddenFadeOut" : "")}
-            style={{
-                    "backgroundColor": forcedColors.bodyBackground,
-                    //"borderColor": forcedColors.bodyBorder,
-                    //"border": "4em solid red",
-                    'visibility': this.state.visibility
-                }}>
+            style={this.getMessageStyle()}>
 
             <AuthorView author={message.author}/>
 
