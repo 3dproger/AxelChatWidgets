@@ -54,7 +54,7 @@ function getDeviceName() {
     return ""
 }
 
-export const CoreView = () => {
+export const RootView = () => {
     const [searchParams] = useSearchParams();
     const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState([]);
@@ -217,4 +217,4 @@ export const CoreView = () => {
     }
 };
 
-export default CoreView;
+export default RootView;
