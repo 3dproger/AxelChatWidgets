@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ContentView } from "./ContentView"
+import { AuthorView } from "./AuthorView";
 
 export class MessageView extends React.Component {
     static propTypes = {
@@ -17,60 +18,40 @@ export class MessageView extends React.Component {
         super(props)
 
         this.state = {
-        needToHide: false,
+            needToHide: false,
         };
 
         if (props.hideTimeout > 0)
         {
-        setTimeout(() => 
-            {
-            this.setState({
-                needToHide: true,
-            });
-            }, props.hideTimeout)
+            setTimeout(() => 
+                {
+                    this.setState({
+                        needToHide: true,
+                    });
+                }, props.hideTimeout)
         }
     }
 
     render() {
         const message = this.props.message;
         if (!message) {
-        return <div>Message is null</div>;
-        }
-
-        const author = message.author;
-        if (!author) {
-        return <div>Author is null</div>;
+            return <span className="null_message">NULL_MESSAGE</span>;
         }
 
         const forcedColors = message.forcedColors;
-        //console.log(message)
+        console.log(message)
 
         return (
-        <span className={"message" + (this.state.needToHide ? " hiddenFadeOut" : "")} style={{"backgroundColor": forcedColors.bodyBackground, 'visibility': this.state.visibility}}>
-            <span className="badges">
-            <img
-                className="badgeServiceIcon"
-                alt={author.serviceId + "-badge"}
-                src={author.serviceBadge}
-            />
-
-            {author.leftBadges.map((badgeUrl, idx) => (
-                <img key={idx} className="badgeLeft" alt="" src={badgeUrl}></img>
-            ))}
-            </span>
-
-            <span
-            className={"authorName" + (author.customBackgroundColor.length  > 0 ? " authorNameCustomBackgroundColor" : "")}
+        <span
+            className={"message" + (this.state.needToHide ? " hiddenFadeOut" : "")}
             style={{
-                "color": author.color,
-                "backgroundColor": author.customBackgroundColor,
-            }}>
-                {author.name}
-            </span>
+                    "backgroundColor": forcedColors.bodyBackground,
+                    //"borderColor": forcedColors.bodyBorder,
+                    //"border": "4em solid red",
+                    'visibility': this.state.visibility
+                }}>
 
-            {author.rightBadges.map((badgeUrl, idx) => (
-            <img key={idx} className="badgeRight" alt="" src={badgeUrl}></img>
-            ))}
+            <AuthorView author={message.author}/>
 
             <span className="authorMessageContentSeparator"></span>
 
