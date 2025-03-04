@@ -64,10 +64,12 @@ export const RootView = () => {
     const [appState, setState] = useState({
         viewers: -1,
     });
-    const [widgetSettings, setWidgetSettings] = useState({
-        messages: {
-            hideTimeout: 0,
-        }
+    const [settings, setSettings] = useState({
+        widgets: {
+            messages: {
+                hideTimeout: 0,
+            }
+        },
     });
 
     const [, updateState] = React.useState();
@@ -176,8 +178,11 @@ export const RootView = () => {
                 }
             }
         }
+        else if (protocolMessageType === "NEED_RELOAD") {
+            window.location.reload();
+        }
         else if (protocolMessageType === "SETTINGS_UPDATED") {
-            setWidgetSettings(data.settings.widgets)
+            setSettings(data.settings)
         }
         else if (protocolMessageType === "CLEAR_MESSAGES") {
             setMessages((prev) => {
@@ -206,7 +211,7 @@ export const RootView = () => {
         const widgetType = searchParams.get("widget");
 
         if (widgetType === "messages") {
-            return (<MessagesListView messages={messages} hideTimeout={widgetSettings.messages.hideTimeout} />);
+            return (<MessagesListView messages={messages} hideTimeout={settings.widgets.messages.hideTimeout} />);
         }
         else if (widgetType === "selected-messages") {
             return (<MessagesListView messages={selectedMessages} hideTimeout={0} />);
