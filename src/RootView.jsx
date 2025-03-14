@@ -35,6 +35,16 @@ function getWebSocketUrl(searchParams) {
     return "ws://" + window.location.hostname + ":" + window.location.port + "/";
 }
 
+function getEventLogging(searchParams) {
+    const param = searchParams.get("event-logging");
+    if (typeof param === "string")
+    {
+        return param.toLowerCase() === "true" ? true : false;
+    }
+
+    return false;
+}
+
 function getDeviceType() {
     if (isDesktop) { return "DESKTOP" }
     if (isMobileOnly) {return "MOBILE" }
@@ -72,7 +82,7 @@ export const RootView = () => {
         },
     });
     const [config] = useState({
-        eventsLogging: searchParams.get("event-logging").toLowerCase() === "true" ? true : false,
+        eventsLogging: getEventLogging(searchParams)
     });
 
     const [, updateState] = React.useState();
