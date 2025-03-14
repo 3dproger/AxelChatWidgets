@@ -71,13 +71,19 @@ export const RootView = () => {
             }
         },
     });
+    const [config] = useState({
+        eventsLogging: searchParams.get("event-logging").toLowerCase() === "true" ? true : false,
+    });
 
     const [, updateState] = React.useState();
     const forceUpdate = React.useCallback(() => updateState({}), []);
 
     const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParams), {
         onOpen: () => {
-            //console.log('Opened socket');
+            if (config.eventsLogging) {
+                console.log('Opened socket');
+            }
+
             setMessages([]);
             sendMessage(JSON.stringify({
                 type: "HELLO",
@@ -115,7 +121,11 @@ export const RootView = () => {
         }
 
         const protocolMessage = JSON.parse(lastMessage.data);
-        //console.log(protocolMessage);
+
+        if (config.eventsLogging) {
+            console.log(protocolMessage);
+        }
+
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
@@ -148,11 +158,14 @@ export const RootView = () => {
             setState(data);
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
-            //console.log(protocolMessage);
             for (const message of data.messages) {
                 let prevMessage = messagesMap.get(message.id);
                 if (typeof(prevMessage) !== "undefined" && prevMessage !== null) {
-                    //console.log("changed ", prevMessage, " to ", message);
+
+                    if (config.eventsLogging) {
+                        console.log("changed ", prevMessage, " to ", message);
+                    }
+
                     Object.assign(prevMessage, message);
                 }
             }
