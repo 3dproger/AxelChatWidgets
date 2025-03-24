@@ -44,6 +44,15 @@ body:hover {
   margin-right: 3px;
 }
 
+.tag {
+  vertical-align: middle;
+  border-radius: 3px;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
 .badgeServiceIcon,
 .badgeLeft,
 .badgeRight {

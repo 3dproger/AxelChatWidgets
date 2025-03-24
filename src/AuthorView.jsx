@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { TagView } from "./TagView";
 
 export class AuthorView extends React.Component {
     static propTypes = {
@@ -25,7 +26,15 @@ export class AuthorView extends React.Component {
                     alt={author.serviceId + "-badge"}
                     src={author.serviceBadge}
                 />
+            </span>
 
+            <span className="tags">
+                {author.leftTags.map((tag, idx) => (
+                    <TagView key={idx} tag={tag}/>
+                ))}
+            </span>
+
+            <span className="badges">
                 {author.leftBadges.map((badgeUrl, idx) => (
                     <img key={idx} className="badgeLeft" alt="" src={badgeUrl}></img>
                 ))}
@@ -40,9 +49,17 @@ export class AuthorView extends React.Component {
                 {author.name}
             </span>
 
-            {author.rightBadges.map((badgeUrl, idx) => (
-                <img key={idx} className="badgeRight" alt="" src={badgeUrl}></img>
-            ))}
+            <span className="badges">
+                {author.rightBadges.map((badgeUrl, idx) => (
+                    <img key={idx} className="badgeRight" alt="" src={badgeUrl}></img>
+                ))}
+            </span>
+
+            <span className="tags">
+                {author.rightTags.map((tag, idx) => (
+                    <TagView key={idx} tag={tag}/>
+                ))}
+            </span>
         </span>
         )
     }

@@ -13,7 +13,7 @@ export class ContentView extends React.Component {
     render() {
       const content = this.props.content;
       if (!content) {
-        return <div>null</div>;
+        return <span>null</span>;
       }
   
       const type = content.type;
