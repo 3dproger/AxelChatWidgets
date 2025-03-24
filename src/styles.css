@@ -47,10 +47,14 @@ body:hover {
 .tag {
   vertical-align: middle;
   border-radius: 3px;
-  margin-left: 2px;
-  margin-right: 2px;
-  padding-left: 2px;
-  padding-right: 2px;
+  margin-left: 0px;
+  margin-right: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 6px;
+  padding-right: 6px;
+  font-size: small;
+  font-weight: 600;
 }
 
 .badgeServiceIcon,
