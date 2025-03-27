@@ -67,7 +67,8 @@ body:hover {
 }
 
 .text,
-.authorMessageContentSeparator {
+.authorMessageContentSeparator,
+.htmlContent {
   vertical-align: middle;
   font-weight: 600;
   color: white;
