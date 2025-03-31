@@ -28,6 +28,14 @@ export class AuthorView extends React.Component {
                 />
             </span>
 
+            <img
+                className="avatar"
+                alt="avatar"
+                src={author.avatar}
+                height={32}
+                width={32}
+            />
+
             <span className="tags">
                 {author.leftTags.map((tag, idx) => (
                     <TagView key={idx} tag={tag}/>

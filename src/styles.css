@@ -22,6 +22,16 @@ body:hover {
   margin-bottom: 1px;
 }
 
+.avatar {
+  vertical-align: middle;
+  height: 32px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-left: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+}
+
 .authorName {
   vertical-align: middle;
   color: #03A9F4;
