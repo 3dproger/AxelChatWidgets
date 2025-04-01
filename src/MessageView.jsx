@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { ContentView } from "./ContentView"
 import { AuthorView } from "./AuthorView";
+import { TimeView } from "./TimeView";
 
 export class MessageView extends React.Component {
     static propTypes = {
@@ -65,6 +66,8 @@ export class MessageView extends React.Component {
         <span
             className={"message" + (this.state.needToHide ? " hiddenFadeOut" : "")}
             style={this.getMessageStyle()}>
+            
+            <TimeView timeIso={message.publishedAt}/>
 
             <AuthorView author={message.author}/>
 

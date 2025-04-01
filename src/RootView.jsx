@@ -64,6 +64,14 @@ function getDeviceName() {
     return ""
 }
 
+const getNavigatorLanguage = () => {
+    if (navigator.languages && navigator.languages.length) {
+      return navigator.languages[0];
+    } else {
+      return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+    }
+  }
+
 export const RootView = () => {
     const [searchParams] = useSearchParams();
     const [authorsMap] = useState(new Map());
@@ -80,6 +88,7 @@ export const RootView = () => {
                 hideTimeout: 0,
             }
         },
+        locale: getNavigatorLanguage(),
     });
     const [config] = useState({
         eventsLogging: getEventLogging(searchParams)

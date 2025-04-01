@@ -21,7 +21,7 @@ export class ServicesListView extends React.Component {
                     <ServiceView key={idx} service={service} />
                 ))}
                 <span className="serviceIndicator">
-                    <img className="badgeServiceIcon" alt="viewers-count" src={"./images/person.svg"}/>
+                    <img className="badgeServiceIcon" alt="" src={"./images/person.svg"}/>
                     <span className="text">{this.props.appState.viewers > -1 ? this.props.appState.viewers.toLocaleString() : "?"}</span>
                 </span>
             </div>

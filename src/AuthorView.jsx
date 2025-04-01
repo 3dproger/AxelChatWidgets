@@ -23,14 +23,14 @@ export class AuthorView extends React.Component {
             <span className="badges">
                 <img
                     className="badgeServiceIcon"
-                    alt={author.serviceId + "-badge"}
+                    alt=""
                     src={author.serviceBadge}
                 />
             </span>
 
             <img
                 className="avatar"
-                alt="avatar"
+                alt=""
                 src={author.avatar}
                 height={32}
                 width={32}

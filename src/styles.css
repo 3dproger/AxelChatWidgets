@@ -22,6 +22,16 @@ body:hover {
   margin-bottom: 1px;
 }
 
+.time,
+.date {
+  vertical-align: middle;
+  color: rgba(224, 224, 224, 0.5);
+  padding-left: 4px;
+  padding-right: 4px;
+  font-size: small;
+  text-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
+}
+
 .avatar {
   vertical-align: middle;
   height: 32px;
@@ -87,7 +97,11 @@ body:hover {
     1px 1px 0 rgb(50, 50, 50),
     -1px 1px 0 rgb(50, 50, 50),
     -1px -1px 0 rgb(50, 50, 50),
-    1px -1px 0 rgb(50, 50, 50);
+    1px -1px 0 rgb(50, 50, 50),
+    1px 0px rgb(50, 50, 50),
+    -1px 0px rgb(50, 50, 50),
+    0px 1px rgb(50, 50, 50),
+    0px -1px rgb(50, 50, 50);
 }
 
 .authorMessageContentSeparator::before {
@@ -124,4 +138,11 @@ body:hover {
 .hiddenFadeOut {
   opacity: 0;
   transition: visibility 0s 0.5s, opacity 0.5s linear;
+}
+
+/* Disabled display of some elements by default */
+.time,
+.date,
+.avatar {
+  display: none;
 }
