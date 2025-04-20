@@ -222,8 +222,15 @@ export const RootView = () => {
                 return [];
             });
         }
-        else if (protocolMessageType === "HELLO") {
+        else if (protocolMessageType === "HELLO" ||
+                 protocolMessageType === "PONG" ||
+                 protocolMessageType === "SERVER_CLOSE") {
             // ignore
+        }
+        else if (protocolMessageType === "PING") {
+            sendMessage(JSON.stringify({
+                type: "PONG"
+            }));
         }
         else {
             console.error("Unknown message type '" + protocolMessageType + "', protocol message = '" + protocolMessage + "'");
