@@ -19,27 +19,25 @@ export class ContentView extends React.Component {
       const type = content.type;
       const className = content.htmlClassName;
       const data = content.data;
+      const style = content.style;
   
       if (type === "text") {
         const text = data.text;
-        const style = {...data.style, "white-space": "pre-line" };
 
-        return <span className={className} style={style}>{text}</span>;
+        return <span className={className} style={{...style, "white-space": "pre-line" }}>{text}</span>;
       }
       else if (type === "image") {
-        return <img className={className} alt={data.alt} src={data.url}></img>;
+        return <img className={className} style={style} alt={data.alt} src={data.url}></img>;
       }
       else if (type === "hyperlink") {
-        const style = {...data.style, "white-space": "pre-line" };
-
         return (
-          <span> <a className={className} href={data.url} style={style}>
+          <span> <a className={className} style={{...style, "white-space": "pre-line" }} href={data.url}>
             <span>{data.text}</span>
           </a> </span>
         );
       }
       else if (type === "html") {
-        return <span className={className} dangerouslySetInnerHTML={{__html: data.html}}/>
+        return <span className={className} style={style} dangerouslySetInnerHTML={{__html: data.html}}/>
       }
   
       return <div>Unknown content type '{type}'</div>;
