@@ -118,7 +118,18 @@ body:hover {
 
 .imageContent {
   vertical-align: middle;
-  /*height: 32px;*/
+  height: 32px;
+}
+
+.EmoteSizeType {
+  height: 32px;
+}
+
+.StickerSizeType {
+  height: 100px;
+}
+
+.AnySizeType {
   width: 100%;
   max-width: 600px;
   height: 100%;
