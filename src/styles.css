@@ -174,3 +174,28 @@ body:hover {
 .avatar {
   display: none;
 }
+
+.bigText {
+  vertical-align: middle;
+  font-size: 40pt;
+  font-weight: 600;
+  color: white;
+  margin-right: 32px;
+
+  text-shadow:
+    1px 1px 0 black,
+    -1px 1px 0 black,
+    -1px -1px 0 black,
+    1px -1px 0 black,
+    1px 0px black,
+    -1px 0px black,
+    0px 1px black,
+    0px -1px black;
+}
+
+.bigBadgeServiceIcon {
+  vertical-align: middle;
+  height: 50px;
+  width: 50px;
+  margin-right: 8px;
+}

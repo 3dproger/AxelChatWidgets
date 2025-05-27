@@ -11,8 +11,8 @@ function getTotalViewersView(viewers, enabledSourcesCount) {
 
     return(
         <span className="serviceIndicator" >
-            <img className="badgeServiceIcon" alt="" src={"./images/person.svg"}/>
-            <span className="text">{viewers > -1 ? viewers.toLocaleString() : "?"}</span>
+            <img className="bigBadgeServiceIcon" alt="" src={"./images/person.svg"}/>
+            <span className="bigText">{viewers > -1 ? viewers.toLocaleString() : "?"}</span>
         </span>
     )
 }
@@ -31,13 +31,13 @@ export class ServicesListView extends React.Component {
     render() {
         const appState = this.props.appState;
         return (
-            <div className="ServicesListView">
+            <span>
                 {this.props.services.map((service, idx) => (
                     <ServiceView key={idx} service={service} />
                 ))}
 
                 {getTotalViewersView(appState.viewers, appState.enabledCount)}
-            </div>
+            </span>
         )
     }
 }

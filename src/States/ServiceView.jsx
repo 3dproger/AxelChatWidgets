@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './../styles.css'
-import './styles.css'
 
 export class ServiceView extends React.Component {
     static propTypes = {
@@ -29,8 +27,8 @@ export class ServiceView extends React.Component {
 
         return (
             <span className="serviceIndicator">
-                <img className="badgeServiceIcon" alt="" src={service.icon}/>
-                <span className="text">{service.viewers !== -1 ? service.viewers.toLocaleString() : ""}</span>
+                <img className="bigBadgeServiceIcon" alt="" src={service.icon}/>
+                <span className="bigText">{service.viewers !== -1 ? service.viewers.toLocaleString() : ""}</span>
             </span>
         )
     }
