@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import { useSearchParams } from 'react-router-dom';
-import { MessagesListView } from './MessagesListView';
-import { ServicesListView } from './ServicesListView'
+import { MessagesListView } from './Messages/MessagesListView';
+import { ServicesListView } from './Services/ServicesListView'
 import { AnimatedDummyTextView, IndicatorType } from './AnimatedDummyTextView'
 import {
     osName,

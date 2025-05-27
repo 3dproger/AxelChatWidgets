@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ServiceView } from './ServiceView';
-import './styles.css'
+import './../styles.css'
 
 function getTotalViewersView(viewers, enabledSourcesCount) {
     if (enabledSourcesCount === 1)
@@ -31,7 +31,7 @@ export class ServicesListView extends React.Component {
     render() {
         const appState = this.props.appState;
         return (
-            <div>
+            <div className="ServicesListView">
                 {this.props.services.map((service, idx) => (
                     <ServiceView key={idx} service={service} />
                 ))}

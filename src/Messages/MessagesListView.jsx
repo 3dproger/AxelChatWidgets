@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
+import { AnimatedDummyTextView, IndicatorType } from "../AnimatedDummyTextView";
 import { MessageView } from "./MessageView";
 
 export class MessagesListView extends React.Component {
