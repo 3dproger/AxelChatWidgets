@@ -244,7 +244,7 @@ export const RootView = () => {
         [ReadyState.CONNECTING]: 'Connecting...',
         [ReadyState.OPEN]: 'Open',
         [ReadyState.CLOSING]: 'Closing',
-        [ReadyState.CLOSED]: 'Closed. Please launch the AxelChat or restart the widget...',
+        [ReadyState.CLOSED]: 'Closed. Please launch the AxelChat or refresh the widget...',
         [ReadyState.UNINSTANTIATED]: 'Uninstantiated',
     }[readyState];
 
