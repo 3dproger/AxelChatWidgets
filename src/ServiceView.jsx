@@ -22,7 +22,7 @@ export class ServiceView extends React.Component {
 
         if (!service.enabled) {
             return (
-                <span></span>
+                <></>
             )
         }
 

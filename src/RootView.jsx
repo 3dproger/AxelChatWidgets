@@ -81,12 +81,14 @@ export const RootView = () => {
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
         viewers: -1,
+        enabledCount: -1,
     });
     const [settings, setSettings] = useState({
         widgets: {
             messages: {
                 hideTimeout: 0,
-            }
+            },
+            hideConnectionStatusWhenConnected: false,
         },
         locale: getNavigatorLanguage(),
     });
@@ -250,21 +252,38 @@ export const RootView = () => {
         const widgetType = searchParams.get("widget");
 
         if (widgetType === "messages") {
-            return (<MessagesListView messages={messages} hideTimeout={settings.widgets.messages.hideTimeout} />);
+            return (<MessagesListView
+                messages={messages}
+                hideTimeout={settings.widgets.messages.hideTimeout} />);
         }
         else if (widgetType === "selected-messages") {
-            return (<MessagesListView messages={selectedMessages} hideTimeout={0} />);
+            return (<MessagesListView
+                messages={selectedMessages}
+                hideTimeout={0} />);
         }
         else if (widgetType === "states") {
-            return (<ServicesListView services={services} appState={appState} />);
+            return (<ServicesListView
+                services={services}
+                appState={appState} />);
         }
         else {
             return (<span className="errorText">Error: unknown widget</span>);
         }
     }
     else {
+        console.log(settings.widgets.hideConnectionStatusWhenConnected, readyState)
+        if (readyState === ReadyState.OPEN && settings.widgets.hideConnectionStatusWhenConnected) {
+            console.log("return")
+            return <span></span>
+        }
+
+        console.log("not return")
+
         return (
-            <AnimatedDummyTextView type={readyState === ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image} text={connectionStatus} imageSrc="./images/error-alt-svgrepo-com.svg"/>
+            <AnimatedDummyTextView
+                type={readyState === ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image}
+                text={connectionStatus}
+                imageSrc="./images/error-alt-svgrepo-com.svg"/>
         )
     }
 };
