@@ -254,12 +254,14 @@ export const RootView = () => {
         if (widgetType === "messages") {
             return (<MessagesListView
                 messages={messages}
-                hideTimeout={settings.widgets.messages.hideTimeout} />);
+                hideTimeout={settings.widgets.messages.hideTimeout}
+                hideConnectionStatusWhenConnected={settings.widgets.hideConnectionStatusWhenConnected} />);
         }
         else if (widgetType === "selected-messages") {
             return (<MessagesListView
                 messages={selectedMessages}
-                hideTimeout={0} />);
+                hideTimeout={0}
+                hideConnectionStatusWhenConnected={settings.widgets.hideConnectionStatusWhenConnected} />);
         }
         else if (widgetType === "states") {
             return (<ServicesListView
@@ -271,14 +273,6 @@ export const RootView = () => {
         }
     }
     else {
-        console.log(settings.widgets.hideConnectionStatusWhenConnected, readyState)
-        if (readyState === ReadyState.OPEN && settings.widgets.hideConnectionStatusWhenConnected) {
-            console.log("return")
-            return <span></span>
-        }
-
-        console.log("not return")
-
         return (
             <AnimatedDummyTextView
                 type={readyState === ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image}

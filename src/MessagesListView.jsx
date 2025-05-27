@@ -7,11 +7,13 @@ export class MessagesListView extends React.Component {
   static propTypes = {
     messages: PropTypes.array.isRequired,
     hideTimeout: PropTypes.number,
+    hideConnectionStatusWhenConnected: PropTypes.bool,
   };
 
   static defaultProps = {
     messages: [],
     hideTimeout: 0,
+    hideConnectionStatusWhenConnected: false,
   };
 
   scrollToBottom = () => {
@@ -30,13 +32,18 @@ export class MessagesListView extends React.Component {
 
   render() {
     if (this.props.messages.length === 0) {
-      return (
-        <AnimatedDummyTextView
-          type={IndicatorType.Image}
-          text="Connected!"
-          imageSrc="./images/tick.svg"
-        />
-      );
+      if (this.props.hideConnectionStatusWhenConnected) {
+          return (<></>)
+      }
+      else {
+        return (
+          <AnimatedDummyTextView
+            type={IndicatorType.Image}
+            text="Connected!"
+            imageSrc="./images/tick.svg"
+          />
+        );
+      }
     } else {
       return (
         <div className="messagesListView">
