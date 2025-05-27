@@ -61,6 +61,7 @@ export class MessageView extends React.Component {
         }
 
         //console.log(message)
+        const multiline = this.props.message.multiline;
 
         return (
         <span
@@ -71,12 +72,19 @@ export class MessageView extends React.Component {
 
             <AuthorView author={message.author}/>
 
-            <span className="authorMessageContentSeparator"></span>
+            {multiline ?
+                (
+                    <br/>
+                ) :
+                (
+                    <span className="authorMessageContentSeparator"></span>
+                )
+            }
 
             <span className="messageContents">
-            {message.contents.map((content, idx) => (
-                <ContentView key={idx} content={content} />
-            ))}
+                {message.contents.map((content, idx) => (
+                    <ContentView key={idx} content={content} />
+                ))}
             </span>
         </span>
         );

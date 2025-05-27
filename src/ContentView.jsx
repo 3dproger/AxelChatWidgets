@@ -27,7 +27,7 @@ export class ContentView extends React.Component {
         return <span className={className} style={{...style, "white-space": "pre-line" }}>{text}</span>;
       }
       else if (type === "image") {
-        return <img className={className} style={style} alt={data.alt} src={data.url}></img>;
+        return <img className={className} style={style} alt="" src={data.url}></img>;
       }
       else if (type === "hyperlink") {
         return (
