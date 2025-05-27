@@ -26,7 +26,7 @@ export class AnimatedDummyTextView extends React.Component {
             return (
                 <span>
                     <Spin style={{"marginRight": "4px"}} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>
-                    <span className="authorName">{this.props.text}</span>
+                    <span className="text">{this.props.text}</span>
                 </span>
             )
         }
@@ -34,7 +34,7 @@ export class AnimatedDummyTextView extends React.Component {
         return (
             <span>
                 <img className="badgeServiceIcon" alt="" src={this.props.imageSrc}/>
-                <span className="authorName">{this.props.text}</span>
+                <span className="text">{this.props.text}</span>
             </span>
         )
     }
