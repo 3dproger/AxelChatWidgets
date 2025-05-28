@@ -3,6 +3,7 @@
 body {
   font-family: 'Inter', 'Poppins', Roboto, Arial, sans-serif;
   font-weight: 400;
+  font-size: 16pt;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #1D1F26;
@@ -42,7 +43,7 @@ body:hover {
 
 .avatar {
   vertical-align: middle;
-  height: 32px;
+  height: 40px;
   margin-top: 2px;
   margin-bottom: 2px;
   margin-left: 8px;
@@ -100,8 +101,8 @@ body:hover {
 .badgeRight {
   vertical-align: middle;
   padding-right: 2px;
-  height: 20px;
-  width: 20px;
+  height: 24px;
+  width: 24px;
 }
 
 .text,
@@ -134,22 +135,22 @@ body:hover {
 
 .imageContent {
   vertical-align: middle;
-  height: 32px;
+  height: 40px;
 }
 
 .EmoteSizeType {
-  height: 32px;
+  height: 40px;
 }
 
 .StickerSizeType {
-  height: 100px;
+  height: 140px;
 }
 
 .AnySizeType {
   width: 100%;
   max-width: 600px;
   height: 100%;
-  max-height: 600px;
+  max-height: 800px;
 }
 
 .errorText {
