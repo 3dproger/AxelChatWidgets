@@ -81,12 +81,14 @@ export const RootView = () => {
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
         viewers: -1,
-        enabledCount: -1,
     });
     const [settings, setSettings] = useState({
         widgets: {
             messages: {
                 hideTimeout: 0,
+            },
+            states: {
+                hidePlatformIconIfCountIsUnknown: false,
             },
             hideConnectionStatusWhenConnected: false,
         },
@@ -266,7 +268,8 @@ export const RootView = () => {
         else if (widgetType === "states") {
             return (<ServicesListView
                 services={services}
-                appState={appState} />);
+                appState={appState}
+                hidePlatformIconIfCountIsUnknown={settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
         }
         else {
             return (<span className="errorText">Error: unknown widget</span>);

@@ -19,12 +19,6 @@ export class ServiceView extends React.Component {
             )
         }
 
-        if (!service.enabled) {
-            return (
-                <></>
-            )
-        }
-
         return (
             <span className="serviceIndicator">
                 <img className="bigBadgeServiceIcon" alt="" src={service.icon}/>
