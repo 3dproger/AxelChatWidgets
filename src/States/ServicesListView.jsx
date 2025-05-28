@@ -10,7 +10,7 @@ function getTotalViewersView(viewers, enabledSourcesCount) {
     }
 
     return(
-        <span className="serviceIndicator" >
+        <span className="serviceIndicator" style={{whiteSpace: "nowrap"}}>
             <img className="bigBadgeServiceIcon" alt="" src={"./images/person.svg"}/>
             <span className="bigText">{viewers > -1 ? viewers.toLocaleString() : "?"}</span>
         </span>

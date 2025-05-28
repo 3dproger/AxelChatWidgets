@@ -20,7 +20,7 @@ export class ServiceView extends React.Component {
         }
 
         return (
-            <span className="serviceIndicator">
+            <span className="serviceIndicator" style={{whiteSpace: "nowrap"}}>
                 <img className="bigBadgeServiceIcon" alt="" src={service.icon}/>
                 <span className="bigText">{service.viewers !== -1 ? service.viewers.toLocaleString() : ""}</span>
             </span>
