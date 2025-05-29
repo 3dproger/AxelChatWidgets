@@ -2,7 +2,6 @@
 
 body {
   font-family: 'Inter', 'Poppins', Roboto, Helvetica Neue, Geneva, arial, Tahoma, verdana, sans-serif;
-  font-weight: 400;
   font-size: 16pt;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -37,7 +36,7 @@ body:hover {
   color: rgba(224, 224, 224, 0.5);
   padding-left: 4px;
   padding-right: 4px;
-  font-size: mediaum;
+  font-size: small;
   text-shadow: 1px 1px 0 rgb(0, 0, 0, 0.5);
 }
 
@@ -52,7 +51,7 @@ body:hover {
 }
 
 .authorName {
-  font-weight: 700;
+  font-weight: bold;
   vertical-align: middle;
   color: #03A9F4;
   border-radius: 3px;
