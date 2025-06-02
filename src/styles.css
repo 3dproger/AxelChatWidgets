@@ -26,7 +26,7 @@ body:hover {
   width: 100%;
   margin-left: 2px;
   margin-right: 2px;
-  background-color: rgba(0, 0, 0, 0.65);
+  /*background-color: rgba(0, 0, 0, 0.65);*/
   /*background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.75), transparent);*/
 }
 

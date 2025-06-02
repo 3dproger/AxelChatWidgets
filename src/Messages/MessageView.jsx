@@ -8,11 +8,13 @@ export class MessageView extends React.Component {
     static propTypes = {
         message: PropTypes.object.isRequired,
         hideTimeout: PropTypes.number,
+        messageStyle: PropTypes.object,
     };
 
     static defaultProps = {
         message: null,
         hideTimeout: 0,
+        messageStyle: {},
     };
 
     constructor(props) {
@@ -39,6 +41,7 @@ export class MessageView extends React.Component {
 
         let r = {
             'visibility': this.state.visibility,
+            ...this.props.messageStyle,
         };
 
         if (forcedColors.bodyBackground !== undefined) {

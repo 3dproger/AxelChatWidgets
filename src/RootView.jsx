@@ -86,6 +86,7 @@ export const RootView = () => {
         widgets: {
             messages: {
                 hideTimeout: 0,
+                style: {},
             },
             states: {
                 hidePlatformIconIfCountIsUnknown: false,
@@ -257,12 +258,14 @@ export const RootView = () => {
             return (<MessagesListView
                 messages={messages}
                 hideTimeout={settings.widgets.messages.hideTimeout}
+                messageStyle={settings.widgets.messages.style}
                 hideConnectionStatusWhenConnected={settings.widgets.hideConnectionStatusWhenConnected} />);
         }
         else if (widgetType === "selected-messages") {
             return (<MessagesListView
                 messages={selectedMessages}
                 hideTimeout={0}
+                messageStyle={settings.widgets.messages.style}
                 hideConnectionStatusWhenConnected={settings.widgets.hideConnectionStatusWhenConnected} />);
         }
         else if (widgetType === "states") {

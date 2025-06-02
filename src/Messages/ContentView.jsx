@@ -24,14 +24,14 @@ export class ContentView extends React.Component {
       if (type === "text") {
         const text = data.text;
 
-        return <span className={className} style={{...style, "white-space": "pre-line" }}>{text}</span>;
+        return <span className={className} style={{...style, "whiteSpace": "pre-line" }}>{text}</span>;
       }
       else if (type === "image") {
         return <img className={className} style={style} alt="" src={data.url}></img>;
       }
       else if (type === "hyperlink") {
         return (
-          <span> <a className={className} style={{...style, "white-space": "pre-line" }} href={data.url}>
+          <span> <a className={className} style={{...style, "whiteSpace": "pre-line" }} href={data.url}>
             <span>{data.text}</span>
           </a> </span>
         );
