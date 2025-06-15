@@ -40,9 +40,8 @@ export class MessagesListView extends React.Component {
       else {
         return (
           <AnimatedDummyTextView
-            type={IndicatorType.Image}
+            type={IndicatorType.Success}
             text="Connected!"
-            imageSrc="./images/tick.svg"
           />
         );
       }

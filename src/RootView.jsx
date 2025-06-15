@@ -281,9 +281,8 @@ export const RootView = () => {
     else {
         return (
             <AnimatedDummyTextView
-                type={readyState === ReadyState.CONNECTING ? IndicatorType.Spin : IndicatorType.Image}
-                text={connectionStatus}
-                imageSrc="./images/error-alt-svgrepo-com.svg"/>
+                type={readyState === ReadyState.CONNECTING ? IndicatorType.Loading : IndicatorType.Critical}
+                text={connectionStatus}/>
         )
     }
 };

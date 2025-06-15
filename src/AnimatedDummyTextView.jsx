@@ -1,41 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, CheckCircleOutlined, ApiOutlined } from '@ant-design/icons';
 
 export const IndicatorType = {
-    Image: "Image",
-    Spin: "Spin",
+    TextOnly: "TextOnly",
+    Success: "Success",
+    Loading: "Loading",
+    Critical: "Critical"
 };
 
 export class AnimatedDummyTextView extends React.Component {
     static propTypes = {
         type: PropTypes.string,
         text: PropTypes.string.isRequired,
-        imageSrc: PropTypes.string.isRequired,
     }
 
     static defaultProps = {
-        type: IndicatorType.Spin,
+        type: IndicatorType.Loading,
         text: "TEXT",
-        imageSrc: "./images/tick.svg",
     }
 
     render() {
-        if (this.props.type === IndicatorType.Spin) {
-            return (
-                <span>
-                    <Spin style={{"marginRight": "4px"}} indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}/>
-                    <span className="text">{this.props.text}</span>
-                </span>
-            )
-        }
+        const type = this.props.type;
 
         return (
-            <span>
-                <img className="badgeServiceIcon" alt="" src={this.props.imageSrc}/>
-                <span className="text">{this.props.text}</span>
-            </span>
+        <>
+        <Spin
+            style={{"marginRight": "4px"}}
+            indicator={<LoadingOutlined style={{
+                fontSize: 24,
+                verticalAlign: "middle",
+                display: (type === IndicatorType.Loading ? "block" : "none"),
+            }} spin />}/>
+
+        <CheckCircleOutlined style={{
+            fontSize: 24,
+            verticalAlign: "middle",
+            color: "lime",
+            display: (type === IndicatorType.Success ? "inline" : "none"),
+        }} />
+
+        <ApiOutlined style={{
+            fontSize: 32,
+            verticalAlign: "middle",
+            color: "red",
+            display: (type === IndicatorType.Critical ? "inline" : "none"),
+        }} />
+
+        <span
+            className="text"
+            style={{
+                marginLeft: "6px",
+            }}
+        >{this.props.text}</span>
+        </>
         )
     }
 }
