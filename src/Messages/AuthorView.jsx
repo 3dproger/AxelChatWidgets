@@ -5,10 +5,12 @@ import { TagView } from "./TagView";
 export class AuthorView extends React.Component {
     static propTypes = {
         author: PropTypes.object.isRequired,
+        showPlatformIcon: PropTypes.bool,
     };
 
     static defaultProps = {
         author: null,
+        showPlatformIcon: true,
     };
 
     render() {
@@ -20,13 +22,14 @@ export class AuthorView extends React.Component {
 
         return (
         <span className="author">
-            <span className="badges">
-                <img
-                    className="badgeServiceIcon"
-                    alt=""
-                    src={author.serviceBadge}
-                />
-            </span>
+            {this.props.showPlatformIcon &&
+                <span className="badges">
+                    <img
+                        className="badgeServiceIcon"
+                        alt=""
+                        src={author.serviceBadge}
+                    />
+                </span>}
 
             <img
                 className="avatar"

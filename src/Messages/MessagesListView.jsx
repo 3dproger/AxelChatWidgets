@@ -9,13 +9,15 @@ export class MessagesListView extends React.Component {
     hideTimeout: PropTypes.number,
     hideConnectionStatusWhenConnected: PropTypes.bool,
     messageStyle: PropTypes.object,
+    showPlatformIcon: PropTypes.bool,
   };
 
   static defaultProps = {
     messages: [],
     hideTimeout: 0,
     hideConnectionStatusWhenConnected: false,
-    messageStyle: {}
+    messageStyle: {},
+    showPlatformIcon: true,
   };
 
   scrollToBottom = () => {
@@ -57,6 +59,7 @@ export class MessagesListView extends React.Component {
                 message={message}
                 messageStyle={this.props.messageStyle}
                 hideTimeout={this.props.hideTimeout}
+                showPlatformIcon={this.props.showPlatformIcon}
               />
             </div>
           ))}

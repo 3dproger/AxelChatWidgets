@@ -9,12 +9,14 @@ export class MessageView extends React.Component {
         message: PropTypes.object.isRequired,
         hideTimeout: PropTypes.number,
         messageStyle: PropTypes.object,
+        showPlatformIcon: PropTypes.bool,
     };
 
     static defaultProps = {
         message: null,
         hideTimeout: 0,
         messageStyle: {},
+        showPlatformIcon: true,
     };
 
     constructor(props) {
@@ -73,7 +75,7 @@ export class MessageView extends React.Component {
             
             <TimeView timeIso={message.publishedAt}/>
 
-            <AuthorView author={message.author}/>
+            <AuthorView author={message.author} showPlatformIcon={this.props.showPlatformIcon}/>
 
             {multiline ?
                 (
