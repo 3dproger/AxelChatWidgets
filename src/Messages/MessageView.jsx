@@ -4,6 +4,33 @@ import { ContentView } from "./ContentView"
 import { AuthorView } from "./AuthorView";
 import { TimeView } from "./TimeView";
 
+function isMessageAuthorVisible(message) {
+    if (message.markedAsDeleted || message.deletedOnPlatform) {
+        return false;
+    }
+
+    return true;
+}
+
+function getAuthorContent(message, showPlatformIcon) {
+    if (!isMessageAuthorVisible(message)) {
+        return <></>
+    }
+
+    return (<>
+        <AuthorView author={message.author} showPlatformIcon={showPlatformIcon}/>
+
+        {message.multiline ?
+            (
+                <br/>
+            ) :
+            (
+                <span className="authorMessageContentSeparator"></span>
+            )
+        }
+    </>)
+}
+
 export class MessageView extends React.Component {
     static propTypes = {
         message: PropTypes.object.isRequired,
@@ -66,7 +93,6 @@ export class MessageView extends React.Component {
         }
 
         //console.log(message)
-        const multiline = this.props.message.multiline;
 
         return (
         <span
@@ -75,16 +101,7 @@ export class MessageView extends React.Component {
             
             <TimeView timeIso={message.publishedAt}/>
 
-            <AuthorView author={message.author} showPlatformIcon={this.props.showPlatformIcon}/>
-
-            {multiline ?
-                (
-                    <br/>
-                ) :
-                (
-                    <span className="authorMessageContentSeparator"></span>
-                )
-            }
+            {getAuthorContent(message, this.props.showPlatformIcon)}
 
             <span className="messageContents">
                 {message.contents.map((content, idx) => (
