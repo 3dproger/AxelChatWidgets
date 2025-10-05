@@ -216,8 +216,9 @@ export function RootView() {
             forceUpdate();
         }
         else if (protocolMessageType === "MESSAGES_REMOVED") {
-            let ids = [];
-            const messages = data.messages;
+            let ids: string[] = [];
+            const specData = data as GenericMessagesMessageData;
+            const messages = specData.messages;
             for (const i in messages) {
                 const message = messages[i]
                 ids.push(message.id);
@@ -226,7 +227,8 @@ export function RootView() {
         }
         else if (protocolMessageType === "MESSAGES_SELECTED") {
             setSelectedMessages((prev) => {
-                for (const message of data.messages) {
+                const specData = data as GenericMessagesMessageData;
+                for (const message of specData.messages) {
                     const author = message.author;
                     authorsMap.set(author.id, author);
                 }
