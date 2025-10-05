@@ -24,6 +24,10 @@ import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 
+export interface SearchParamsData {
+    eventsLogging: boolean;
+}
+
 function getWebSocketUrl(searchParams: URLSearchParams) {
     const param = searchParams.get("ws-url");
     if (param) {
@@ -94,7 +98,7 @@ export function RootView() {
         },
         locale: getNavigatorLanguage(),
     });
-    const [config] = useState({
+    const [config] = useState<SearchParamsData>({
         eventsLogging: getEventLogging(searchParams)
     });
 
