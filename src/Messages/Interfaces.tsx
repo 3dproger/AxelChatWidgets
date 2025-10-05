@@ -1,33 +1,57 @@
+import CSS from "csstype";
+
 export interface MessageUserTag {
-  text: string;
-  backgroundColor: string;
-  textColor: string;
+  readonly text: string;
+  readonly backgroundColor: CSS.DataType.Color;
+  readonly textColor: CSS.DataType.Color;
 }
 
 export interface MessageUser {
-    id: string;
-    name: string;
-    avatar: string;
-    pageUrl: string;
-    color: string;
-    customBackgroundColor: string;
-    leftBadges: string[];
-    rightBadges: string[];
-    leftTags: MessageUserTag[];
-    rightTags: MessageUserTag[];
-    serviceBadge: string;
-    serviceId: string;
+    readonly id: string;
+    readonly name: string;
+    readonly avatar: string;
+    readonly pageUrl: string;
+    readonly color: CSS.DataType.Color;
+    readonly customBackgroundColor: CSS.DataType.Color;
+    readonly leftBadges: string[];
+    readonly rightBadges: string[];
+    readonly leftTags: MessageUserTag[];
+    readonly rightTags: MessageUserTag[];
+    readonly serviceBadge: string;
+    readonly serviceId: string;
 }
 
 export interface MessageContentData {
-    text?: string;
-    url?: string;
-    html?: string;
+    readonly text?: string;
+    readonly url?: string;
+    readonly html?: string;
 }
 
 export interface MessageContent {
-    type: "text" | "image" | "hyperlink" | "html";
-    htmlClassName: string;
-    data: MessageContentData;
-    style: object;
+    readonly type: "text" | "image" | "hyperlink" | "html";
+    readonly htmlClassName: string;
+    readonly data: MessageContentData;
+    readonly style: object;
+}
+
+export interface Message {
+    readonly id: string;
+    readonly author: MessageUser;
+    readonly contents: MessageContent[];
+    readonly customAuthorAvatarUrl: string;
+    readonly customAuthorName: string;
+    readonly deletedOnPlatform: boolean;
+    readonly edited: boolean;
+    readonly eventType: "Message";
+    readonly forcedColors: {
+        readonly bodyBackground?: CSS.DataType.Color;
+        readonly bodyBorder?: CSS.DataType.Color;
+    };
+    readonly markedAsDeleted: boolean;
+    readonly multiline: boolean;
+    readonly publishedAt: string;
+    readonly receivedAt: string;
+    readonly raw: any;
+    readonly rawType: string;
+    readonly reply: any;
 }
