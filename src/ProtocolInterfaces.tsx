@@ -78,6 +78,10 @@ export interface StatesChangedData {
     services: PlatformState[];
 }
 
+export interface GenericMessagesMessageData {
+    messages: Message[];
+}
+
 export interface AppState {
     viewers: number;
 }

@@ -17,9 +17,9 @@ import {
     mobileVendor,
     mobileModel,
 } from 'react-device-detect'
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { AppState, ClientSettings, Message, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
+import { AppState, ClientSettings, Message, GenericMessagesMessageData, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
@@ -78,7 +78,7 @@ export function RootView() {
     const [searchParams] = useSearchParams();
     const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState<Message[]>([]);
-    const [messagesMap, setMessagesMap] = useState(new Map());
+    const [messagesMap, setMessagesMap] = useState(new Map<string, Message>());
     const [selectedMessages, setSelectedMessages] = useState<Message[]>([]);
     const [services, setServices] = useState<PlatformState[]>([]);
     const [appState, setAppState] = useState<AppState>({
@@ -102,43 +102,42 @@ export function RootView() {
         eventsLogging: getEventLogging(searchParams)
     });
 
-    const [, updateState] = useState();
-    const forceUpdate = useCallback(() => updateState(undefined), []);
+    // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
+    const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-        const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParams), {
-        onOpen: () => {
-            if (config.eventsLogging) {
-                console.log('Opened socket');
-            }
+    const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParams), {
+    onOpen: () => {
+        if (config.eventsLogging) {
+            console.log('Opened socket');
+        }
 
-            setMessages([]);
-            sendMessage(JSON.stringify({
-                type: "HELLO",
-                data: {
-                    client: {
-                        type: "MAIN_WEBSOCKETCLIENT",
-                        name: packageJson.name,
-						version: packageJson.version,
-                        device: {
-                            type: getDeviceType(),
-                            name: getDeviceName(),
-                            os: {
-                                name: osName,
-                                version: osVersion,
-                            },
-                            browser: {
-                                name: browserName,
-                                version: fullBrowserVersion,
-                            },
-                        }
-                    },
-                    info: {
-						type: "WIDGET",
-                        name: searchParams.get("widget"),
-                    },
+        setMessages([]);
+        sendMessage(JSON.stringify({
+            type: "HELLO",
+            data: {
+                client: {
+                    type: "MAIN_WEBSOCKETCLIENT",
+                    name: packageJson.name,
+                    version: packageJson.version,
+                    device: {
+                        type: getDeviceType(),
+                        name: getDeviceName(),
+                        os: {
+                            name: osName,
+                            version: osVersion,
+                        },
+                        browser: {
+                            name: browserName,
+                            version: fullBrowserVersion,
+                        },
+                    }
                 },
-            }));
-        },
+                info: {
+                    type: "WIDGET",
+                    name: searchParams.get("widget"),
+                },
+            },
+        }));},
         shouldReconnect: (closeEvent) => true,
     });
 
@@ -157,7 +156,6 @@ export function RootView() {
             return;
         }
 
-
         const protocolMessage = JSON.parse(lastMessage.data) as ProtocolMessage;
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
@@ -170,9 +168,11 @@ export function RootView() {
 
         if (protocolMessageType === "NEW_MESSAGES_RECEIVED") {
             setMessages((prev) => {
-                prev = prev.concat(...data.messages);
+                const specData = data as GenericMessagesMessageData;
 
-                for (const message of data.messages) {
+                prev = prev.concat(...specData.messages);
+
+                for (const message of specData.messages) {
                     messagesMap.set(message.id, message)
                     const author = message.author;
                     authorsMap.set(author.id, author);
@@ -200,9 +200,10 @@ export function RootView() {
             setAppState(specData as AppState);
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
-            for (const message of data.messages) {
+            const specData = data as GenericMessagesMessageData;
+            for (const message of specData.messages) {
                 let prevMessage = messagesMap.get(message.id);
-                if (typeof(prevMessage) !== "undefined" && prevMessage !== null) {
+                if (prevMessage) {
 
                     if (config.eventsLogging) {
                         console.log("changed ", prevMessage, " to ", message);
@@ -211,6 +212,7 @@ export function RootView() {
                     Object.assign(prevMessage, message);
                 }
             }
+
             forceUpdate();
         }
         else if (protocolMessageType === "MESSAGES_REMOVED") {
