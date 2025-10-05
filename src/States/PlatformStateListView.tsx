@@ -75,39 +75,3 @@ export function PlatformStateListView({platformsStates, appState, hidePlatformIc
         </span>
     )
 }
-
-/*export class ServicesListView extends React.Component {
-    static propTypes = {
-        services: PropTypes.array.isRequired,
-        appState: PropTypes.object.isRequired,
-        hidePlatformIconIfCountIsUnknown: PropTypes.bool,
-    }
-
-    static defaultProps = {
-        services: [],
-        appState: null,
-        hidePlatformIconIfCountIsUnknown: false,
-    }
-
-    render() {
-        const appState = this.props.appState;
-        const services = this.props.services;
-        const hidePlatformIconIfCountIsUnknown = this.props.hidePlatformIconIfCountIsUnknown;
-        const visibleCount = getVisiblePlatformsCount(services, hidePlatformIconIfCountIsUnknown);
-
-        return (
-            <span>
-                {services.map((service, idx) => (
-                    <span style={{display: getPlatformDisplayStyle(service, hidePlatformIconIfCountIsUnknown)}}>
-                        <PlatformStateView
-                            key={idx}
-                            platformState={service}
-                        />
-                    </span>
-                ))}
-
-                {getTotalViewersView(appState.viewers, visibleCount)}
-            </span>
-        )
-    }
-}*/
