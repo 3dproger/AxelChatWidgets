@@ -4,8 +4,8 @@ import { PlatformStateView } from './PlatformStateView';
 import './../styles.css'
 import { AppState, PlatformState } from '../ProtocolInterfaces';
 
-function getTotalViewersView(viewers: number, enabledSourcesCount: number) {
-    if (enabledSourcesCount === 1) {
+function getTotalViewersView(viewers: number, visiblePlatformsCount: number) {
+    if (visiblePlatformsCount === 1) {
         return (<></>)
     }
 
@@ -59,7 +59,7 @@ interface ServicesListViewProps {
 }
 
 export function PlatformStateListView({platformsStates, appState, hidePlatformIconIfCountIsUnknown} : ServicesListViewProps) {
-    const visibleCount = getVisiblePlatformsCount(platformsStates, hidePlatformIconIfCountIsUnknown);
+    const visiblePlatformsCount = getVisiblePlatformsCount(platformsStates, hidePlatformIconIfCountIsUnknown);
     return (
         <span>
             {platformsStates.map((state, idx) => (
@@ -71,7 +71,7 @@ export function PlatformStateListView({platformsStates, appState, hidePlatformIc
                 </span>
             ))}
 
-            {getTotalViewersView(appState.viewers, visibleCount)}
+            {getTotalViewersView(appState.viewers, visiblePlatformsCount)}
         </span>
     )
 }
