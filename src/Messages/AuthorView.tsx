@@ -1,5 +1,5 @@
 import { TagView } from "./TagView";
-import { MessageUser } from "./Interfaces"
+import { MessageUser } from "../ProtocolInterfaces"
 
 interface AuthorViewProps {
     author: MessageUser;

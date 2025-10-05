@@ -1,4 +1,4 @@
-import { MessageUserTag } from "./Interfaces"
+import { MessageUserTag } from "../ProtocolInterfaces"
 
 interface TagViewProps {
     tag: MessageUserTag;

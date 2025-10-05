@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ServiceView } from './ServiceView';
+import { PlatformStateView } from './PlatformStateView';
 import './../styles.css'
 
 function getTotalViewersView(viewers, enabledSourcesCount) {
@@ -75,9 +75,9 @@ export class ServicesListView extends React.Component {
             <span>
                 {services.map((service, idx) => (
                     <span style={{display: getPlatformDisplayStyle(service, hidePlatformIconIfCountIsUnknown)}}>
-                        <ServiceView
+                        <PlatformStateView
                             key={idx}
-                            service={service}
+                            platformState={service}
                         />
                     </span>
                 ))}

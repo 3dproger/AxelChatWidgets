@@ -19,7 +19,7 @@ import {
 } from 'react-device-detect'
 import { useCallback, useEffect, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { Message } from "./Messages/Interfaces";
+import { Message } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { ServicesListView } from "./States/ServicesListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";

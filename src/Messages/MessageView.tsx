@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ContentView } from "./ContentView"
 import { AuthorView } from "./AuthorView";
 import { TimeView } from "./TimeView";
-import { Message } from "./Interfaces";
+import { Message } from "../ProtocolInterfaces";
 import CSS from "csstype";
 
 function isMessageAuthorVisible(message: Message) {

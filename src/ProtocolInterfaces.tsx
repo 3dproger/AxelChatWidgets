@@ -55,3 +55,11 @@ export interface Message {
     readonly rawType: string;
     readonly reply: any;
 }
+
+export interface PlatformState {
+    enabled: boolean;
+    connection_state: "not_connected" | "connecting" | "connected";
+    icon: string;
+    type_id: string;
+    viewers: number;
+}

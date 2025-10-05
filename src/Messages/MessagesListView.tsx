@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatedDummyTextView, IndicatorType } from "../AnimatedDummyTextView";
 import { MessageView } from "./MessageView";
-import { Message } from "./Interfaces";
+import { Message } from "../ProtocolInterfaces";
 import CSS from "csstype";
 
 interface MessagesListViewProps {

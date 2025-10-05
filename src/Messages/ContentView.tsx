@@ -1,4 +1,4 @@
-import { MessageContent } from "./Interfaces"
+import { MessageContent } from "../ProtocolInterfaces"
 
 interface ContentViewProps {
     content: MessageContent;
