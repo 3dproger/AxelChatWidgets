@@ -19,7 +19,7 @@ import {
 } from 'react-device-detect'
 import { useCallback, useEffect, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { AppState, Message, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
+import { AppState, ClientSettings, Message, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
@@ -84,7 +84,7 @@ export function RootView() {
     const [appState, setAppState] = useState<AppState>({
         viewers: -1,
     });
-    const [settings, setSettings] = useState({
+    const [settings, setSettings] = useState<ClientSettings>({
         widgets: {
             messages: {
                 hideTimeout: 0,
