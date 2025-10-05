@@ -63,3 +63,7 @@ export interface PlatformState {
     type_id: string;
     viewers: number;
 }
+
+export interface AppState {
+    viewers: number;
+}

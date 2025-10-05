@@ -21,7 +21,7 @@ import { useCallback, useEffect, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { Message } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
-import { ServicesListView } from "./States/ServicesListView";
+import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 
 function getWebSocketUrl(searchParams: URLSearchParams): string {
@@ -294,8 +294,8 @@ export function RootView() {
                 />);
         }
         else if (widgetType === "states") {
-            return (<ServicesListView
-                services={services}
+            return (<PlatformStateListView
+                platformsStates={services}
                 appState={appState}
                 hidePlatformIconIfCountIsUnknown={settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
         }
