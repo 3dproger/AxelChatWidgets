@@ -146,13 +146,14 @@ export const RootView = () => {
         }
 
         const protocolMessage = JSON.parse(lastMessage.data);
-
-        if (config.eventsLogging) {
-            console.log(protocolMessage);
-        }
-
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
+
+        if (config.eventsLogging) {
+            if (protocolMessageType !== "PING" && protocolMessageType !== "PONG") {
+                console.log(protocolMessage);
+            }
+        }
 
         if (protocolMessageType === "NEW_MESSAGES_RECEIVED") {
             setMessages((prev) => {
