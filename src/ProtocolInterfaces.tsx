@@ -67,3 +67,17 @@ export interface PlatformState {
 export interface AppState {
     viewers: number;
 }
+
+export interface ProtocolMessage {
+    type: string;
+    data: any;
+}
+
+export interface StatesChangedData {
+    viewers: number;
+    services: PlatformState[];
+}
+
+export interface AppState {
+    viewers: number;
+}

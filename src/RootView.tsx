@@ -19,12 +19,12 @@ import {
 } from 'react-device-detect'
 import { useCallback, useEffect, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { Message } from "./ProtocolInterfaces";
+import { AppState, Message, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 
-function getWebSocketUrl(searchParams: URLSearchParams): string {
+function getWebSocketUrl(searchParams: URLSearchParams) {
     const param = searchParams.get("ws-url");
     if (param) {
         return param;
@@ -33,7 +33,7 @@ function getWebSocketUrl(searchParams: URLSearchParams): string {
     return "ws://" + window.location.hostname + ":" + window.location.port + "/";
 }
 
-function getEventLogging(searchParams: URLSearchParams): boolean {
+function getEventLogging(searchParams: URLSearchParams) {
     const param = searchParams.get("event-logging");
     if (param)
     {
@@ -43,7 +43,7 @@ function getEventLogging(searchParams: URLSearchParams): boolean {
     return false;
 }
 
-function getDeviceType(): string {
+function getDeviceType() {
     if (isDesktop) { return "DESKTOP" }
     if (isMobileOnly) {return "MOBILE" }
     if (isTablet) { return "TABLET" }
@@ -54,7 +54,7 @@ function getDeviceType(): string {
     return "UNKNOWN"
 }
 
-function getDeviceName(): string {
+function getDeviceName() {
     if (isMobile) {
         return mobileVendor + ", " + mobileModel
     }
@@ -62,7 +62,7 @@ function getDeviceName(): string {
     return ""
 }
 
-function getNavigatorLanguage(): string {
+function getNavigatorLanguage() {
     if (navigator.languages && navigator.languages.length > 0) {
         return navigator.languages[0];
     }
@@ -76,8 +76,8 @@ export function RootView() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [messagesMap, setMessagesMap] = useState(new Map());
     const [selectedMessages, setSelectedMessages] = useState<Message[]>([]);
-    const [services, setServices] = useState([]);
-    const [appState, setState] = useState({
+    const [services, setServices] = useState<PlatformState[]>([]);
+    const [appState, setAppState] = useState<AppState>({
         viewers: -1,
     });
     const [settings, setSettings] = useState({
@@ -153,7 +153,8 @@ export function RootView() {
             return;
         }
 
-        const protocolMessage = JSON.parse(lastMessage.data);
+
+        const protocolMessage = JSON.parse(lastMessage.data) as ProtocolMessage;
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
@@ -190,8 +191,9 @@ export function RootView() {
             });
         }
         else if (protocolMessageType === "STATES_CHANGED") {
-            setServices(data.services);
-            setState(data);
+            const specData = data as StatesChangedData;
+            setServices(specData.services);
+            setAppState(specData as AppState);
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
             for (const message of data.messages) {
