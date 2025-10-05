@@ -18,3 +18,16 @@ export interface MessageUser {
     serviceBadge: string;
     serviceId: string;
 }
+
+export interface MessageContentData {
+    text?: string;
+    url?: string;
+    html?: string;
+}
+
+export interface MessageContent {
+    type: "text" | "image" | "hyperlink" | "html";
+    htmlClassName: string;
+    data: MessageContentData;
+    style: object;
+}
