@@ -175,7 +175,7 @@ body:hover {
 .time,
 .date,
 .avatar {
-  /*display: none;*/
+  display: none;
 }
 
 .bigText {
