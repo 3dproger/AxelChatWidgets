@@ -1,19 +1,19 @@
-import { Tag } from "./Interfaces"
+import { MessageUserTag } from "./Interfaces"
 
 interface TagViewProps {
-  tag: Tag;
+    tag: MessageUserTag;
 }
 
 export function TagView({ tag }: TagViewProps) {
-  return (
-    <span
-        className="tag"
-        style={{
-            backgroundColor: tag.backgroundColor,
-            color: tag.textColor,
-        }}
+    return (
+        <span
+            className="tag"
+            style={{
+                backgroundColor: tag.backgroundColor,
+                color: tag.textColor,
+            }}
         >
-        {tag.text}
-    </span>
-  );
+            {tag.text}
+        </span>
+    );
 }

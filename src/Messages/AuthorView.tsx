@@ -1,28 +1,19 @@
-import React from "react";
-import PropTypes from "prop-types";
 import { TagView } from "./TagView";
+import { MessageUser } from "./Interfaces"
 
-export class AuthorView extends React.Component {
-    static propTypes = {
-        author: PropTypes.object.isRequired,
-        showPlatformIcon: PropTypes.bool,
-    };
+interface AuthorViewProps {
+    author: MessageUser;
+    showPlatformIcon: boolean;
+}
 
-    static defaultProps = {
-        author: null,
-        showPlatformIcon: true,
-    };
+export function AuthorView({author, showPlatformIcon} : AuthorViewProps) {
+    if (!author) {
+        return <span className="null_author">NULL_AUTHOR</span>;
+    }
 
-    render() {
-        const author = this.props.author;
-
-        if (!author) {
-            return <span className="null_author">NULL_AUTHOR</span>;
-        }
-
-        return (
+    return (
         <span className="author">
-            {this.props.showPlatformIcon &&
+            {showPlatformIcon &&
                 <span className="badges">
                     <img
                         className="badgeServiceIcon"
@@ -72,6 +63,5 @@ export class AuthorView extends React.Component {
                 ))}
             </span>
         </span>
-        )
-    }
+    )
 }
