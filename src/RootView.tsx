@@ -1,9 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import useWebSocket, { ReadyState } from 'react-use-websocket';
-import { useSearchParams } from 'react-router-dom';
-import { MessagesListView } from './Messages/MessagesListView';
-import { ServicesListView } from './States/ServicesListView';
-import { AnimatedDummyTextView, IndicatorType } from './AnimatedDummyTextView'
+import { useSearchParams } from "react-router-dom";
+import packageJson from '../package.json';
 import {
     osName,
     osVersion,
@@ -20,24 +16,26 @@ import {
     isEmbedded,
     mobileVendor,
     mobileModel,
-}
-    from 'react-device-detect'
+} from 'react-device-detect'
+import { useCallback, useEffect, useState } from "react";
+import useWebSocket, { ReadyState } from "react-use-websocket";
+import { Message } from "./Messages/Interfaces";
+import { MessagesListView } from "./Messages/MessagesListView";
+import { ServicesListView } from "./States/ServicesListView";
+import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 
-import packageJson from '../package.json';
-
-function getWebSocketUrl(searchParams) {
+function getWebSocketUrl(searchParams: URLSearchParams): string {
     const param = searchParams.get("ws-url");
-    if (typeof param === "string")
-    {
+    if (param) {
         return param;
     }
 
     return "ws://" + window.location.hostname + ":" + window.location.port + "/";
 }
 
-function getEventLogging(searchParams) {
+function getEventLogging(searchParams: URLSearchParams): boolean {
     const param = searchParams.get("event-logging");
-    if (typeof param === "string")
+    if (param)
     {
         return param.toLowerCase() === "true" ? true : false;
     }
@@ -45,7 +43,7 @@ function getEventLogging(searchParams) {
     return false;
 }
 
-function getDeviceType() {
+function getDeviceType(): string {
     if (isDesktop) { return "DESKTOP" }
     if (isMobileOnly) {return "MOBILE" }
     if (isTablet) { return "TABLET" }
@@ -56,7 +54,7 @@ function getDeviceType() {
     return "UNKNOWN"
 }
 
-function getDeviceName() {
+function getDeviceName(): string {
     if (isMobile) {
         return mobileVendor + ", " + mobileModel
     }
@@ -64,20 +62,20 @@ function getDeviceName() {
     return ""
 }
 
-const getNavigatorLanguage = () => {
-    if (navigator.languages && navigator.languages.length) {
-      return navigator.languages[0];
-    } else {
-      return navigator.userLanguage || navigator.language || navigator.browserLanguage || 'en';
+function getNavigatorLanguage(): string {
+    if (navigator.languages && navigator.languages.length > 0) {
+        return navigator.languages[0];
     }
+    
+    return navigator.language || 'en';
   }
 
-export const RootView = () => {
+export function RootView() {
     const [searchParams] = useSearchParams();
     const [authorsMap] = useState(new Map());
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState<Message[]>([]);
     const [messagesMap, setMessagesMap] = useState(new Map());
-    const [selectedMessages, setSelectedMessages] = useState([]);
+    const [selectedMessages, setSelectedMessages] = useState<Message[]>([]);
     const [services, setServices] = useState([]);
     const [appState, setState] = useState({
         viewers: -1,
@@ -100,10 +98,10 @@ export const RootView = () => {
         eventsLogging: getEventLogging(searchParams)
     });
 
-    const [, updateState] = React.useState();
-    const forceUpdate = React.useCallback(() => updateState({}), []);
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState(undefined), []);
 
-    const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParams), {
+        const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParams), {
         onOpen: () => {
             if (config.eventsLogging) {
                 console.log('Opened socket');
@@ -140,7 +138,7 @@ export const RootView = () => {
         shouldReconnect: (closeEvent) => true,
     });
 
-    function removeMessages(ids) {
+    function removeMessages(ids: string[]) {
         for (const i in ids) {
             const id = ids[i];
             messagesMap.delete(id);
@@ -182,7 +180,9 @@ export const RootView = () => {
 
                     for (let i = 0; i < needToDeleteCount; i++) {
                         const message = prev.shift();
-                        messagesMap.delete(message.id);
+                        if (message) {
+                            messagesMap.delete(message.id);
+                        }
                     }
                 }
 
@@ -263,7 +263,7 @@ export const RootView = () => {
         }
 
     }, [lastMessage, setMessages]);
-    
+
     const connectionStatus = {
         [ReadyState.CONNECTING]: 'Connecting...',
         [ReadyState.OPEN]: 'Open',
@@ -310,6 +310,4 @@ export const RootView = () => {
                 text={connectionStatus}/>
         )
     }
-};
-
-export default RootView;
+}
