@@ -140,6 +140,16 @@ export const RootView = () => {
         shouldReconnect: (closeEvent) => true,
     });
 
+    function removeMessages(ids) {
+        for (const i in ids) {
+            const id = ids[i];
+            messagesMap.delete(id);
+            setMessages((prev) => {
+                return prev.filter(message => (message.id !== id));
+            });
+        }
+    }
+
     useEffect(() => {
         if (!lastMessage) {
             return;
@@ -196,6 +206,15 @@ export const RootView = () => {
                 }
             }
             forceUpdate();
+        }
+        else if (protocolMessageType === "MESSAGES_REMOVED") {
+            let ids = [];
+            const messages = data.messages;
+            for (const i in messages) {
+                const message = messages[i]
+                ids.push(message.id);
+            }
+            removeMessages(ids);
         }
         else if (protocolMessageType === "MESSAGES_SELECTED") {
             setSelectedMessages((prev) => {
