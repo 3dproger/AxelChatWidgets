@@ -2,8 +2,7 @@ import React, { ReactElement, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { PlatformStateView } from './PlatformStateView';
 import './../styles.css'
-import { PlatformState } from '../ProtocolInterfaces';
-import { AppContext } from '../Contexts/AppContext';
+import { AppContext, PlatformState } from '../Contexts/AppContext';
 
 function getTotalViewersView(viewers: number, visiblePlatformsCount: number) {
     if (visiblePlatformsCount === 1) {
@@ -54,12 +53,12 @@ function getPlatformDisplayStyle(state: PlatformState, hidePlatformIconIfCountIs
 }
 
 interface ServicesListViewProps {
-    platformsStates: PlatformState[];
     hidePlatformIconIfCountIsUnknown: boolean;
 }
 
-export function PlatformStateListView({platformsStates, hidePlatformIconIfCountIsUnknown} : ServicesListViewProps) {
+export function PlatformStateListView({hidePlatformIconIfCountIsUnknown} : ServicesListViewProps) {
     const appContext = useContext(AppContext);
+    const platformsStates = appContext.hostApp.services;
     const visiblePlatformsCount = getVisiblePlatformsCount(platformsStates, hidePlatformIconIfCountIsUnknown);
     
     return (

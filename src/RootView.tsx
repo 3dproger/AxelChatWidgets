@@ -17,10 +17,10 @@ import {
     mobileVendor,
     mobileModel,
 } from 'react-device-detect'
-import { AppContext, parseSearchParams } from "./Contexts/AppContext";
+import { AppContext, HostAppState, parseSearchParams } from "./Contexts/AppContext";
 import { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { Message, GenericMessagesMessageData, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
+import { Message, GenericMessagesMessageData, ProtocolMessage } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
@@ -53,7 +53,6 @@ export function RootView() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [messagesMap, setMessagesMap] = useState(new Map<string, Message>());
     const [selectedMessages, setSelectedMessages] = useState<Message[]>([]);
-    const [services, setServices] = useState<PlatformState[]>([]);
 
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
     const [, forceUpdate] = useReducer(x => x + 1, 0);
@@ -148,9 +147,7 @@ export function RootView() {
             });
         }
         else if (protocolMessageType === "STATES_CHANGED") {
-            const specData = data as StatesChangedData;
-            setServices(specData.services);
-            appContext.hostApp.viewers = specData.viewers;
+            appContext.hostApp = data;
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
             const specData = data as GenericMessagesMessageData;
@@ -258,7 +255,6 @@ export function RootView() {
         }
         else if (widgetType === "states") {
             return (<PlatformStateListView
-                platformsStates={services}
                 hidePlatformIconIfCountIsUnknown={appContext.settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
         }
         else {

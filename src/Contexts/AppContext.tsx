@@ -46,8 +46,17 @@ function getDefaultLocale() {
     return navigator.language || 'en';
 }
 
+export interface PlatformState {
+    enabled: boolean;
+    connection_state: "not_connected" | "connecting" | "connected";
+    icon: string;
+    type_id: string;
+    viewers: number;
+}
+
 export interface HostAppState {
     viewers: number;
+    services: PlatformState[];
 }
 
 interface AppContextInterface {
@@ -78,5 +87,6 @@ export const AppContext = createContext<AppContextInterface>({
     },
     hostApp: {
         viewers: -1,
+        services: [],
     }
 });

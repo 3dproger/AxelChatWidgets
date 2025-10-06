@@ -56,22 +56,9 @@ export interface Message {
     readonly reply: any;
 }
 
-export interface PlatformState {
-    enabled: boolean;
-    connection_state: "not_connected" | "connecting" | "connected";
-    icon: string;
-    type_id: string;
-    viewers: number;
-}
-
 export interface ProtocolMessage {
     type: string;
     data: any;
-}
-
-export interface StatesChangedData {
-    viewers: number;
-    services: PlatformState[];
 }
 
 export interface GenericMessagesMessageData {

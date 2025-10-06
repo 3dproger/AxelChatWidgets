@@ -1,5 +1,4 @@
-import { PlatformState } from "../ProtocolInterfaces"
-
+import { PlatformState } from "../Contexts/AppContext";
 interface PlatformStateViewProps {
     platformState: PlatformState;
 }
