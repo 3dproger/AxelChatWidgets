@@ -25,12 +25,6 @@ import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 
-export interface SearchParamsData {
-    eventsLogging: boolean;
-    wsUrl: string;
-    widget: string;
-}
-
 function getDeviceType() {
     if (isDesktop) { return "DESKTOP" }
     if (isMobileOnly) {return "MOBILE" }
