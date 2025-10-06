@@ -52,13 +52,10 @@ function getPlatformDisplayStyle(state: PlatformState, hidePlatformIconIfCountIs
     return "none";
 }
 
-interface ServicesListViewProps {
-    hidePlatformIconIfCountIsUnknown: boolean;
-}
-
-export function PlatformStateListView({hidePlatformIconIfCountIsUnknown} : ServicesListViewProps) {
+export function PlatformStateListView() {
     const appContext = useContext(AppContext);
     const platformsStates = appContext.hostApp.services;
+    const hidePlatformIconIfCountIsUnknown = appContext.settings.widgets.states.hidePlatformIconIfCountIsUnknown;
     const visiblePlatformsCount = getVisiblePlatformsCount(platformsStates, hidePlatformIconIfCountIsUnknown);
     
     return (

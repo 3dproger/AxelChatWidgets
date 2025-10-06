@@ -254,8 +254,7 @@ export function RootView() {
                 />);
         }
         else if (widgetType === "states") {
-            return (<PlatformStateListView
-                hidePlatformIconIfCountIsUnknown={appContext.settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
+            return (<PlatformStateListView/>);
         }
         else {
             let text: string;
