@@ -20,7 +20,6 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
             return;
         }
 
-        setAutoscrollEnabled(true);
         if (lastElement) {
             lastElement.scrollIntoView({ behavior: "smooth" });
         }
@@ -49,7 +48,7 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
         lastScrollY.current = scrollY;
 	};
 
-  window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     const style: React.CSSProperties = {
         overflowY: 'auto',
@@ -71,7 +70,7 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
             />
 
             {!autoscrollEnabled && 
-                <FloatButton onClick={() => {scrollToBottomIfEnabled(true)}} icon={<ArrowDownOutlined />} type="primary" style={{ insetInlineEnd: "50%" }} />
+                <FloatButton onClick={() => {setAutoscrollEnabled(true);}} icon={<ArrowDownOutlined />} type="primary" style={{ insetInlineEnd: "50%" }} />
             }
         </div>
     );
