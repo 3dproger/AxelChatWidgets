@@ -85,7 +85,7 @@ function getNavigatorLanguage() {
 
 export function RootView() {
     const [searchParamsRaw] = useSearchParams();
-    const [searchParams] = useState<SearchParamsData>(parseSearchParams(searchParamsRaw));
+    const searchParams = parseSearchParams(searchParamsRaw);
 
     const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState<Message[]>([]);
