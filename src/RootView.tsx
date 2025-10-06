@@ -37,14 +37,14 @@ function getWebSocketUrl(searchParams: URLSearchParams) {
     return "ws://" + window.location.hostname + ":" + window.location.port + "/";
 }
 
-function getEventLogging(searchParams: URLSearchParams) {
-    const param = searchParams.get("event-logging");
-    if (param)
-    {
-        return param.toLowerCase() === "true" ? true : false;
-    }
+function parseSearchParams(raw: URLSearchParams): SearchParamsData {
+    let result: SearchParamsData = {
+        eventsLogging: false,
+    };
 
-    return false;
+    result.eventsLogging = raw.get("event-logging") === "true";
+
+    return result;
 }
 
 function getDeviceType() {
@@ -75,7 +75,9 @@ function getNavigatorLanguage() {
   }
 
 export function RootView() {
-    const [searchParams] = useSearchParams();
+    const [searchParamsRaw] = useSearchParams();
+    const [searchParams] = useState<SearchParamsData>(parseSearchParams(searchParamsRaw));
+
     const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState<Message[]>([]);
     const [messagesMap, setMessagesMap] = useState(new Map<string, Message>());
@@ -98,16 +100,13 @@ export function RootView() {
         },
         locale: getNavigatorLanguage(),
     });
-    const [config] = useState<SearchParamsData>({
-        eventsLogging: getEventLogging(searchParams)
-    });
 
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParams), {
+    const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParamsRaw), {
     onOpen: () => {
-        if (config.eventsLogging) {
+        if (searchParams.eventsLogging) {
             console.log('Opened socket');
         }
 
@@ -134,7 +133,7 @@ export function RootView() {
                 },
                 info: {
                     type: "WIDGET",
-                    name: searchParams.get("widget"),
+                    name: searchParamsRaw.get("widget"),
                 },
             },
         }));},
@@ -160,7 +159,7 @@ export function RootView() {
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
-        if (config.eventsLogging) {
+        if (searchParams.eventsLogging) {
             if (protocolMessageType !== "PING" && protocolMessageType !== "PONG") {
                 console.log(protocolMessage);
             }
@@ -205,7 +204,7 @@ export function RootView() {
                 let prevMessage = messagesMap.get(message.id);
                 if (prevMessage) {
 
-                    if (config.eventsLogging) {
+                    if (searchParams.eventsLogging) {
                         console.log("changed ", prevMessage, " to ", message);
                     }
 
@@ -283,7 +282,7 @@ export function RootView() {
     }[readyState];
 
     if (readyState === ReadyState.OPEN) {
-        const widgetType = searchParams.get("widget");
+        const widgetType = searchParamsRaw.get("widget");
 
         if (widgetType === "messages") {
             return (<MessagesListView
