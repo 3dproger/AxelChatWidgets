@@ -15,7 +15,11 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
     const [lastElement, setLastElement] = useState<HTMLDivElement | null>();
     const lastScrollY = useRef(0);
 
-    const scrollToBottom = useCallback(() => {
+    const scrollToBottomIfEnabled = useCallback((force: boolean) => {
+        if (!force && !autoscrollEnabled) {
+            return;
+        }
+
         setAutoscrollEnabled(true);
         if (lastElement) {
             lastElement.scrollIntoView({ behavior: "smooth" });
@@ -23,13 +27,11 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
         else {
             console.warn("No last element")
         }
-    }, [lastElement]);
+    }, [autoscrollEnabled, lastElement]);
 
     useEffect(() => {
-        if (autoscrollEnabled) {
-            scrollToBottom();
-        }
-    }, [lastElement, autoscrollEnabled, children, scrollToBottom]);
+        scrollToBottomIfEnabled(false);
+    }, [lastElement, autoscrollEnabled, children, scrollToBottomIfEnabled]);
 
     const handleScroll = (event: Event) => {
         const scrollY = window.scrollY;
@@ -69,7 +71,7 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
             />
 
             {!autoscrollEnabled && 
-                <FloatButton onClick={scrollToBottom} icon={<ArrowDownOutlined />} type="primary" style={{ insetInlineEnd: "50%" }} />
+                <FloatButton onClick={() => {scrollToBottomIfEnabled(true)}} icon={<ArrowDownOutlined />} type="primary" style={{ insetInlineEnd: "50%" }} />
             }
         </div>
     );
