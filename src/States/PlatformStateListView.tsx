@@ -1,8 +1,9 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { PlatformStateView } from './PlatformStateView';
 import './../styles.css'
-import { AppState, PlatformState } from '../ProtocolInterfaces';
+import { PlatformState } from '../ProtocolInterfaces';
+import { AppContext } from '../Contexts/AppContext';
 
 function getTotalViewersView(viewers: number, visiblePlatformsCount: number) {
     if (visiblePlatformsCount === 1) {
@@ -54,12 +55,13 @@ function getPlatformDisplayStyle(state: PlatformState, hidePlatformIconIfCountIs
 
 interface ServicesListViewProps {
     platformsStates: PlatformState[];
-    appState: AppState;
     hidePlatformIconIfCountIsUnknown: boolean;
 }
 
-export function PlatformStateListView({platformsStates, appState, hidePlatformIconIfCountIsUnknown} : ServicesListViewProps) {
+export function PlatformStateListView({platformsStates, hidePlatformIconIfCountIsUnknown} : ServicesListViewProps) {
+    const appContext = useContext(AppContext);
     const visiblePlatformsCount = getVisiblePlatformsCount(platformsStates, hidePlatformIconIfCountIsUnknown);
+    
     return (
         <span>
             {platformsStates.map((state, idx) => (
@@ -71,7 +73,7 @@ export function PlatformStateListView({platformsStates, appState, hidePlatformIc
                 </span>
             ))}
 
-            {getTotalViewersView(appState.viewers, visiblePlatformsCount)}
+            {getTotalViewersView(appContext.hostApp.viewers, visiblePlatformsCount)}
         </span>
     )
 }

@@ -46,9 +46,14 @@ function getDefaultLocale() {
     return navigator.language || 'en';
 }
 
+export interface HostAppState {
+    viewers: number;
+}
+
 interface AppContextInterface {
     searchParams: SearchParams;
     settings: AppSettings;
+    hostApp: HostAppState;
 }
 
 export const AppContext = createContext<AppContextInterface>({
@@ -70,5 +75,8 @@ export const AppContext = createContext<AppContextInterface>({
             hideConnectionStatusWhenConnected: false,
         },
         locale: getDefaultLocale(),
+    },
+    hostApp: {
+        viewers: -1,
     }
 });

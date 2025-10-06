@@ -64,10 +64,6 @@ export interface PlatformState {
     viewers: number;
 }
 
-export interface AppState {
-    viewers: number;
-}
-
 export interface ProtocolMessage {
     type: string;
     data: any;
@@ -80,8 +76,4 @@ export interface StatesChangedData {
 
 export interface GenericMessagesMessageData {
     messages: Message[];
-}
-
-export interface AppState {
-    viewers: number;
 }
