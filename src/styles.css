@@ -215,3 +215,7 @@ body {
 		opacity: 1;
 	}
 }
+
+.on-hover-cursor-pointer:hover {
+  cursor: pointer;
+}

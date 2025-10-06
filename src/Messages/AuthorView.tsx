@@ -17,8 +17,19 @@ export function AuthorView({author} : AuthorViewProps) {
     const showPlatformIcon = appContext.settings.widgets.messages.showPlatformIcon;
     const showAvatars = appContext.settings.widgets.messages.showAvatar;
 
+    function clicked() {
+        appContext.ws?.sendJsonMessage({
+            type: "SHOW_USER_INFO_REQUESTED",
+            data: {
+                userId: author.id,
+            }
+        });
+    }
+
     return (
-        <span className="author">
+        <span className="author on-hover-cursor-pointer"
+            onClick={clicked}
+        >
             {showPlatformIcon &&
                 <span className="badges">
                     <img
