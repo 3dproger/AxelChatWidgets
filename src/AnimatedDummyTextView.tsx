@@ -3,49 +3,37 @@ import PropTypes from 'prop-types';
 import { Spin } from 'antd';
 import { LoadingOutlined, CheckCircleOutlined, ApiOutlined } from '@ant-design/icons';
 
-export const IndicatorType = {
-    TextOnly: "TextOnly",
-    Success: "Success",
-    Loading: "Loading",
-    Critical: "Critical"
-};
+interface AnimatedDummyTextViewProps {
+    type: "TextOnly" | "Success" | "Loading" | "Critical" | undefined;
+    text: string;
+}
 
-export class AnimatedDummyTextView extends React.Component {
-    static propTypes = {
-        type: PropTypes.string,
-        text: PropTypes.string.isRequired,
+export function AnimatedDummyTextView({type, text}: AnimatedDummyTextViewProps) {
+    if (!type) {
+        type = "Loading";
     }
 
-    static defaultProps = {
-        type: IndicatorType.Loading,
-        text: "TEXT",
-    }
-
-    render() {
-        const type = this.props.type;
-
-        return (
-        <>
+    return (<>
         <Spin
             style={{"marginRight": "4px"}}
             indicator={<LoadingOutlined style={{
                 fontSize: 24,
                 verticalAlign: "middle",
-                display: (type === IndicatorType.Loading ? "block" : "none"),
+                display: (type === "Loading" ? "block" : "none"),
             }} spin />}/>
 
         <CheckCircleOutlined style={{
             fontSize: 24,
             verticalAlign: "middle",
             color: "lime",
-            display: (type === IndicatorType.Success ? "inline" : "none"),
+            display: (type === "Success" ? "inline" : "none"),
         }} />
 
         <ApiOutlined style={{
             fontSize: 32,
             verticalAlign: "middle",
             color: "red",
-            display: (type === IndicatorType.Critical ? "inline" : "none"),
+            display: (type === "Critical" ? "inline" : "none"),
         }} />
 
         <span
@@ -53,8 +41,6 @@ export class AnimatedDummyTextView extends React.Component {
             style={{
                 marginLeft: "6px",
             }}
-        >{this.props.text}</span>
-        </>
-        )
-    }
+        >{text}</span>
+    </>)
 }

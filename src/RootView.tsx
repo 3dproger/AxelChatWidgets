@@ -23,7 +23,7 @@ import useWebSocket, { ReadyState } from "react-use-websocket";
 import { Message, GenericMessagesMessageData, ProtocolMessage } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
-import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
+import { AnimatedDummyTextView } from "./AnimatedDummyTextView";
 
 function getDeviceType() {
     if (isDesktop) { return "DESKTOP" }
@@ -271,7 +271,7 @@ export function RootView() {
     else {
         return (
             <AnimatedDummyTextView
-                type={readyState === ReadyState.CONNECTING ? IndicatorType.Loading : IndicatorType.Critical}
+                type={readyState === ReadyState.CONNECTING ? "Loading" : "Critical"}
                 text={connectionStatus}/>
         )
     }

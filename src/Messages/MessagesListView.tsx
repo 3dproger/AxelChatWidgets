@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { AnimatedDummyTextView, IndicatorType } from "../AnimatedDummyTextView";
+import { AnimatedDummyTextView } from "../AnimatedDummyTextView";
 import { MessageView } from "./MessageView";
 import { Message } from "../ProtocolInterfaces";
 import CSS from "csstype";
@@ -31,7 +31,7 @@ export function MessagesListView({messages, hideTimeout, hideConnectionStatusWhe
 
         return (
             <AnimatedDummyTextView
-                type={IndicatorType.Success}
+                type="Success"
                 text="Connected!"
             />
         );
