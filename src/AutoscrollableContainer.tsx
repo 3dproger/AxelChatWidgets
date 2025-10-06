@@ -58,7 +58,6 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
         <div
             ref={containerRef}
             style={style}
-            //onScroll={handleScroll}
             >
             {children}
 
