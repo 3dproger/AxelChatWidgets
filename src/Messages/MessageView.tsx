@@ -80,9 +80,15 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
         ...getMessageExtraStyle(message),
     }
 
+    let className = "message";
+    className += " fade-in";
+    if (needToHide) {
+        className += " hiddenFadeOut";
+    }
+
     return (
         <span
-            className={"message" + (needToHide ? " hiddenFadeOut" : "")}
+            className={className}
             style={style}>
             
             <TimeView timeIso={message.publishedAt}/>
