@@ -17,7 +17,8 @@ import {
     mobileVendor,
     mobileModel,
 } from 'react-device-detect'
-import { useCallback, useEffect, useReducer, useState } from "react";
+import { AppContext, parseSearchParams } from "./Contexts/AppContext";
+import { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
 import { AppState, ClientSettings, Message, GenericMessagesMessageData, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
@@ -28,32 +29,6 @@ export interface SearchParamsData {
     eventsLogging: boolean;
     wsUrl: string;
     widget: string;
-}
-
-function parseSearchParams(raw: URLSearchParams): SearchParamsData {
-    let result: SearchParamsData = {
-        eventsLogging: false,
-        wsUrl: "ws://" + window.location.hostname + ":" + window.location.port + "/",
-        widget: "",
-    };
-
-    result.eventsLogging = raw.get("event-logging") === "true";
-
-    {
-        const param = raw.get("ws-url");
-        if (param) {
-            result.wsUrl = param;
-        }
-    }
-
-    {
-        const param = raw.get("widget");
-        if (param) {
-            result.widget = param;
-        }
-    }
-
-    return result;
 }
 
 function getDeviceType() {
@@ -85,7 +60,8 @@ function getNavigatorLanguage() {
 
 export function RootView() {
     const [searchParamsRaw] = useSearchParams();
-    const searchParams = parseSearchParams(searchParamsRaw);
+    const appContext = useContext(AppContext);
+    parseSearchParams(searchParamsRaw, appContext.searchParams);
 
     const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState<Message[]>([]);
@@ -113,9 +89,9 @@ export function RootView() {
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const { sendMessage, lastMessage, readyState } = useWebSocket(searchParams.wsUrl, {
+    const { sendMessage, lastMessage, readyState } = useWebSocket(appContext.searchParams.wsUrl, {
     onOpen: () => {
-        if (searchParams.eventsLogging) {
+        if (appContext.searchParams.eventsLogging) {
             console.log('Opened socket');
         }
 
@@ -142,7 +118,7 @@ export function RootView() {
                 },
                 info: {
                     type: "WIDGET",
-                    name: searchParams.widget,
+                    name: appContext.searchParams.widget,
                 },
             },
         }));},
@@ -168,7 +144,7 @@ export function RootView() {
         const protocolMessageType = protocolMessage.type;
         const data = protocolMessage.data;
 
-        if (searchParams.eventsLogging) {
+        if (appContext.searchParams.eventsLogging) {
             if (protocolMessageType !== "PING" && protocolMessageType !== "PONG") {
                 console.log(protocolMessage);
             }
@@ -213,7 +189,7 @@ export function RootView() {
                 let prevMessage = messagesMap.get(message.id);
                 if (prevMessage) {
 
-                    if (searchParams.eventsLogging) {
+                    if (appContext.searchParams.eventsLogging) {
                         console.log("changed ", prevMessage, " to ", message);
                     }
 
@@ -291,7 +267,7 @@ export function RootView() {
     }[readyState];
 
     if (readyState === ReadyState.OPEN) {
-        const widgetType = searchParams.widget;
+        const widgetType = appContext.searchParams.widget;
 
         if (widgetType === "messages") {
             return (<MessagesListView
@@ -319,11 +295,11 @@ export function RootView() {
         }
         else {
             let text: string;
-            if (searchParams.widget.length === 0) {
+            if (appContext.searchParams.widget.length === 0) {
                 text = "Widget parameter not specified";
             }
             else {
-                text = "Unknown widget '" + searchParams.widget + "'";
+                text = "Unknown widget '" + appContext.searchParams.widget + "'";
             }
 
             return (<span className="errorText">Error: {text}</span>);
