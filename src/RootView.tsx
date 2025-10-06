@@ -20,7 +20,7 @@ import {
 import { AppContext, parseSearchParams } from "./Contexts/AppContext";
 import { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { AppState, ClientSettings, Message, GenericMessagesMessageData, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
+import { AppState, Message, GenericMessagesMessageData, PlatformState, ProtocolMessage, StatesChangedData } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
@@ -44,14 +44,6 @@ function getDeviceName() {
     return ""
 }
 
-function getNavigatorLanguage() {
-    if (navigator.languages && navigator.languages.length > 0) {
-        return navigator.languages[0];
-    }
-    
-    return navigator.language || 'en';
-  }
-
 export function RootView() {
     const [searchParamsRaw] = useSearchParams();
     const appContext = useContext(AppContext);
@@ -64,20 +56,6 @@ export function RootView() {
     const [services, setServices] = useState<PlatformState[]>([]);
     const [appState, setAppState] = useState<AppState>({
         viewers: -1,
-    });
-    const [settings, setSettings] = useState<ClientSettings>({
-        widgets: {
-            messages: {
-                hideTimeout: 0,
-                style: {},
-                showPlatformIcon: true,
-            },
-            states: {
-                hidePlatformIconIfCountIsUnknown: false,
-            },
-            hideConnectionStatusWhenConnected: false,
-        },
-        locale: getNavigatorLanguage(),
     });
 
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
@@ -228,7 +206,7 @@ export function RootView() {
             window.location.reload();
         }
         else if (protocolMessageType === "SETTINGS_UPDATED") {
-            setSettings(data.settings)
+            appContext.settings = data.settings;
         }
         else if (protocolMessageType === "CLEAR_MESSAGES") {
             setMessages((prev) => {
@@ -266,26 +244,26 @@ export function RootView() {
         if (widgetType === "messages") {
             return (<MessagesListView
                 messages={messages}
-                hideTimeout={settings.widgets.messages.hideTimeout}
-                messageStyle={settings.widgets.messages.style}
-                hideConnectionStatusWhenConnected={settings.widgets.hideConnectionStatusWhenConnected}
-                showPlatformIcon={settings.widgets.messages.showPlatformIcon}
+                hideTimeout={appContext.settings.widgets.messages.hideTimeout}
+                messageStyle={appContext.settings.widgets.messages.style}
+                hideConnectionStatusWhenConnected={appContext.settings.widgets.hideConnectionStatusWhenConnected}
+                showPlatformIcon={appContext.settings.widgets.messages.showPlatformIcon}
                 />);
         }
         else if (widgetType === "selected-messages") {
             return (<MessagesListView
                 messages={selectedMessages}
                 hideTimeout={0}
-                messageStyle={settings.widgets.messages.style}
-                hideConnectionStatusWhenConnected={settings.widgets.hideConnectionStatusWhenConnected}
-                showPlatformIcon={settings.widgets.messages.showPlatformIcon}
+                messageStyle={appContext.settings.widgets.messages.style}
+                hideConnectionStatusWhenConnected={appContext.settings.widgets.hideConnectionStatusWhenConnected}
+                showPlatformIcon={appContext.settings.widgets.messages.showPlatformIcon}
                 />);
         }
         else if (widgetType === "states") {
             return (<PlatformStateListView
                 platformsStates={services}
                 appState={appState}
-                hidePlatformIconIfCountIsUnknown={settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
+                hidePlatformIconIfCountIsUnknown={appContext.settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
         }
         else {
             let text: string;

@@ -85,18 +85,3 @@ export interface GenericMessagesMessageData {
 export interface AppState {
     viewers: number;
 }
-
-export interface ClientSettings {
-    locale: string;
-    widgets: {
-        hideConnectionStatusWhenConnected: boolean;
-        states: {
-            hidePlatformIconIfCountIsUnknown: false;
-        }
-        messages: {
-            hideTimeout: number;
-            style: object;
-            showPlatformIcon: boolean;
-        }
-    }
-}
