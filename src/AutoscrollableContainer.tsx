@@ -51,7 +51,6 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
     window.addEventListener('scroll', handleScroll);
 
     const style: React.CSSProperties = {
-        overflowY: 'auto',
         maxHeight: maxHeight,
     };
 
