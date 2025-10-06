@@ -32,7 +32,7 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
         scrollToBottomIfEnabled(false);
     }, [lastElement, autoscrollEnabled, children, scrollToBottomIfEnabled]);
 
-    const handleScroll = (event: Event) => {
+    /*const handleScroll = (event: Event) => {
         const scrollY = window.scrollY;
         const scrollDelta = scrollY - lastScrollY.current;
 
@@ -48,7 +48,7 @@ export function AutoscrollableContainer({ children, maxHeight, autoscrollEnabled
         lastScrollY.current = scrollY;
 	};
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);*/
 
     const style: React.CSSProperties = {
         maxHeight: maxHeight,
