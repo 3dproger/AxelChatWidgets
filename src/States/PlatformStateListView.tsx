@@ -1,5 +1,4 @@
-import React, { ReactElement, useContext } from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 import { PlatformStateView } from './PlatformStateView';
 import './../styles.css'
 import { AppContext, PlatformState } from '../Contexts/AppContext';
