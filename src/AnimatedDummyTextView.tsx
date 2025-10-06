@@ -4,13 +4,13 @@ import { Spin } from 'antd';
 import { LoadingOutlined, CheckCircleOutlined, ApiOutlined } from '@ant-design/icons';
 
 interface AnimatedDummyTextViewProps {
-    type: "TextOnly" | "Success" | "Loading" | "Critical" | undefined;
+    type: "TEXT_ONLY" | "SUCCESS" | "LOADING" | "CRITICAL" | undefined;
     text: string;
 }
 
 export function AnimatedDummyTextView({type, text}: AnimatedDummyTextViewProps) {
     if (!type) {
-        type = "Loading";
+        type = "LOADING";
     }
 
     return (<>
@@ -19,21 +19,21 @@ export function AnimatedDummyTextView({type, text}: AnimatedDummyTextViewProps) 
             indicator={<LoadingOutlined style={{
                 fontSize: 24,
                 verticalAlign: "middle",
-                display: (type === "Loading" ? "block" : "none"),
+                display: (type === "LOADING" ? "block" : "none"),
             }} spin />}/>
 
         <CheckCircleOutlined style={{
             fontSize: 24,
             verticalAlign: "middle",
             color: "lime",
-            display: (type === "Success" ? "inline" : "none"),
+            display: (type === "SUCCESS" ? "inline" : "none"),
         }} />
 
         <ApiOutlined style={{
             fontSize: 32,
             verticalAlign: "middle",
             color: "red",
-            display: (type === "Critical" ? "inline" : "none"),
+            display: (type === "CRITICAL" ? "inline" : "none"),
         }} />
 
         <span

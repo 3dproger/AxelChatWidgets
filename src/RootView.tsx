@@ -271,7 +271,7 @@ export function RootView() {
     else {
         return (
             <AnimatedDummyTextView
-                type={readyState === ReadyState.CONNECTING ? "Loading" : "Critical"}
+                type={readyState === ReadyState.CONNECTING ? "LOADING" : "CRITICAL"}
                 text={connectionStatus}/>
         )
     }

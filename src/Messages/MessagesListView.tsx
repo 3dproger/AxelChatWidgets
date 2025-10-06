@@ -31,7 +31,7 @@ export function MessagesListView({messages, hideTimeout, hideConnectionStatusWhe
 
         return (
             <AnimatedDummyTextView
-                type="Success"
+                type="SUCCESS"
                 text="Connected!"
             />
         );
