@@ -17,7 +17,7 @@ function getTotalViewersView(viewers: number, visiblePlatformsCount: number) {
     )
 }
 
-function isVisiblePlatform(state: PlatformState, hidePlatformIconIfCountIsUnknown: boolean) {
+function isVisiblePlatform(state: PlatformState, hideIfUnknown: boolean) {
     if (!state) {
         console.warn("Platform state is null");
         return false;
@@ -31,21 +31,21 @@ function isVisiblePlatform(state: PlatformState, hidePlatformIconIfCountIsUnknow
         return true;
     }
 
-    return !hidePlatformIconIfCountIsUnknown;
+    return !hideIfUnknown;
 }
 
-function getVisiblePlatformsCount(states: PlatformState[], hidePlatformIconIfCountIsUnknown: boolean) {
+function getVisiblePlatformsCount(states: PlatformState[], hideIfUnknown: boolean) {
     let result = 0;
     for (let i = 0; i < states.length; i++) {
-        if (isVisiblePlatform(states[i], hidePlatformIconIfCountIsUnknown)) {
+        if (isVisiblePlatform(states[i], hideIfUnknown)) {
             result++;
         }
     }
     return result;
 }
 
-function getPlatformDisplayStyle(state: PlatformState, hidePlatformIconIfCountIsUnknown: boolean) {
-    if (isVisiblePlatform(state, hidePlatformIconIfCountIsUnknown)) {
+function getPlatformDisplayStyle(state: PlatformState, hideIfUnknown: boolean) {
+    if (isVisiblePlatform(state, hideIfUnknown)) {
         return "inherit";
     }
     
@@ -55,13 +55,13 @@ function getPlatformDisplayStyle(state: PlatformState, hidePlatformIconIfCountIs
 export function PlatformStateListView() {
     const appContext = useContext(AppContext);
     const platformsStates = appContext.hostApp.services;
-    const hidePlatformIconIfCountIsUnknown = appContext.settings.widgets.states.hidePlatformIconIfCountIsUnknown;
-    const visiblePlatformsCount = getVisiblePlatformsCount(platformsStates, hidePlatformIconIfCountIsUnknown);
+    const hideIfUnknown = appContext.settings.widgets.states.hidePlatformIconIfCountIsUnknown;
+    const visiblePlatformsCount = getVisiblePlatformsCount(platformsStates, hideIfUnknown);
     
     return (
         <span>
             {platformsStates.map((state, idx) => (
-                <span style={{display: getPlatformDisplayStyle(state, hidePlatformIconIfCountIsUnknown)}}>
+                <span style={{display: getPlatformDisplayStyle(state, hideIfUnknown)}}>
                     <PlatformStateView
                         key={idx}
                         platformState={state}
