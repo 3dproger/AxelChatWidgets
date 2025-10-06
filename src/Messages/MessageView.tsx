@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { ContentView } from "./ContentView"
 import { AuthorView } from "./AuthorView";
 import { TimeView } from "./TimeView";
 import { Message } from "../ProtocolInterfaces";
 import CSS from "csstype";
+import { AppContext } from '../Contexts/AppContext';
 
 function isMessageAuthorVisible(message: Message) {
     if (message.markedAsDeleted || message.deletedOnPlatform) {
@@ -32,7 +33,7 @@ function getAuthorContent(message: Message, showPlatformIcon: boolean) {
     </>)
 }
 
-function getMessageStyle(message: Message) : object {
+function getMessageExtraStyle(message: Message) : object {
     if (!message) {
         return {};
     }
@@ -57,11 +58,12 @@ function getMessageStyle(message: Message) : object {
 interface MessageViewProps {
     message: Message;
     hideTimeout: number;
-    messageStyle: object;
-    showPlatformIcon: boolean;
 }
 
-export function MessageView({ message, hideTimeout, messageStyle, showPlatformIcon }: MessageViewProps) {
+export function MessageView({ message, hideTimeout }: MessageViewProps) {
+    const appContext = useContext(AppContext);
+    const messageStyle = appContext.settings.widgets.messages.style;
+    const showPlatformIcon = appContext.settings.widgets.messages.showPlatformIcon;
     const [needToHide, setNeedToHide] = useState<boolean>(false);
 
     if (hideTimeout > 0) {
@@ -76,7 +78,7 @@ export function MessageView({ message, hideTimeout, messageStyle, showPlatformIc
 
     const style = {
         ...messageStyle,
-        ...getMessageStyle(message),
+        ...getMessageExtraStyle(message),
     }
 
     return (

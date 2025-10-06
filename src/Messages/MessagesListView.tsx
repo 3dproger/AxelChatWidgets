@@ -1,18 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AnimatedDummyTextView } from "../AnimatedDummyTextView";
 import { MessageView } from "./MessageView";
 import { Message } from "../ProtocolInterfaces";
-import CSS from "csstype";
+import { AppContext } from "../Contexts/AppContext";
 
 interface MessagesListViewProps {
     messages: Message[];
     hideTimeout: number;
-    hideConnectionStatusWhenConnected: boolean;
-    messageStyle: CSS.Properties;
-    showPlatformIcon: boolean;
 }
 
-export function MessagesListView({messages, hideTimeout, hideConnectionStatusWhenConnected, messageStyle, showPlatformIcon}: MessagesListViewProps) {
+export function MessagesListView({messages, hideTimeout}: MessagesListViewProps) {
+    const appContext = useContext(AppContext);
+    const hideConnectionStatusWhenConnected = appContext.settings.widgets.hideConnectionStatusWhenConnected;
     const [lastElement, setLastElement] = useState<HTMLDivElement | null>();
 
     useEffect(() => {
@@ -46,9 +45,7 @@ export function MessagesListView({messages, hideTimeout, hideConnectionStatusWhe
                 >
                 <MessageView
                     message={message}
-                    messageStyle={messageStyle}
                     hideTimeout={hideTimeout}
-                    showPlatformIcon={showPlatformIcon}
                 />
                 </div>
             ))}

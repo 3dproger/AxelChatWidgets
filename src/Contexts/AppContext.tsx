@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import CSS from "csstype";
 
 interface SearchParams {
     eventsLogging: boolean;
@@ -32,7 +33,7 @@ export interface AppSettings {
         }
         messages: {
             hideTimeout: number;
-            style: object;
+            style: CSS.Properties;
             showPlatformIcon: boolean;
         }
     }

@@ -239,18 +239,12 @@ export function RootView() {
             return (<MessagesListView
                 messages={messages}
                 hideTimeout={appContext.settings.widgets.messages.hideTimeout}
-                messageStyle={appContext.settings.widgets.messages.style}
-                hideConnectionStatusWhenConnected={appContext.settings.widgets.hideConnectionStatusWhenConnected}
-                showPlatformIcon={appContext.settings.widgets.messages.showPlatformIcon}
                 />);
         }
         else if (widgetType === "selected-messages") {
             return (<MessagesListView
                 messages={selectedMessages}
                 hideTimeout={0}
-                messageStyle={appContext.settings.widgets.messages.style}
-                hideConnectionStatusWhenConnected={appContext.settings.widgets.hideConnectionStatusWhenConnected}
-                showPlatformIcon={appContext.settings.widgets.messages.showPlatformIcon}
                 />);
         }
         else if (widgetType === "states") {
