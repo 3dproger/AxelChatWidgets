@@ -1,15 +1,21 @@
 import { TagView } from "./TagView";
 import { MessageUser } from "../ProtocolInterfaces"
+import { AppContext } from "../Contexts/AppContext";
+import { useContext } from "react";
 
 interface AuthorViewProps {
     author: MessageUser;
-    showPlatformIcon: boolean;
 }
 
-export function AuthorView({author, showPlatformIcon} : AuthorViewProps) {
+export function AuthorView({author} : AuthorViewProps) {
+    const appContext = useContext(AppContext);
+
     if (!author) {
         return <span className="null_author">NULL_AUTHOR</span>;
     }
+
+    const showPlatformIcon = appContext.settings.widgets.messages.showPlatformIcon;
+    const showAvatars = appContext.settings.widgets.messages.showAvatar;
 
     return (
         <span className="author">
@@ -22,13 +28,15 @@ export function AuthorView({author, showPlatformIcon} : AuthorViewProps) {
                     />
                 </span>}
 
-            <img
-                className="avatar"
-                alt=""
-                src={author.avatar}
-                height={32}
-                width={32}
-            />
+            {showAvatars &&
+                <img
+                    className="avatar"
+                    alt=""
+                    src={author.avatar}
+                    height={32}
+                    width={32}
+                />}
+
 
             <span className="tags">
                 {author.leftTags.map((tag, idx) => (

@@ -173,8 +173,8 @@ body:hover {
 
 /* Disabled display of some elements by default */
 .time,
-.date,
-.avatar {
+.date
+{
   display: none;
 }
 

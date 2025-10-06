@@ -14,13 +14,13 @@ function isMessageAuthorVisible(message: Message) {
     return true;
 }
 
-function getAuthorContent(message: Message, showPlatformIcon: boolean) {
+function getAuthorContent(message: Message) {
     if (!isMessageAuthorVisible(message)) {
         return <></>
     }
 
     return (<>
-        <AuthorView author={message.author} showPlatformIcon={showPlatformIcon}/>
+        <AuthorView author={message.author}/>
 
         {message.multiline ?
             (
@@ -63,7 +63,6 @@ interface MessageViewProps {
 export function MessageView({ message, hideTimeout }: MessageViewProps) {
     const appContext = useContext(AppContext);
     const messageStyle = appContext.settings.widgets.messages.style;
-    const showPlatformIcon = appContext.settings.widgets.messages.showPlatformIcon;
     const [needToHide, setNeedToHide] = useState<boolean>(false);
 
     if (hideTimeout > 0) {
@@ -88,7 +87,7 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
             
             <TimeView timeIso={message.publishedAt}/>
 
-            {getAuthorContent(message, showPlatformIcon)}
+            {getAuthorContent(message)}
 
             <span className="messageContents">
                 {message.contents.map((content, idx) => (

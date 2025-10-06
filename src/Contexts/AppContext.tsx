@@ -35,6 +35,7 @@ export interface AppSettings {
             hideTimeout: number;
             style: CSS.Properties;
             showPlatformIcon: boolean;
+            showAvatar: boolean;
         }
     }
 }
@@ -78,6 +79,7 @@ export const AppContext = createContext<AppContextInterface>({
                 hideTimeout: 0,
                 style: {},
                 showPlatformIcon: true,
+                showAvatar: true,
             },
             states: {
                 hidePlatformIconIfCountIsUnknown: false,
