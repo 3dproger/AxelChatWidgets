@@ -26,23 +26,23 @@ import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 
 export interface SearchParamsData {
     eventsLogging: boolean;
-}
-
-function getWebSocketUrl(searchParams: URLSearchParams) {
-    const param = searchParams.get("ws-url");
-    if (param) {
-        return param;
-    }
-
-    return "ws://" + window.location.hostname + ":" + window.location.port + "/";
+    wsUrl: string;
 }
 
 function parseSearchParams(raw: URLSearchParams): SearchParamsData {
     let result: SearchParamsData = {
         eventsLogging: false,
+        wsUrl: "ws://" + window.location.hostname + ":" + window.location.port + "/",
     };
 
     result.eventsLogging = raw.get("event-logging") === "true";
+
+    {
+        const param = raw.get("ws-url");
+        if (param) {
+            result.wsUrl = param;
+        }
+    }
 
     return result;
 }
@@ -104,7 +104,7 @@ export function RootView() {
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const { sendMessage, lastMessage, readyState } = useWebSocket(getWebSocketUrl(searchParamsRaw), {
+    const { sendMessage, lastMessage, readyState } = useWebSocket(searchParams.wsUrl, {
     onOpen: () => {
         if (searchParams.eventsLogging) {
             console.log('Opened socket');
