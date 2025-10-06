@@ -27,12 +27,14 @@ import { AnimatedDummyTextView, IndicatorType } from "./AnimatedDummyTextView";
 export interface SearchParamsData {
     eventsLogging: boolean;
     wsUrl: string;
+    widget: string;
 }
 
 function parseSearchParams(raw: URLSearchParams): SearchParamsData {
     let result: SearchParamsData = {
         eventsLogging: false,
         wsUrl: "ws://" + window.location.hostname + ":" + window.location.port + "/",
+        widget: "",
     };
 
     result.eventsLogging = raw.get("event-logging") === "true";
@@ -41,6 +43,13 @@ function parseSearchParams(raw: URLSearchParams): SearchParamsData {
         const param = raw.get("ws-url");
         if (param) {
             result.wsUrl = param;
+        }
+    }
+
+    {
+        const param = raw.get("widget");
+        if (param) {
+            result.widget = param;
         }
     }
 
@@ -133,7 +142,7 @@ export function RootView() {
                 },
                 info: {
                     type: "WIDGET",
-                    name: searchParamsRaw.get("widget"),
+                    name: searchParams.widget,
                 },
             },
         }));},
@@ -282,7 +291,7 @@ export function RootView() {
     }[readyState];
 
     if (readyState === ReadyState.OPEN) {
-        const widgetType = searchParamsRaw.get("widget");
+        const widgetType = searchParams.widget;
 
         if (widgetType === "messages") {
             return (<MessagesListView
@@ -309,7 +318,15 @@ export function RootView() {
                 hidePlatformIconIfCountIsUnknown={settings.widgets.states.hidePlatformIconIfCountIsUnknown} />);
         }
         else {
-            return (<span className="errorText">Error: unknown widget</span>);
+            let text: string;
+            if (searchParams.widget.length === 0) {
+                text = "Widget parameter not specified";
+            }
+            else {
+                text = "Unknown widget '" + searchParams.widget + "'";
+            }
+
+            return (<span className="errorText">Error: {text}</span>);
         }
     }
     else {
