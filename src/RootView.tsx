@@ -57,14 +57,14 @@ export function RootView() {
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
     const [, forceUpdate] = useReducer(x => x + 1, 0);
 
-    const { sendMessage, lastMessage, readyState } = useWebSocket(appContext.searchParams.wsUrl, {
+    appContext.ws = useWebSocket(appContext.searchParams.wsUrl, {
     onOpen: () => {
         if (appContext.searchParams.eventsLogging) {
             console.log('Opened socket');
         }
 
         setMessages([]);
-        sendMessage(JSON.stringify({
+        appContext.ws?.sendMessage(JSON.stringify({
             type: "HELLO",
             data: {
                 client: {
@@ -92,6 +92,8 @@ export function RootView() {
         }));},
         shouldReconnect: (closeEvent) => true,
     });
+
+    const { sendMessage, lastMessage, readyState } = appContext.ws;
 
     function removeMessages(ids: string[]) {
         for (const i in ids) {

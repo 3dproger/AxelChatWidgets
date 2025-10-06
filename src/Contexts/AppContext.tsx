@@ -1,5 +1,6 @@
 import { createContext } from 'react';
 import CSS from "csstype";
+import { WebSocketHook } from 'react-use-websocket/dist/lib/types';
 
 interface SearchParams {
     eventsLogging: boolean;
@@ -65,6 +66,7 @@ interface AppContextInterface {
     searchParams: SearchParams;
     settings: AppSettings;
     hostApp: HostAppState;
+    ws: WebSocketHook | null;
 }
 
 export const AppContext = createContext<AppContextInterface>({
@@ -91,5 +93,6 @@ export const AppContext = createContext<AppContextInterface>({
     hostApp: {
         viewers: -1,
         services: [],
-    }
+    },
+    ws: null,
 });
