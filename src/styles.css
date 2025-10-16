@@ -161,11 +161,6 @@ body {
   margin-right: 8px;
 }
 
-.hiddenFadeOut {
-  opacity: 0;
-  transition: visibility 0s 0.5s, opacity 0.5s linear;
-}
-
 /* Disabled display of some elements by default */
 .time,
 .date
@@ -197,6 +192,11 @@ body {
   height: 50px;
   width: 50px;
   margin-right: 8px;
+}
+
+.fade-out {
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
 }
 
 .fade-in {

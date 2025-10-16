@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ContentView } from "./ContentView"
 import { AuthorView } from "./AuthorView";
 import { TimeView } from "./TimeView";
@@ -65,11 +65,13 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
     const messageStyle = appContext.settings.widgets.messages.style;
     const [needToHide, setNeedToHide] = useState<boolean>(false);
 
-    if (hideTimeout > 0) {
-        setTimeout(() => {
+    useEffect(() => {
+        const timer = setTimeout(() => {
             setNeedToHide(true);
-        }, hideTimeout)
-    }
+        }, hideTimeout);
+
+        return () => clearTimeout(timer);
+    }, [hideTimeout]);
 
     if (!message) {
         return <span className="null_message">NULL_MESSAGE</span>;
@@ -81,9 +83,12 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
     }
 
     let className = "message";
-    className += " fade-in";
+    
     if (needToHide) {
-        className += " hiddenFadeOut";
+        className += " fade-out";
+    }
+    else {
+        className += " fade-in";
     }
 
     return (
