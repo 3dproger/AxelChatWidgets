@@ -66,11 +66,13 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
     const [needToHide, setNeedToHide] = useState<boolean>(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setNeedToHide(true);
-        }, hideTimeout);
+        if (hideTimeout > 0) {
+            const timer = setTimeout(() => {
+                setNeedToHide(true);
+            }, hideTimeout);
 
-        return () => clearTimeout(timer);
+            return () => clearTimeout(timer);
+        }
     }, [hideTimeout]);
 
     if (!message) {
