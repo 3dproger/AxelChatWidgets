@@ -47,6 +47,7 @@ export interface Message {
         readonly bodyBackground?: CSS.DataType.Color;
         readonly bodyBorder?: CSS.DataType.Color;
     };
+    readonly sideLineColor?: CSS.DataType.Color;
     readonly markedAsDeleted: boolean;
     readonly multiline: boolean;
     readonly publishedAt: string;

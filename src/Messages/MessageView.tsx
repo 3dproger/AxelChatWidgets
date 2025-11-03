@@ -84,6 +84,8 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
         ...getMessageExtraStyle(message),
     }
 
+    const sideLineColor = message.sideLineColor || "transparent";
+
     let className = "message";
     
     if (needToHide) {
@@ -97,6 +99,10 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
         <span
             className={className}
             style={style}>
+
+            <span
+                className="messageSideLine"
+                style={{backgroundColor: sideLineColor}}/>
             
             <TimeView timeIso={message.publishedAt}/>
 
