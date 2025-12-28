@@ -43,11 +43,11 @@ export interface Message {
     readonly deletedOnPlatform: boolean;
     readonly edited: boolean;
     readonly eventType: "Message";
-    readonly forcedColors: {
-        readonly bodyBackground?: CSS.DataType.Color;
-        readonly bodyBorder?: CSS.DataType.Color;
+    readonly bodyStyle: {
+        readonly backgroundColor?: CSS.DataType.Color;
+        readonly borderColor?: CSS.DataType.Color;
+        readonly sideLineColor?: CSS.DataType.Color;
     };
-    readonly sideLineColor?: CSS.DataType.Color;
     readonly markedAsDeleted: boolean;
     readonly multiline: boolean;
     readonly publishedAt: string;

@@ -38,18 +38,18 @@ function getMessageExtraStyle(message: Message) : object {
         return {};
     }
 
-    const forcedColors = message.forcedColors;
+    const style = message.bodyStyle;
 
     let r : CSS.Properties = {};
 
-    if (forcedColors.bodyBackground) {
-        r.backgroundColor = forcedColors.bodyBackground
+    if (style.backgroundColor) {
+        r.backgroundColor = style.backgroundColor
     }
 
-    if (forcedColors.bodyBorder) {
+    if (style.borderColor) {
         r.borderWidth = "2px";
         r.borderStyle = "solid";
-        r.borderColor = forcedColors.bodyBorder;
+        r.borderColor = style.borderColor;
     }
 
     return r
@@ -84,7 +84,7 @@ export function MessageView({ message, hideTimeout }: MessageViewProps) {
         ...getMessageExtraStyle(message),
     }
 
-    const sideLineColor = message.sideLineColor || "transparent";
+    const sideLineColor = message.bodyStyle.sideLineColor || "transparent";
 
     let className = "message";
     
