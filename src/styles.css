@@ -28,8 +28,8 @@ body {
 .messageSideLine {
   width: 6px;
   height: 100%;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
   background-color: transparent;
   position: absolute;
   top: 0px;
