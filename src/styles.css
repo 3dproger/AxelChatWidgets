@@ -18,9 +18,11 @@ body {
   border-radius: 5px;
   margin-top: 2px;
   margin-bottom: 2px;
-  width: 100%;
+  width: calc(100% - 2px);
   margin-left: 2px;
   margin-right: 2px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
   /*background-color: rgba(0, 0, 0, 0.65);*/
   /*background: linear-gradient(0.25turn, rgba(0, 0, 0, 0.75), transparent);*/
 }
