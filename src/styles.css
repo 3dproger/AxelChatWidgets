@@ -57,6 +57,9 @@ body {
   margin-bottom: 2px;
   margin-left: 8px;
   margin-right: 8px;
+}
+
+.roundImage {
   border-radius: 50%;
 }
 

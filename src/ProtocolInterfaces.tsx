@@ -19,6 +19,7 @@ export interface MessageUser {
     readonly rightTags: MessageUserTag[];
     readonly serviceBadge: string;
     readonly serviceId: string;
+    readonly preventCropAvatar: boolean;
 }
 
 export interface MessageContentData {

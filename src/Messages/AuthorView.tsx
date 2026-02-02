@@ -26,6 +26,12 @@ export function AuthorView({author} : AuthorViewProps) {
         });
     }
 
+    let avatarClassNames = "avatar"
+
+    if (!author.preventCropAvatar) {
+        avatarClassNames += " roundImage"
+    }
+
     return (
         <span className="author on-hover-cursor-pointer"
             onClick={clicked}
@@ -41,7 +47,7 @@ export function AuthorView({author} : AuthorViewProps) {
 
             {showAvatars &&
                 <img
-                    className="avatar"
+                    className={avatarClassNames}
                     alt=""
                     src={author.avatar}
                     height={32}
