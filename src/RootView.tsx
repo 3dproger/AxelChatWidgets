@@ -49,7 +49,6 @@ export function RootView() {
     const appContext = useContext(AppContext);
     parseSearchParams(searchParamsRaw, appContext.searchParams);
 
-    const [authorsMap] = useState(new Map());
     const [messages, setMessages] = useState<Message[]>([]);
     const [messagesMap, setMessagesMap] = useState(new Map<string, Message>());
     const [selectedMessages, setSelectedMessages] = useState<Message[]>([]);
@@ -128,8 +127,6 @@ export function RootView() {
 
                 for (const message of specData.messages) {
                     messagesMap.set(message.id, message)
-                    const author = message.author;
-                    authorsMap.set(author.id, author);
                 }
 
                 const MaxMessagesCount = 70;
@@ -179,13 +176,7 @@ export function RootView() {
         }
         else if (protocolMessageType === "MESSAGES_SELECTED") {
             setSelectedMessages((prev) => {
-                const specData = data as GenericMessagesMessageData;
-                for (const message of specData.messages) {
-                    const author = message.author;
-                    authorsMap.set(author.id, author);
-                }
-
-                return data.messages;
+                return (data as GenericMessagesMessageData).messages;
             });
         }
         else if (protocolMessageType === "USER_UPDATED") {
