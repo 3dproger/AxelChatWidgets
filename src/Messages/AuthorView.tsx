@@ -20,6 +20,19 @@ function getFinalName(message: Message) {
     return author.name;
 }
 
+function getFinalAvatar(message: Message) {
+    if (message.customAuthorAvatarUrl.length !== 0) {
+        return message.customAuthorAvatarUrl;
+    }
+
+    const author = message.author;
+    if (!author) {
+        return "";
+    }
+
+    return author.avatar;
+}
+
 export function AuthorView({message} : AuthorViewProps) {
     const appContext = useContext(AppContext);
     const author = message.author;
@@ -63,7 +76,7 @@ export function AuthorView({message} : AuthorViewProps) {
                 <img
                     className={avatarClassNames}
                     alt=""
-                    src={author.avatar}
+                    src={getFinalAvatar(message)}
                     height={32}
                     width={32}
                 />}
