@@ -27,6 +27,9 @@ export function parseSearchParams(input: URLSearchParams, output: SearchParams) 
 
 export interface AppSettings {
     locale: string;
+    chat: {
+        blankAvatar: string;
+    },
     widgets: {
         hideConnectionStatusWhenConnected: boolean;
         states: {
@@ -76,6 +79,9 @@ export const AppContext = createContext<AppContextInterface>({
         widget: "",
     },
     settings: {
+        chat: {
+            blankAvatar: "",
+        },
         widgets: {
             messages: {
                 hideTimeout: 0,

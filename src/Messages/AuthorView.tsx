@@ -20,7 +20,7 @@ function getFinalName(message: Message) {
     return author.name;
 }
 
-function getFinalAvatar(message: Message) {
+function getFinalAvatar(message: Message, blankAvatar: string) {
     if (message.customAuthorAvatarUrl.length !== 0) {
         return message.customAuthorAvatarUrl;
     }
@@ -30,7 +30,12 @@ function getFinalAvatar(message: Message) {
         return "";
     }
 
-    return author.avatar;
+    const avatar = author.avatar;
+    if (avatar.length !== 0) {
+        return avatar;
+    }
+
+    return blankAvatar;
 }
 
 export function AuthorView({message} : AuthorViewProps) {
@@ -76,7 +81,7 @@ export function AuthorView({message} : AuthorViewProps) {
                 <img
                     className={avatarClassNames}
                     alt=""
-                    src={getFinalAvatar(message)}
+                    src={getFinalAvatar(message, appContext.settings.chat.blankAvatar)}
                     height={32}
                     width={32}
                 />}
