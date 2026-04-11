@@ -188,16 +188,6 @@ export function RootView() {
                 return data.messages;
             });
         }
-        else if (protocolMessageType === "AUTHOR_VALUES_CHANGED") {
-            const authorId = data.author_id;
-
-            if (authorsMap.has(authorId)) {
-                var author = authorsMap.get(authorId);
-                for (var key in data.values) {
-                    author[key] = data.values[key];
-                }
-            }
-        }
         else if (protocolMessageType === "NEED_RELOAD") {
             window.location.reload();
         }
