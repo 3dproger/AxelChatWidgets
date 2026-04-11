@@ -20,7 +20,7 @@ function getAuthorContent(message: Message) {
     }
 
     return (<>
-        <AuthorView author={message.author}/>
+        <AuthorView message={message}/>
 
         {message.multiline ?
             (

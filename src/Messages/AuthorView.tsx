@@ -1,14 +1,28 @@
 import { TagView } from "./TagView";
-import { MessageUser } from "../ProtocolInterfaces"
+import { MessageUser, Message } from "../ProtocolInterfaces"
 import { AppContext } from "../Contexts/AppContext";
 import { useContext } from "react";
 
 interface AuthorViewProps {
-    author: MessageUser;
+    message: Message;
 }
 
-export function AuthorView({author} : AuthorViewProps) {
+function getFinalName(message: Message) {
+    if (message.customAuthorName.length !== 0) {
+        return message.customAuthorName;
+    }
+
+    const author = message.author;
+    if (!author) {
+        return "NULL_AUTHOR";
+    }
+
+    return author.name;
+}
+
+export function AuthorView({message} : AuthorViewProps) {
     const appContext = useContext(AppContext);
+    const author = message.author;
 
     if (!author) {
         return <span className="null_author">NULL_AUTHOR</span>;
@@ -73,7 +87,7 @@ export function AuthorView({author} : AuthorViewProps) {
                     "color": author.color,
                     "backgroundColor": author.customBackgroundColor,
                 }}>
-                {author.name}
+                {getFinalName(message)}
             </span>
 
             <span className="badges">
