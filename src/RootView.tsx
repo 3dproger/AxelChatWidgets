@@ -128,7 +128,7 @@ export function RootView() {
 
         const protocolMessage = JSON.parse(lastMessage.data) as ProtocolMessage;
         const protocolMessageType = protocolMessage.type;
-        const data = protocolMessage.data;
+        const rawData = protocolMessage.data;
 
         if (appContext.searchParams.eventsLogging) {
             if (protocolMessageType !== "PING" && protocolMessageType !== "PONG") {
@@ -138,7 +138,7 @@ export function RootView() {
 
         if (protocolMessageType === "NEW_MESSAGES_RECEIVED") {
             setMessages((prev) => {
-                const specData = data as GenericMessagesMessageData;
+                const specData = rawData as GenericMessagesMessageData;
 
                 prev = prev.concat(...specData.messages);
 
@@ -156,10 +156,10 @@ export function RootView() {
             });
         }
         else if (protocolMessageType === "STATES_CHANGED") {
-            appContext.hostApp = data;
+            appContext.hostApp = rawData;
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
-            const specData = data as GenericMessagesMessageData;
+            const specData = rawData as GenericMessagesMessageData;
             for (const newMessage of specData.messages) {
                 updateMessage(messages, newMessage);
                 updateMessage(selectedMessages, newMessage);
@@ -169,7 +169,7 @@ export function RootView() {
         }
         else if (protocolMessageType === "MESSAGES_REMOVED") {
             let ids: string[] = [];
-            const specData = data as GenericMessagesMessageData;
+            const specData = rawData as GenericMessagesMessageData;
             const messages = specData.messages;
             for (const i in messages) {
                 const message = messages[i]
@@ -179,12 +179,12 @@ export function RootView() {
         }
         else if (protocolMessageType === "MESSAGES_SELECTED") {
             setSelectedMessages((prev) => {
-                return (data as GenericMessagesMessageData).messages;
+                return (rawData as GenericMessagesMessageData).messages;
             });
         }
         else if (protocolMessageType === "USER_UPDATED") {
             setMessages((prev) => {
-                const newUser = (data as UserUpdatedData).user;
+                const newUser = (rawData as UserUpdatedData).user;
 
                 for (let message of prev) {
                     if (message.author.id === newUser.id) {
@@ -201,7 +201,7 @@ export function RootView() {
             window.location.reload();
         }
         else if (protocolMessageType === "SETTINGS_UPDATED") {
-            appContext.settings = data.settings;
+            appContext.settings = rawData.settings;
         }
         else if (protocolMessageType === "CLEAR_MESSAGES") {
             setMessages((prev) => {
