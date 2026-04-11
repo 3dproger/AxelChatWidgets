@@ -44,13 +44,31 @@ function getDeviceName() {
     return ""
 }
 
+function getMessageById(list: Message[], id : string) : Message | undefined {
+    for (const message of list) {
+        if (message.id === id) {
+            return message;
+        }
+    }
+
+    return undefined;
+}
+
+function updateMessage(list: Message[], newMessage : Message) {
+    let prevMessage = getMessageById(list, newMessage.id);
+    if (!prevMessage) {
+        return;
+    }
+
+    Object.assign(prevMessage, newMessage);
+}
+
 export function RootView() {
     const [searchParamsRaw] = useSearchParams();
     const appContext = useContext(AppContext);
     parseSearchParams(searchParamsRaw, appContext.searchParams);
 
     const [messages, setMessages] = useState<Message[]>([]);
-    const [messagesMap, setMessagesMap] = useState(new Map<string, Message>());
     const [selectedMessages, setSelectedMessages] = useState<Message[]>([]);
 
     // https://stackoverflow.com/questions/57883814/forceupdate-with-react-hooks
@@ -97,7 +115,6 @@ export function RootView() {
     function removeMessages(ids: string[]) {
         for (const i in ids) {
             const id = ids[i];
-            messagesMap.delete(id);
             setMessages((prev) => {
                 return prev.filter(message => (message.id !== id));
             });
@@ -125,20 +142,13 @@ export function RootView() {
 
                 prev = prev.concat(...specData.messages);
 
-                for (const message of specData.messages) {
-                    messagesMap.set(message.id, message)
-                }
-
                 const MaxMessagesCount = 70;
 
                 if (prev.length > MaxMessagesCount) {
                     const needToDeleteCount = prev.length - MaxMessagesCount;
 
                     for (let i = 0; i < needToDeleteCount; i++) {
-                        const message = prev.shift();
-                        if (message) {
-                            messagesMap.delete(message.id);
-                        }
+                        prev.shift();
                     }
                 }
 
@@ -150,16 +160,9 @@ export function RootView() {
         }
         else if (protocolMessageType === "MESSAGES_CHANGED") {
             const specData = data as GenericMessagesMessageData;
-            for (const message of specData.messages) {
-                let prevMessage = messagesMap.get(message.id);
-                if (prevMessage) {
-
-                    if (appContext.searchParams.eventsLogging) {
-                        console.log("changed ", prevMessage, " to ", message);
-                    }
-
-                    Object.assign(prevMessage, message);
-                }
+            for (const newMessage of specData.messages) {
+                updateMessage(messages, newMessage);
+                updateMessage(selectedMessages, newMessage);
             }
 
             forceUpdate();
@@ -202,7 +205,6 @@ export function RootView() {
         }
         else if (protocolMessageType === "CLEAR_MESSAGES") {
             setMessages((prev) => {
-                messagesMap.clear();
                 return [];
             });
         }
