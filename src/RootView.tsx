@@ -20,7 +20,7 @@ import {
 import { AppContext, HostAppState, parseSearchParams } from "./Contexts/AppContext";
 import { useCallback, useContext, useEffect, useReducer, useState } from "react";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import { Message, GenericMessagesMessageData, ProtocolMessage } from "./ProtocolInterfaces";
+import { Message, GenericMessagesMessageData, ProtocolMessage, UserUpdatedData } from "./ProtocolInterfaces";
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView } from "./AnimatedDummyTextView";
@@ -186,6 +186,21 @@ export function RootView() {
                 }
 
                 return data.messages;
+            });
+        }
+        else if (protocolMessageType === "USER_UPDATED") {
+            setMessages((prev) => {
+                const newUser = (data as UserUpdatedData).user;
+
+                for (let message of prev) {
+                    if (message.author.id === newUser.id) {
+                        //message.author = newUser;
+                        Object.assign(message.author, newUser);
+                        break;
+                    }        
+                }
+
+                return prev;
             });
         }
         else if (protocolMessageType === "NEED_RELOAD") {

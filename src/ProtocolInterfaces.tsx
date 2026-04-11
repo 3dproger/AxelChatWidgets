@@ -37,7 +37,7 @@ export interface MessageContent {
 
 export interface Message {
     readonly id: string;
-    readonly author: MessageUser;
+    author: MessageUser;
     readonly contents: MessageContent[];
     readonly customAuthorAvatarUrl: string;
     readonly customAuthorName: string;
@@ -65,4 +65,8 @@ export interface ProtocolMessage {
 
 export interface GenericMessagesMessageData {
     messages: Message[];
+}
+
+export interface UserUpdatedData {
+    readonly user: MessageUser;
 }
