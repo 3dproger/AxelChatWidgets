@@ -22,6 +22,10 @@ function isVisiblePlatform(state: PlatformState, hideIfUnknown: boolean) {
         return false;
     }
 
+    if (!state.viewersCounterEnabled) {
+        return false;
+    }
+
     if (!state.enabled) {
         return false;
     }

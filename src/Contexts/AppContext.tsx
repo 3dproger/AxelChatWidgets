@@ -58,6 +58,8 @@ export interface PlatformState {
     icon: string;
     type_id: string;
     viewers: number;
+    followers: number;
+    viewersCounterEnabled: boolean;
 }
 
 export interface HostAppState {
