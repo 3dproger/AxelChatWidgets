@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { PlatformStateView } from './PlatformStateView';
-import './../styles.css'
 import { AppContext, PlatformState } from '../Contexts/AppContext';
 
 function getTotalViewersView(viewers: number, visiblePlatformsCount: number) {
