@@ -24,6 +24,7 @@ import { Message, GenericMessagesMessageData, ProtocolMessage, UserUpdatedData }
 import { MessagesListView } from "./Messages/MessagesListView";
 import { PlatformStateListView } from "./States/PlatformStateListView";
 import { AnimatedDummyTextView } from "./AnimatedDummyTextView";
+import { MessagesListWithStateView } from "./Messages/MessagesListWithStateView";
 
 function getDeviceType() {
     if (isDesktop) { return "DESKTOP" }
@@ -237,6 +238,11 @@ export function RootView() {
 
         if (widgetType === "messages") {
             return (<MessagesListView
+                messages={messages}
+                />);
+        }
+        else if (widgetType === "messages-with-states") {
+            return (<MessagesListWithStateView
                 messages={messages}
                 />);
         }
