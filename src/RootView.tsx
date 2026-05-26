@@ -238,13 +238,12 @@ export function RootView() {
         if (widgetType === "messages") {
             return (<MessagesListView
                 messages={messages}
-                hideTimeout={appContext.settings.widgets.messages.hideTimeout}
                 />);
         }
         else if (widgetType === "selected-messages") {
             return (<MessagesListView
                 messages={selectedMessages}
-                hideTimeout={0}
+                customHideTimeout={0}
                 />);
         }
         else if (widgetType === "states") {

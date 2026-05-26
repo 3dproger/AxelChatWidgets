@@ -7,12 +7,13 @@ import { AutoscrollableContainer } from "../AutoscrollableContainer";
 
 interface MessagesListViewProps {
     messages: Message[];
-    hideTimeout: number;
+    customHideTimeout?: number; // 0 => disable timeout
 }
 
-export function MessagesListView({messages, hideTimeout}: MessagesListViewProps) {
+export function MessagesListView({messages, customHideTimeout}: MessagesListViewProps) {
     const appContext = useContext(AppContext);
     const hideConnectionStatusWhenConnected = appContext.settings.widgets.hideConnectionStatusWhenConnected;
+    const hideTimeout = customHideTimeout ?? appContext.settings.widgets.messages.hideTimeout;
 
     if (messages.length === 0) {
         if (hideConnectionStatusWhenConnected) {
