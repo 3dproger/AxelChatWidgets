@@ -211,6 +211,7 @@ export function RootView() {
         }
         else if (protocolMessageType === "HELLO" ||
                  protocolMessageType === "PONG" ||
+                 protocolMessageType === "SERVER_ALIVE" ||
                  protocolMessageType === "SERVER_CLOSE") {
             // ignore
         }
