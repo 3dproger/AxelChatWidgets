@@ -33,7 +33,7 @@ export function MessagesListView({messages, customHideTimeout}: MessagesListView
             <div className="messagesListView"
                 onScroll={(event) => { console.log(event) }}>
 
-                {messages.map((message) => (
+                {messages.map((message) => (message.visible.public && (
                     <div
                         style={{ display: "flex", justifyContent: "space-between" }}
                         key={message.id}
@@ -43,7 +43,7 @@ export function MessagesListView({messages, customHideTimeout}: MessagesListView
                         hideTimeout={hideTimeout}
                     />
                     </div>
-                ))}
+                )))}
             </div>
         </AutoscrollableContainer>
     );
