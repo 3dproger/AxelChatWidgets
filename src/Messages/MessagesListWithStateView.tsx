@@ -14,6 +14,7 @@ export function MessagesListWithStateView({messages}: MessagesListWithStateViewP
     return (
         <div>
             <MessagesListView messages={messages}/>
+            <br/>
             <PlatformStateListView/>
         </div>
     );
