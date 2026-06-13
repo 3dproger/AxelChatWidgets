@@ -20,6 +20,10 @@ export interface MessageUser {
     readonly serviceBadge: string;
     readonly serviceId: string;
     readonly preventCropAvatar: boolean;
+    readonly visible: {
+        readonly public: boolean;
+        readonly private: boolean;
+    };
 }
 
 export interface MessageContentData {
@@ -48,6 +52,10 @@ export interface Message {
         readonly backgroundColor?: CSS.DataType.Color;
         readonly borderColor?: CSS.DataType.Color;
         readonly sideLineColor?: CSS.DataType.Color;
+    };
+    readonly visible: {
+        readonly public: boolean;
+        readonly private: boolean;
     };
     readonly markedAsDeleted: boolean;
     readonly multiline: boolean;
